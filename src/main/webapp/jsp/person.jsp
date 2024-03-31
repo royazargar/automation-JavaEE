@@ -86,5 +86,10 @@
 
         <jsp:include page="js-import.jsp"></jsp:include>
         <script src="../assets/js/person.js"></script>
+        <script>
+            function edit(id) {
+                document.location.replace("/personEdit.do?id=" + id);
+            }
+        </script>
 </body>
 </html>
