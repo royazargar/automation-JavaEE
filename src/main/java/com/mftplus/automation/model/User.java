@@ -45,7 +45,7 @@ public class User extends Base implements Serializable {
     @ToString.Exclude
     private List<Roles> roles;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Person person;
 
 }

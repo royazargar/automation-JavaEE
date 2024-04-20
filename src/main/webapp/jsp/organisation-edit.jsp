@@ -21,7 +21,7 @@
 
 <div class="content">
     <div id="org-form">
-        <form id="myForm" >
+        <form id="myForm" method="post">
             <h1>Edit Organization</h1>
             <br>
             <div class="row  mb-4">
@@ -95,7 +95,7 @@
         const myForm = document.getElementById("myForm");
         const queryString = new URLSearchParams(new FormData(myForm)).toString();
         fetch("/organisation-edit.do?" + queryString, {
-            method: "PUT"
+            method: "POST"
         }).then(() => {
             document.location.replace("/organisation.do");
         });

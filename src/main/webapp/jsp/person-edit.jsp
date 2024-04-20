@@ -19,7 +19,7 @@
 
 <div class="content">
     <div id="org-form">
-        <form id="myForm" >
+        <form id="myForm">
             <h1>Edit Person</h1>
             <br>
             <input class="form-control" type="text" name="id" value="${sessionScope.person.id}" hidden="hidden">
@@ -59,7 +59,7 @@
 
 <script src="../assets/js/jquery-3.7.1.min.js"></script>
 <script>
-    function edit() {
+    function edit(){
         const myForm = document.getElementById("myForm");
         const queryString = new URLSearchParams(new FormData(myForm)).toString();
         fetch("/personEdit.do?" + queryString, {
