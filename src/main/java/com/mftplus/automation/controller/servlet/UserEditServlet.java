@@ -1,7 +1,9 @@
 package com.mftplus.automation.controller.servlet;
 
 
+import com.mftplus.automation.model.Person;
 import com.mftplus.automation.model.User;
+import com.mftplus.automation.model.enums.Gender;
 import com.mftplus.automation.model.enums.Role;
 import com.mftplus.automation.service.impl.UserServiceImpl;
 import jakarta.inject.Inject;
@@ -31,7 +33,7 @@ public class UserEditServlet extends HttpServlet {
             if (req.getParameter("username") == null) {
                 resp.sendRedirect("/user.do");
             } else {
-                String username = req.getParameter(user.getUsername());
+                String username = req.getParameter("username");
                 Optional<User> user = userService.findByUsername(username);
                 if (user.isPresent()) {
                     req.getSession().setAttribute("user", user.get());
@@ -56,17 +58,13 @@ public class UserEditServlet extends HttpServlet {
             String password = req.getParameter("password");
             String role = req.getParameter("role");
 
-            user = User.
-                    builder().
-                    username(username).
-                    password(password).
-                    role(Role.valueOf(role)).
-                    deleted(false).
-                    build();
+            user.setUsername(username);
+            user.setPassword(password);
+            user.setRole(Role.valueOf(role));
 
             userService.edit(user);
             log.info("UserEditServlet - User Edited");
-            resp.sendRedirect("/user.do");
+        //    resp.sendRedirect("/user.do");
 
         } catch (Exception e) {
             log.error(e.getMessage());

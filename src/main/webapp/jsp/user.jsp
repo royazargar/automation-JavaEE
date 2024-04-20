@@ -77,7 +77,11 @@
 
 <jsp:include page="js-import.jsp"></jsp:include>
     <script src="../assets/js/user.js"></script>
-
+    <script>
+        function edit(username) {
+            document.location.replace("/userEdit.do?id=" + username);
+        }
+    </script>
 
 </body>
 </html>
