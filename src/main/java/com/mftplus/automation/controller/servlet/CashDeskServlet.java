@@ -37,19 +37,18 @@ public class CashDeskServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             String name = req.getParameter("name");
-            int cashDeskNumber = Integer.parseInt(req.getParameter("cashDeskNumber"));
+//            Integer cashDeskNumber = Integer.valueOf(req.getParameter("cashDeskNumber"));
             Long cashBalance = Long.valueOf(req.getParameter("cashBalance"));
-            Optional<User> user = userService.findByUsername(req.getParameter("username"));
-            List<User> userList=userService.findAll();
-            String username = req.getUserPrincipal().getName();
+            String username = req.getParameter("username");
+            Optional<User> userOptional=userService.findByUsername(username);
 
-                if (user.isPresent()) {
+                if (userOptional.isPresent()) {
                     cashDesk = CashDesk
                             .builder()
                             .name(name)
-                            .cashDeskNumber(cashDeskNumber)
+//                            .cashDeskNumber(cashDeskNumber)
                             .cashBalance(cashBalance)
-                            .cashier(user.get())
+                            .cashier(userOptional.get())
                             .deleted(false)
                             .build();
 
@@ -81,7 +80,7 @@ public class CashDeskServlet extends HttpServlet {
                 cashDesk = CashDesk
                         .builder()
                         .name(name)
-                        .cashDeskNumber(cashDeskNumber)
+//                        .cashDeskNumber(cashDeskNumber)
                         .cashBalance(cashBalance)
 //                        .cashier(user.get())
                         .deleted(false)

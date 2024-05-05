@@ -29,8 +29,8 @@ public class CashDesk extends Base{
     private String name;// نام صندوق
 
 //    @Pattern(regexp = "^{1,2}$",message = "Invalid Cash Desk Number")
-    @Column(name ="cashDesk_cashDeskNumber",length = 2,unique = true)
-    private int cashDeskNumber;// شماره صندوق
+//    @Column(name ="cashDesk_cashDeskNumber")
+//    private Integer cashDeskNumber;// شماره صندوق
 
 //    @Pattern(regexp = "^{1,15}$",message = "Invalid Cash Balance")
     @Column(name ="cashDesk_cashBalance" ,length =15)
