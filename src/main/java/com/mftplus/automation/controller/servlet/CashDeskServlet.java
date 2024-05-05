@@ -1,7 +1,11 @@
 package com.mftplus.automation.controller.servlet;
 
 import com.mftplus.automation.model.CashDesk;
+import com.mftplus.automation.model.Letter;
 import com.mftplus.automation.model.User;
+import com.mftplus.automation.model.enums.LetterAccessLevel;
+import com.mftplus.automation.model.enums.LetterType;
+import com.mftplus.automation.model.enums.TransferMethod;
 import com.mftplus.automation.service.impl.CashDeskServiceImp;
 import com.mftplus.automation.service.impl.UserServiceImpl;
 import jakarta.inject.Inject;
@@ -13,6 +17,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -34,21 +40,25 @@ public class CashDeskServlet extends HttpServlet {
             int cashDeskNumber = Integer.parseInt(req.getParameter("cashDeskNumber"));
             Long cashBalance = Long.valueOf(req.getParameter("cashBalance"));
             Optional<User> user = userService.findByUsername(req.getParameter("username"));
+            List<User> userList=userService.findAll();
+            String username = req.getUserPrincipal().getName();
 
-            if (user.isPresent()) {
-                cashDesk = CashDesk
-                        .builder()
-                        .name(name)
-                        .cashDeskNumber(cashDeskNumber)
-                        .cashBalance(cashBalance)
-                        .cashier(user.get())
-                        .deleted(false)
-                        .build();
+                if (user.isPresent()) {
+                    cashDesk = CashDesk
+                            .builder()
+                            .name(name)
+                            .cashDeskNumber(cashDeskNumber)
+                            .cashBalance(cashBalance)
+                            .cashier(user.get())
+                            .deleted(false)
+                            .build();
 
-                cashDeskService.save(cashDesk);
-                log.info("CashDeskServlet - CashDesk Saved");
-                resp.sendRedirect("/cashDesk.do");
-            }
+                    cashDeskService.save(cashDesk);
+                    log.info("CashDeskServlet - CashDesk Saved");
+                    resp.sendRedirect("/cashDesk.do");
+                    req.getSession().setAttribute("CashDeskId",cashDesk.getId());
+                    resp.sendRedirect("/cashDesk.do?selectedCashDesk="+cashDesk.getId());
+                }
             else {
                 log.info("Invalid Cashier");
                 resp.sendRedirect("/cashDesk.do");
@@ -73,7 +83,7 @@ public class CashDeskServlet extends HttpServlet {
                         .name(name)
                         .cashDeskNumber(cashDeskNumber)
                         .cashBalance(cashBalance)
-                        .cashier(user.get())
+//                        .cashier(user.get())
                         .deleted(false)
                         .build();
 
@@ -95,6 +105,7 @@ public class CashDeskServlet extends HttpServlet {
         try {
             req.getSession().setAttribute("cashDeskList", cashDeskService.findAll());
             req.getRequestDispatcher("/jsp/cashDesk.jsp").forward(req, resp);
+            req.getSession().setAttribute("userList",userService.findAll());
         } catch (Exception e) {
             log.info(e.getMessage());
             throw new RuntimeException(e);

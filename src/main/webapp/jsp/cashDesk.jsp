@@ -27,9 +27,17 @@
                 <input id="cashBalance" class="col form-control" type="number" name="cashBalance">
             </div>
             <div class="row mb-4">
-                <label class="col form-label" for="username">Cashier</label>
-                <input id="username" class="col form-control" type="text" name="username" onkeyup="showFind()">
+                <label for="user">Select user: </label>
+                <select name="user" id="user">
+                    <c:forEach items="${userList}" var="user">
+                        <option >${user.username}</option>
+                    </c:forEach>
+                </select>
             </div>
+            <%--            <div class="row mb-4">--%>
+            <%--                <label class="col form-label" for="username">Cashier</label>--%>
+            <%--                <input id="username" class="col form-control" type="text" name="username" onkeyup="showFind()">--%>
+            <%--            </div>--%>
 
             <div class="row mb-4">
                 <input type="submit" class="btn btn-primary" value="Save">
