@@ -28,19 +28,22 @@
 <!--        <url-pattern>*.jsp</url-pattern>-->
 <!--    </servlet-mapping>-->
 
+    <!--  initial servlet  -->
     <welcome-file-list>
-        <welcome-file> </welcome-file>
+        <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 
     <servlet>
-        <servlet-name>InitialServlet</servlet-name>
-        <servlet-class>com.mftplus.automation.controller.servlet.InitialServlet</servlet-class>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.mftplus.automation.controller.servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>InitialServlet</servlet-name>
+        <servlet-name>LoginServlet</servlet-name>
         <url-pattern> </url-pattern>
     </servlet-mapping>
+    <!--end  initial servlet  -->
 
+    <!--error pages-->
     <error-page>
         <error-code>403</error-code>
         <location>/error-jsp/403.jsp</location>
@@ -56,13 +59,33 @@
     <!--        <location>/error-jsp/500.jsp</location>-->
     <!--    </error-page>-->
 
+    <!--end error pages-->
+
+    <!--roles-->
+    <!--admin-->
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>admin</web-resource-name>
-            <url-pattern>/organisation.do</url-pattern>
-            <url-pattern>/user.do</url-pattern>
+            <!--security for letter pages-->
             <url-pattern>/letter.do</url-pattern>
+            <url-pattern>/letterBox.do</url-pattern>
+            <url-pattern>/letterDisplay.do</url-pattern>
+            <url-pattern>/letterEdit.do</url-pattern>
+            <!--end security for letter pages-->
+
+            <!--security for person pages-->
+            <url-pattern>/person.do</url-pattern>
+            <url-pattern>/personTable.do</url-pattern>
+            <!--end security for person pages-->
+
+            <!--security for reference pages-->
             <url-pattern>/reference.do</url-pattern>
+            <!--end security for reference pages-->
+
+            <url-pattern>/organisation.do</url-pattern>
+            <url-pattern>/home.do</url-pattern>
+            <url-pattern>/user.do</url-pattern>
+
             <http-method>GET</http-method>
             <http-method>POST</http-method>
             <http-method>PUT</http-method>
@@ -72,12 +95,32 @@
             <role-name>admin</role-name>
         </auth-constraint>
     </security-constraint>
+    <!--end admin-->
 
+    <!--manager-->
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>manager</web-resource-name>
+            <!--security for letter pages-->
+            <url-pattern>/letter.do</url-pattern>
+            <url-pattern>/letterBox.do</url-pattern>
+            <url-pattern>/letterDisplay.do</url-pattern>
+            <url-pattern>/letterEdit.do</url-pattern>
+            <!--end security for letter pages-->
+
+            <!--security for person pages-->
+            <url-pattern>/person.do</url-pattern>
+            <url-pattern>/personTable.do</url-pattern>
+            <!--end security for person pages-->
+
+            <!--security for reference pages-->
+            <url-pattern>/reference.do</url-pattern>
+            <!--end security for reference pages-->
+
             <url-pattern>/organisation.do</url-pattern>
+            <url-pattern>/home.do</url-pattern>
             <url-pattern>/user.do</url-pattern>
+
             <http-method>GET</http-method>
             <http-method>POST</http-method>
             <http-method>PUT</http-method>
@@ -87,14 +130,30 @@
             <role-name>manager</role-name>
         </auth-constraint>
     </security-constraint>
+    <!--end manager-->
 
+    <!--user-->
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>user</web-resource-name>
+            <!--security for letter pages-->
             <url-pattern>/letter.do</url-pattern>
-            <url-pattern>/reference.do</url-pattern>
+            <url-pattern>/letterBox.do</url-pattern>
+            <url-pattern>/letterDisplay.do</url-pattern>
+            <url-pattern>/letterEdit.do</url-pattern>
+            <!--end security for letter pages-->
+
+            <!--security for person pages-->
             <url-pattern>/person.do</url-pattern>
+            <!--end security for person pages-->
+
+            <!--security for reference pages-->
+            <url-pattern>/reference.do</url-pattern>
+            <!--end security for reference pages-->
+
+            <url-pattern>/home.do</url-pattern>
             <url-pattern>/user.do</url-pattern>
+
             <http-method>GET</http-method>
             <http-method>POST</http-method>
             <http-method>PUT</http-method>
@@ -104,8 +163,10 @@
             <role-name>user</role-name>
         </auth-constraint>
     </security-constraint>
+    <!--end user-->
+    <!--end roles-->
 
-
+    <!--security login form-->
     <login-config>
         <auth-method>FORM</auth-method>
         <form-login-config>
@@ -113,5 +174,6 @@
             <form-error-page>/jsp/login-error.jsp</form-error-page>
         </form-login-config>
     </login-config>
+    <!--end security login form-->
 
 </web-app>
