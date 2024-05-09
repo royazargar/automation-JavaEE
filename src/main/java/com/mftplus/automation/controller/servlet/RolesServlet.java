@@ -1,6 +1,5 @@
 package com.mftplus.automation.controller.servlet;
 
-import com.mftplus.automation.model.CompositeKey;
 import com.mftplus.automation.model.Roles;
 import com.mftplus.automation.model.User;
 import com.mftplus.automation.service.impl.RolesServiceImpl;
@@ -28,8 +27,6 @@ public class RolesServlet extends HttpServlet {
         log.info("RolesServlet - Get");
 
         try {
-            //todo
-//            req.getSession().setAttribute("roleTypes", Arrays.asList(Role.values()));
             req.getSession().setAttribute("rolesList", rolesService.findAll());
             req.getRequestDispatcher("/jsp/roles.jsp").forward(req, resp);
         } catch (Exception e) {
@@ -47,22 +44,14 @@ public class RolesServlet extends HttpServlet {
 
             if (username != null){
                 Optional<User> user = userService.findByUsername(username);
-                System.out.println(user);
 
                 if (user.isPresent()){
-                    CompositeKey compositeKey =
-                            CompositeKey
-                                    .builder()
-                                    .roleName(roleName)
-                                    .user(user.get())
-                                    .build();
-                    System.out.println(compositeKey);
                     Roles role =
                             Roles
                                     .builder()
-                                    .compositeKey(compositeKey)
+                                    .user(user.get())
+                                    .role(roleName)
                                     .build();
-                    System.out.println(role);
                     rolesService.save(role);
                     log.info("RolesServlet - role saved");
                     resp.sendRedirect("/roles.do");

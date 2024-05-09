@@ -1,6 +1,5 @@
 package com.mftplus.automation.service.impl;
 
-import com.mftplus.automation.model.CompositeKey;
 import com.mftplus.automation.model.Roles;
 import com.mftplus.automation.service.RolesService;
 import jakarta.enterprise.context.SessionScoped;
@@ -35,37 +34,57 @@ public class RolesServiceImpl implements RolesService, Serializable {
     @Transactional
     @Override
     public void remove(Roles role) throws Exception {
-
+        role = entityManager.find(Roles.class, role.getId());
+        role.setDeleted(true);
+        entityManager.merge(role);
     }
 
     @Transactional
     @Override
-    public void removeById(String roleName, String username) throws Exception {
-
+    public void removeById(Long id) throws Exception {
+        Roles role = entityManager.find(Roles.class, id);
+        role.setDeleted(true);
+        entityManager.merge(role);
     }
 
     @Transactional
     @Override
-    public Optional<Roles> findById(CompositeKey compositeKey) throws Exception {
-        return Optional.ofNullable(entityManager.find(Roles.class, compositeKey));
+    public Optional<Roles> findById(Long id) throws Exception {
+        return Optional.ofNullable(entityManager.find(Roles.class, id));
     }
 
     @Transactional
     @Override
     public List<Roles> findAll() throws Exception {
-        TypedQuery<Roles> query = entityManager.createQuery("select oo from userRolesEntity oo where oo.deleted=false", Roles.class);
+        TypedQuery<Roles> query = entityManager.createQuery("select oo from rolesEntity oo where oo.deleted=false", Roles.class);
         return query.getResultList();
     }
 
     @Transactional
     @Override
     public List<Roles> findByRoleName(String roleName) throws Exception {
-        return null;
+        TypedQuery<Roles> query = entityManager.createQuery("select oo from rolesEntity oo where oo.role=:roleName", Roles.class);
+        query.setParameter("roleName",roleName);
+        return query.getResultList();
     }
 
     @Transactional
     @Override
     public List<Roles> findByUser(String username) throws Exception {
-        return null;
+        TypedQuery<Roles> query = entityManager.createQuery("select oo from rolesEntity oo where oo.user=:username", Roles.class);
+        query.setParameter("username",username);
+        return query.getResultList();
+    }
+
+    //todo : is this supposed to be optional? did not work
+    @Transactional
+    @Override
+    public List<Roles> findByUsernameAndRoleName(String username, String roleName) throws Exception {
+        TypedQuery<Roles> query = entityManager.
+                createQuery
+                        ("select oo from rolesEntity oo where oo.user.username=:username and oo.role=:roleName and deleted=false", Roles.class);
+        query.setParameter("username",username);
+        query.setParameter("roleName",roleName);
+        return query.getResultList();
     }
 }
