@@ -1,5 +1,6 @@
 package com.mftplus.automation.service.impl;
 
+import com.mftplus.automation.controller.exception.NoContentException;
 import com.mftplus.automation.model.Letter;
 import com.mftplus.automation.service.LetterService;
 import jakarta.enterprise.context.SessionScoped;
@@ -30,8 +31,14 @@ public class LetterServiceImpl implements LetterService, Serializable {
 
     @Transactional
     @Override
-    public void edit(Letter letter) throws Exception {
-        entityManager.merge(letter);
+    public void edit(Letter letter) throws NoContentException {
+        Optional<Letter> optionalLetter = Optional.ofNullable(entityManager.find(Letter.class, letter.getId()));
+
+        if (optionalLetter.isPresent()) {
+            entityManager.merge(letter);
+        } else {
+            throw new NoContentException("Letter with id : " + letter.getId() + " not found !");
+        }
     }
 
     @Transactional
@@ -42,6 +49,7 @@ public class LetterServiceImpl implements LetterService, Serializable {
         entityManager.merge(letter);
     }
 
+    //todo : does not have id check, did not work here
     @Transactional
     @Override
     public void removeById(Long id) throws Exception {
@@ -52,8 +60,13 @@ public class LetterServiceImpl implements LetterService, Serializable {
 
     @Transactional
     @Override
-    public Optional<Letter> findById(Long id) throws Exception {
-        return Optional.ofNullable(entityManager.find(Letter.class, id));
+    public Optional<Letter> findById(Long id) throws NoContentException {
+        Optional<Letter> optional = Optional.ofNullable(entityManager.find(Letter.class, id));
+        if (optional.isPresent()) {
+            return optional;
+        } else {
+            throw new NoContentException("Letter with id : " + id + "not found !");
+        }
     }
 
     @Transactional
@@ -67,7 +80,7 @@ public class LetterServiceImpl implements LetterService, Serializable {
     @Override
     public List<Letter> findByTitle(String title) throws Exception {
         TypedQuery<Letter> query = entityManager.createQuery("select oo from letterEntity oo where oo.title=:title", Letter.class);
-        query.setParameter(title,"title");
+        query.setParameter("title",title);
         return query.getResultList();
     }
 
@@ -75,7 +88,7 @@ public class LetterServiceImpl implements LetterService, Serializable {
     @Override
     public List<Letter> findByContext(String context) throws Exception {
         TypedQuery<Letter> query = entityManager.createQuery("select oo from letterEntity oo where oo.context=:context", Letter.class);
-        query.setParameter(context,"context");
+        query.setParameter("context",context);
         return query.getResultList();
     }
 
@@ -83,7 +96,7 @@ public class LetterServiceImpl implements LetterService, Serializable {
     @Override
     public List<Letter> findByDate(LocalDate date) throws Exception {
         TypedQuery<Letter> query = entityManager.createQuery("select oo from letterEntity oo where oo.date=:date", Letter.class);
-        query.setParameter(String.valueOf(date),"date");
+        query.setParameter("date",date);
         return query.getResultList();
     }
 
@@ -97,7 +110,7 @@ public class LetterServiceImpl implements LetterService, Serializable {
     @Override
     public List<Letter> findByRegisterDate(LocalDateTime dateTime) throws Exception {
         TypedQuery<Letter> query = entityManager.createQuery("select oo from letterEntity oo where oo.registerDateAndTime=:dateTime", Letter.class);
-        query.setParameter(String.valueOf(dateTime),"dateTime");
+        query.setParameter("dateTime",dateTime);
         return query.getResultList();
     }
 
@@ -105,16 +118,24 @@ public class LetterServiceImpl implements LetterService, Serializable {
     @Override
     public List<Letter> findBySenderNameAndTitle(String senderName, String senderTitle) throws Exception {
         TypedQuery<Letter> query = entityManager.createQuery("select oo from letterEntity oo where oo.senderName=:senderName and oo.senderTitle=:senderTitle", Letter.class);
-        query.setParameter(senderName,"senderName");
-        query.setParameter(senderTitle,"senderTitle");
+        query.setParameter("senderName",senderName);
+        query.setParameter("senderTitle",senderTitle);
         return query.getResultList();
     }
 
     @Transactional
     @Override
-    public List<Letter> findBySectionId(Long sectionId) throws Exception {
-        TypedQuery<Letter> query = entityManager.createQuery("select oo from letterEntity oo where oo.user.section=:sectionId", Letter.class);
-        query.setParameter(String.valueOf(sectionId),"sectionId");
+    public List<Letter> findByUser(String user) throws Exception {
+        TypedQuery<Letter> query = entityManager.createQuery("select oo from letterEntity oo where oo.user.username=:userId", Letter.class);
+        query.setParameter("userId",user);
+        return query.getResultList();
+    }
+
+    @Transactional
+    @Override
+    public List<Letter> findByUserAndDeletedFalse(String user) throws Exception {
+        TypedQuery<Letter> query = entityManager.createQuery("select oo from letterEntity oo where oo.user.username=:userId and oo.deleted=false ", Letter.class);
+        query.setParameter("userId",user);
         return query.getResultList();
     }
 
