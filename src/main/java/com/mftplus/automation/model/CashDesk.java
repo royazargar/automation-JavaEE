@@ -2,7 +2,6 @@ package com.mftplus.automation.model;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,8 +28,8 @@ public class CashDesk extends Base{
     private String name;// نام صندوق
 
 //    @Pattern(regexp = "^{1,2}$",message = "Invalid Cash Desk Number")
-//    @Column(name ="cashDesk_cashDeskNumber")
-//    private Integer cashDeskNumber;// شماره صندوق
+    @Column(name ="cashDesk_cashDeskNumber")
+    private Integer cashDeskNumber;// شماره صندوق
 
 //    @Pattern(regexp = "^{1,15}$",message = "Invalid Cash Balance")
     @Column(name ="cashDesk_cashBalance" ,length =15)

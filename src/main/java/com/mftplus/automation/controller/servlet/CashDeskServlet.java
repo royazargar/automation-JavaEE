@@ -33,20 +33,25 @@ public class CashDeskServlet extends HttpServlet {
     @Inject
     private CashDesk cashDesk;
 
+    // TODO: 5/9/2024 null exception
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             String name = req.getParameter("name");
-//            Integer cashDeskNumber = Integer.valueOf(req.getParameter("cashDeskNumber"));
+            Integer cashDeskNumber = Integer.valueOf(req.getParameter("cashDeskNumber"));
             Long cashBalance = Long.valueOf(req.getParameter("cashBalance"));
             String username = req.getParameter("username");
+            System.out.println(username);
+            log.info(username);
             Optional<User> userOptional=userService.findByUsername(username);
+            System.out.println(userOptional);
+            log.info(String.valueOf(userOptional));
 
                 if (userOptional.isPresent()) {
                     cashDesk = CashDesk
                             .builder()
                             .name(name)
-//                            .cashDeskNumber(cashDeskNumber)
+                            .cashDeskNumber(cashDeskNumber)
                             .cashBalance(cashBalance)
                             .cashier(userOptional.get())
                             .deleted(false)
@@ -80,9 +85,9 @@ public class CashDeskServlet extends HttpServlet {
                 cashDesk = CashDesk
                         .builder()
                         .name(name)
-//                        .cashDeskNumber(cashDeskNumber)
+                        .cashDeskNumber(cashDeskNumber)
                         .cashBalance(cashBalance)
-//                        .cashier(user.get())
+                        .cashier(user.get())
                         .deleted(false)
                         .build();
 

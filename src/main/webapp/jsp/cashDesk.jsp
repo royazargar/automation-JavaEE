@@ -18,10 +18,10 @@
                 <label class="col form-label" for="name">Name</label>
                 <input id="name" class="col form-control" type="text" name="name">
             </div>
-<%--            <div class="row mb-4">--%>
-<%--                <label class="col form-label" for="cashDeskNumber">Cash Desk Number</label>--%>
-<%--                <input id="cashDeskNumber" class="col form-control" type="number" name="cashDeskNumber">--%>
-<%--            </div>--%>
+            <div class="row mb-4">
+                <label class="col form-label" for="cashDeskNumber">Cash Desk Number</label>
+                <input id="cashDeskNumber" class="col form-control" type="number" name="cashDeskNumber">
+            </div>
             <div class="row mb-4">
                 <label class="col form-label" for="cashBalance">Cash Balance</label>
                 <input id="cashBalance" class="col form-control" type="number" name="cashBalance">
@@ -30,7 +30,7 @@
                 <label for="user">Select user: </label>
                 <select name="user" id="user">
                     <c:forEach items="${userList}" var="user">
-                        <option >${user.username}</option>
+                        <option name="username">${user.username}</option>
                     </c:forEach>
                 </select>
             </div>
