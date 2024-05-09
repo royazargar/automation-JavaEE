@@ -6,6 +6,7 @@ import com.mftplus.automation.model.enums.LetterType;
 import com.mftplus.automation.model.enums.TransferMethod;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import lombok.experimental.SuperBuilder;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -27,19 +29,82 @@ import java.util.List;
 @Table (name = "letter_tbl")
 @RequestScoped
 public class Letter extends Base implements Serializable {
+
     @Id
     @SequenceGenerator(name = "letterSeq", sequenceName = "letter_seq",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "letterSeq")
-    @Column (name = "l_Id")
+    @Column (name = "l_id")
     private long id;
 
-    @Column (name = "l_title" , length = 20)
+    @Column (name = "l_title" ,columnDefinition = "NVARCHAR2(20)")
+    @Pattern(regexp = "^[a-zA-Zآ-ی\\s]{3,20}$", message = "Invalid Title")
+    @Size(min = 3, max = 20, message = "Title must be between 3 and 20 characters")
+    @NotBlank(message = "Should Not Be Null")
     private String title;
 
-    @Column (name = "l_letter_number" , length = 30)
+    //todo : what is the actual min and max for letter number?
+    @Column (name = "l_letter_number" , columnDefinition = "NVARCHAR2(20)")
+    @Pattern(regexp = "^[0-9]{1,20}$", message = "Invalid LetterNumber")
+    @Size(min = 1, max = 20, message = " LetterNumber must be between 1 and 20 characters")
+    @NotBlank(message = "Should Not Be Null")
     private String letterNumber;
 
+    @ManyToOne
+    private User user;
+
+    //ref receivers
+    @ManyToMany(fetch = FetchType.EAGER)
+    @ToString.Exclude
+    @NotNull(message = "Should Not Be Null")
+    private List<User> userList;
+
+    public void addUser(User user){
+        if (userList==null){
+            userList=new ArrayList<>();
+        }
+        userList.add(user);
+    }
+
+    @Column (name = "l_sender_name" , columnDefinition = "NVARCHAR2(20)")
+    @Pattern(regexp = "^[a-zA-Zآ-ی\\s]{3,20}$", message = "Invalid SenderName")
+    @Size(min = 3, max = 20, message = "SenderName must be between 3 and 20 characters")
+    @NotBlank(message = "Should Not Be Null")
+    private String senderName;
+
+    @Column (name = "l_sender_title", columnDefinition = "NVARCHAR2(20)")
+    @Pattern(regexp = "^[a-zA-Zآ-ی\\s]{3,20}$", message = "Invalid SenderTitle")
+    @Size(min = 3, max = 20, message = "SenderTitle must be between 3 and 20 characters")
+    @NotBlank(message = "Should Not Be Null")
+    private String senderTitle;
+
+    @Column (name = "l_receiver_name" , columnDefinition = "NVARCHAR2(20)")
+    @Pattern(regexp = "^[a-zA-Zآ-ی\\s]{3,20}$", message = "Invalid ReceiverName")
+    @Size(min = 3, max = 20, message = "ReceiverName must be between 3 and 20 characters")
+    @NotBlank(message = "Should Not Be Null")
+    private String receiverName;
+
+    @Column (name = "l_receiver_title" , columnDefinition = "NVARCHAR2(20)")
+    @Pattern(regexp = "^[a-zA-Zآ-ی\\s]{3,20}$", message = "Invalid ReceiverTitle")
+    @Size(min = 3, max = 20, message = "ReceiverTitle must be between 3 and 20 characters")
+    @NotBlank(message = "Should Not Be Null")
+    private String receiverTitle;
+
+    //todo : attachment needed
+    @Column (name = "l_file")
+    private String image;
+
+    @Enumerated (EnumType.ORDINAL)
+    private LetterAccessLevel accessLevel;
+
+    @Enumerated (EnumType.ORDINAL)
+    private TransferMethod transferMethod;
+
+    @Enumerated (EnumType.ORDINAL)
+    private LetterType letterType;
+
     @Column (name = "l_date")
+    @FutureOrPresent(message = "Invalid letter date")
+    @NotNull(message = "Should Not Be Null")
     private LocalDate date;
 
     @Transient
@@ -54,63 +119,12 @@ public class Letter extends Base implements Serializable {
     }
 
     @Column (name = "l_context")
+    @Pattern(regexp = "^[a-zA-Zآ-ی\\s]{3}$", message = "Invalid Context")
+    @Size(min = 3, message = "Context must be at least 3 characters")
     private String context;
 
-    @Column (name = "l_receiver_name" , length = 25)
-    private String receiverName;
-
-    @Column (name = "l_receiver_title" , length = 25)
-    private String receiverTitle;
-
-    @Column (name = "l_sender_name" , length = 25)
-    private String senderName;
-
-    @Column (name = "l_sender_title", length = 25)
-    private String senderTitle;
-
-    @Column (name = "l_file")
-    private String image;
-
-    @Enumerated (EnumType.ORDINAL)
-    private LetterAccessLevel accessLevel;
-
-  //todo rethink
-    @ManyToMany (cascade = {CascadeType.MERGE , CascadeType.PERSIST})
-    @ToString.Exclude
-    private List<User> carbonCopies;
-
-    @ManyToOne (cascade = {CascadeType.MERGE})
-    private User user;
-
-    @Enumerated (EnumType.ORDINAL)
-    private TransferMethod transferMethod;
-
-    @Enumerated (EnumType.ORDINAL)
-    private LetterType letterType;
-
-    //todo
-//    @OneToOne
-//    private LetterRegister registerNumber;
-//
-//    @ManyToOne
-//    private Secretariat indicatorCode;
-
-    @Column (name = "l_register_date_and_time")
+    //todo : does this need @futureOrPresent? I set is as localDateTime.now in servlet
+    @Column(name = "register_date_and_time")
     private LocalDateTime registerDateAndTime;
-
-//    @Transient
-//    private LocalDateTime faRegisterDateAndTime;
-//
-//    public String getFaRegisterDateAndTime() {
-//        return PersianDate.fromGregorian(LocalDate.from(registerDateAndTime)).toString();
-//    }
-//
-//    public void setFaRegisterDateAndTime(String faRegisterDateAndTime) {
-//        this.registerDateAndTime = LocalDateTime.from(PersianDate.parse(faRegisterDateAndTime).toGregorian());
-//    }
-//
-    @ManyToMany (cascade = {CascadeType.MERGE , CascadeType.PERSIST})
-    @ToString.Exclude
-    private List<User> refReceivers;
 
 }
