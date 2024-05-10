@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../../../assets/css/form.css">
     <link rel="stylesheet" href="../../../assets/css/kamadatepicker.min.css">
     <link rel="stylesheet" href="../../../assets/css/all.css">
+    <jsp:include page="../../css-import.jsp"></jsp:include>
     <meta charset="UTF-8" lang="fa">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -58,7 +59,7 @@
                 <label class="formbold-form-label"> ارجاع گیرندکان نامه </label>
                 <div class="position-relative">
                     <div class="col-12 position-relative">
-                        <input class="col-12 formbold-form-input" oninput="getReferences(event)" type="text" placeholder="ارجاع گیرندگان نامه را وارد کنید"/>
+                        <input class="col-12 formbold-form-input" oninput="getReferences(event)" type="text" placeholder="نام و نام خانوادگی ارجاع گیرندگان"/>
                         <div   id="person-ref-list" class="border col-12">
                         </div>
                     </div>

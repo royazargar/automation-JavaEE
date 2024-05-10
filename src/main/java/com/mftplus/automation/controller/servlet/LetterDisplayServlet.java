@@ -1,6 +1,6 @@
 package com.mftplus.automation.controller.servlet;
 
-import com.mftplus.automation.controller.exception.LetterIdIsRequiredException;
+import com.mftplus.automation.controller.exception.IdIsRequiredException;
 import com.mftplus.automation.model.Letter;
 import com.mftplus.automation.model.enums.LetterAccessLevel;
 import com.mftplus.automation.model.enums.LetterType;
@@ -30,7 +30,7 @@ public class LetterDisplayServlet extends HttpServlet {
         log.info("LetterDisplayServlet - Get");
         try {
             if (req.getParameter("id") == null) {
-                throw new LetterIdIsRequiredException("Please set letter id !");
+                throw new IdIsRequiredException("Please set letter id !");
             } else {
                 long id = Integer.parseInt(req.getParameter("id"));
                 Optional<Letter> letter = letterService.findById(id);

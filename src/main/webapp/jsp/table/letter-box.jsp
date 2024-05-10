@@ -98,7 +98,7 @@
                                             <span class="text-dark">${letter.receiverName}</span>
                                         </td>
 
-                                        <td class="text-muted">${letter.date}</td>
+                                        <td class="text-muted">${letter.getFaDate()}</td>
 
                                         <td class="d-flex justify-content-center">
                                             <a href="#" class="text-dark p-2 bg-warning rounded" onclick="selectLetter(${letter.id})">مشاهده نامه </a>
