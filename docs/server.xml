@@ -134,11 +134,11 @@
 
       <Realm className="org.apache.catalina.realm.DataSourceRealm"
        dataSourceName="jdbc/JtaDataSource"
-       userTable="user_tbl"
-       userNameCol="u_username"
-       userCredCol="u_password"
-       userRoleTable="user_roles"
-       roleNameCol="role_name"/>
+             userTable="user_tbl"
+             userNameCol="u_username"
+             userCredCol="u_password"
+             userRoleTable="roles_tbl"
+             roleNameCol="role_name"/>
 
       <Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="true">
