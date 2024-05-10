@@ -9,8 +9,8 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <jsp:include page="css-import.jsp"></jsp:include>
-  <link rel="stylesheet" href="../assets/css/home.css">
   <link rel="stylesheet" href="../assets/css/all.css">
+  <link rel="stylesheet" href="../assets/css/home.css">
 </head>
 <body>
 <!--start website-->
@@ -39,7 +39,7 @@
               <li><a href="#">کالا</a></li>
             </ul>
           </li>
-          <li><a href="#">داشبورد </a></li>
+          <li><a href="dashboard.do">داشبورد </a></li>
         </ul>
       </div>
       <div class="left">
@@ -85,7 +85,7 @@
 </div>
 <!--footer-->
 <section class="footer">
-  <p>مجتمع فنی تهران</p>
+  <p>با ما در ارتباط باشید !</p>
   <p>جهت اطلاعات بیشتر</p>
   <span class="fab fa-telegram"></span>
   <span class="fab fa-facebook"></span>
