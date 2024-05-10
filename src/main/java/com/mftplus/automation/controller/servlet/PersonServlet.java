@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -40,13 +41,14 @@ public class PersonServlet extends HttpServlet {
         try {
             req.getSession().setAttribute("genders", Arrays.asList(Gender.values()));
             req.getSession().setAttribute("personList", personService.findAll());
-            req.getRequestDispatcher("/jsp/person.jsp").forward(req, resp);
+            req.getRequestDispatcher("/jsp/form/save/person-form.jsp").forward(req, resp);
         } catch (Exception e) {
             log.error("Person - GET : " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
+    @Valid
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("PersonServlet - post");
@@ -64,6 +66,7 @@ public class PersonServlet extends HttpServlet {
 
             String username = req.getUserPrincipal().getName();
 
+
             if (username != null) {
                 Optional<User> user = userService.findByUsername(username);
                 if (user.isPresent()) {
@@ -74,12 +77,14 @@ public class PersonServlet extends HttpServlet {
                             .nationalCode(nationalCode)
                             .gender(Gender.valueOf(gender))
                             .user(user.get())
-                            .deleted(false)
+//                            .deleted(false)
                             .build();
-
+                    person.setDeleted(false);
                     personService.save(person);
                     log.info("Person Saved");
-                    resp.sendRedirect("/user.do");
+                    resp.sendRedirect("/person.do");
+                }else {
+                    resp.sendRedirect("");
                 }
             }
         } catch (Exception e) {
@@ -102,5 +107,5 @@ public class PersonServlet extends HttpServlet {
             req.getRequestDispatcher("/jsp/person.jsp").forward(req, resp);
         }
     }
-    }
+}
 

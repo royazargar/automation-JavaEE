@@ -51,13 +51,14 @@ public class PersonApi {
     }
 
     @GET
-    @Path("/findByName/{name}")
+    @Path("/findByNameAndFamily")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findByName(@PathParam("name") String name) throws Exception{
+    public Response findByNameAndFamily(@QueryParam("name") String name,@QueryParam("family") String family) throws Exception{
         try {
-            return Response.ok().entity(personService.findByName(String.valueOf(name))).build();
+            return Response.ok().entity(personService.findByNameAndFamily(name,family)).build();
         } catch (Exception e) {
+            log.error(e.getMessage());
             return Response.status(204).entity("{\"message\": \"" + e.getMessage() + "\"}").build();
         }
     }
