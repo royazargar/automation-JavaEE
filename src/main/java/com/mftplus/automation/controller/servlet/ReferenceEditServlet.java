@@ -1,6 +1,6 @@
 package com.mftplus.automation.controller.servlet;
 
-import com.mftplus.automation.controller.exception.NoUserFoundException;
+import com.mftplus.automation.controller.exception.IdIsRequiredException;
 import com.mftplus.automation.model.Letter;
 import com.mftplus.automation.model.Reference;
 import com.mftplus.automation.model.User;
@@ -23,27 +23,31 @@ import java.util.Arrays;
 import java.util.Optional;
 
 @Slf4j
-@WebServlet (urlPatterns = "/reference.do")
-public class ReferenceServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/referenceEdit.do")
+public class ReferenceEditServlet extends HttpServlet {
     @Inject
     private ReferenceServiceImpl referenceService;
-
     @Inject
     private UserServiceImpl userService;
-
     @Inject
     private LetterServiceImpl letterService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.info("ReferenceServlet - Get");
+        log.info("ReferenceEditServlet - Get");
         try {
-            req.getSession().setAttribute("refTypes", Arrays.asList(ReferenceType.values()));
-            req.getSession().setAttribute("priorities", Arrays.asList(ReferencePriority.values()));
-            req.getSession().setAttribute("referenceList", referenceService.findAll());
-            req.getSession().setAttribute("letterIdRef",req.getParameter("letterIdRef"));
-            req.getSession().setAttribute("user",req.getUserPrincipal().getName());
-            req.getRequestDispatcher("/jsp/form/save/reference-form.jsp").forward(req, resp);
+            if (req.getParameter("id") == null) {
+                throw new IdIsRequiredException("Please set reference id !");
+            } else {
+                long id = Integer.parseInt(req.getParameter("id"));
+                Optional<Reference> reference = referenceService.findById(id);
+                reference.ifPresent(value -> req.getSession().setAttribute("reference", value));
+
+                req.getSession().setAttribute("refTypes", Arrays.asList(ReferenceType.values()));
+                req.getSession().setAttribute("priorities", Arrays.asList(ReferencePriority.values()));
+                req.getSession().setAttribute("referenceList", referenceService.findAll());
+                req.getRequestDispatcher("/jsp/edit-reference.jsp").forward(req, resp);
+            }
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);
@@ -51,36 +55,30 @@ public class ReferenceServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.info("ReferenceServlet - Post");
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("ReferenceEditServlet - Put");
+
         try {
-                String letterId = req.getParameter("letterIdRef");
-                String refType = req.getParameter("refType");
-                String priority = req.getParameter("priority");
-                String faExpiration = req.getParameter("r_expiration");
-                String paraph = req.getParameter("paraph");
-                String explanation = req.getParameter("explanation");
-                String status = req.getParameter("status");
-                String referenceReceiver = req.getParameter("referenceReceiver");
-                boolean validate = req.getParameter("validate") != null && req.getParameter("validate").equals("on");
+            String letterId = req.getParameter("letterIdRef");
+            String refType = req.getParameter("r_refType");
+            String priority = req.getParameter("priority");
+            String faExpiration = req.getParameter("r_expiration");
+            String paraph = req.getParameter("paraph");
+            String explanation = req.getParameter("explanation");
+            String status = req.getParameter("status");
+            String referenceReceiver = req.getParameter("referenceReceiver");
+            boolean validate = req.getParameter("validate") != null && req.getParameter("validate").equals("on");
 
-                String username = req.getUserPrincipal().getName();
+            String username = req.getUserPrincipal().getName();
 
-//            if (letterId != null){
 
+            if (letterId != null && username != null) {
+
+                Optional<Letter> letter = letterService.findById(Long.valueOf(letterId));
                 Optional<User> user = userService.findByUsername(username);
-                if (user.isEmpty()){
-                    throw new NoUserFoundException("no user found for reference !");
-                }
                 Optional<User> referenceReceiverId = userService.findByUsername(referenceReceiver);
-                if (referenceReceiverId.isEmpty()){
-                    throw new NoUserFoundException("no user found for reference receiver !");
-                }
 
-            //todo : number format exception
-            Optional<Letter> letter = letterService.findById(Long.valueOf(letterId));
-
-                if (letter.isPresent()){
+                if (letter.isPresent() && user.isPresent() && referenceReceiverId.isPresent()) {
                     Reference reference =
                             Reference
                                     .builder()
@@ -98,14 +96,15 @@ public class ReferenceServlet extends HttpServlet {
                                     .referenceReceiverId(referenceReceiverId.get())
                                     .build();
                     reference.setFaExpiration(faExpiration);
-                    referenceService.save(reference);
-                    log.info("ReferenceServlet - Reference Saved");
-                resp.sendRedirect("/letterBox.do");
+                    referenceService.edit(reference);
+                    log.info("ReferenceEditServlet - Reference Edited");
+                    resp.sendRedirect("/reference.do");
                 }
+            }
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);
         }
     }
 }
-
+//todo date format bug
