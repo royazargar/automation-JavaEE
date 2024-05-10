@@ -1,8 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Error 403</title>
+    <title>Login Error</title>
     <link rel="stylesheet" href="../assets/css/error.css">
 </head>
 <body>
@@ -12,8 +11,8 @@
     <span><span class="screen-reader-text">0</span></span>
     <span>3</span>
 </section>
-<div class="link-container">
-    <a target="_blank" href="home.do" class="more-link">بازگشت به صفحه اصلی</a>
-</div>
+<%--<div class="link-container">--%>
+<%--    <a target="_blank" href=" " class="more-link">بازگشت به صفحه ورود</a>--%>
+<%--</div>--%>
 </body>
 </html>
