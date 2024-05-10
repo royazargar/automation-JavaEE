@@ -53,7 +53,7 @@ public class LetterServlet extends HttpServlet {
                 req.getSession().setAttribute("transferMethods", Arrays.asList(TransferMethod.values()));
                 req.getSession().setAttribute("letterTypes", Arrays.asList(LetterType.values()));
                 req.getSession().setAttribute("username",req.getUserPrincipal().getName());
-                req.getRequestDispatcher("/jsp/form/letter-form.jsp").forward(req, resp);
+                req.getRequestDispatcher("/jsp/form/save/letter-form.jsp").forward(req, resp);
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);
