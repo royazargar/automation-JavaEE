@@ -13,3 +13,9 @@ Automation System
         - copy docs/tomee.xml and server.xml to {tomee}/conf folder
 
         - copy WEB-INF/lib/ojdbc and logback to {tomee}/lib folder
+
+        - login with admin/admin123 or user/user123
+
+        - check out web.xml and login servlet for more info
+
+        
