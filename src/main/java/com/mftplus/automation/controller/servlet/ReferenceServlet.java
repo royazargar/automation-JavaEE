@@ -100,7 +100,7 @@ public class ReferenceServlet extends HttpServlet {
                     reference.setFaExpiration(faExpiration);
                     referenceService.save(reference);
                     log.info("ReferenceServlet - Reference Saved");
-                resp.sendRedirect("/letterBox.do");
+                resp.sendRedirect("/reference.do");
                 }
         } catch (Exception e) {
             log.error(e.getMessage());

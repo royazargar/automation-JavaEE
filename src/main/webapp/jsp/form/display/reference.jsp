@@ -8,7 +8,7 @@
 </head>
 <body>
 <!--nav bar-->
-<%--<jsp:include page="../../../jsp/all.jsp"></jsp:include>--%>
+<jsp:include page="../../../jsp/dashboard.jsp"></jsp:include>
 
 <div class="formbold-main-wrapper">
     <div class="formbold-form-wrapper">
@@ -16,8 +16,8 @@
         <div class="formbold-form-title">
             <h2 class="">ارجاع</h2>
             <a class="formbold-btn primary" href="#" onclick="showLetter(${sessionScope.reference.letterId.id})">مشاهده نامه</a>
-            <a class="formbold-btn warning" href="#" onclick="edit(${sessionScope.reference.id})">ویرایش</a>
-            <a class="formbold-btn danger" href="#" onclick="remove(${sessionScope.reference.id})">حذف</a>
+            <a class="formbold-btn warning" href="#" onclick="showEditReference(${sessionScope.reference.id})">ویرایش</a>
+            <a class="formbold-btn danger" href="#" onclick="removeReference(${sessionScope.reference.id})">حذف</a>
         </div>
 
         <!--start form-->
@@ -82,15 +82,6 @@
         </form>
     </div>
 </div>
-
-<script>
-    function edit(id) {
-        document.location.replace("/referenceEdit.do?id=" + id);
-    }
-    function showLetter(id) {
-        document.location.replace("/letterDisplay.do?id=" + id);
-    }
-</script>
 <script src="../../../assets/js/reference.js"></script>
 </body>
 </html>
