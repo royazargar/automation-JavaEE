@@ -3,9 +3,8 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="../../assets/css/all.css">
     <link rel="stylesheet" href="../../assets/css/letterBox.css">
-    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <jsp:include page="../../jsp/css-import.jsp"></jsp:include>
     <meta charset="UTF-8" lang="fa">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -102,7 +101,7 @@
 
                                         <td class="d-flex justify-content-center">
                                             <a href="#" class="text-dark p-2 bg-warning rounded" onclick="selectLetter(${letter.id})">مشاهده نامه </a>
-                                            <a href="#" class="text-dark p-2 bg-warning rounded" onclick="editLetter(${letter.id})">ویرایش نامه </a>
+                                            <a href="#" class="text-dark p-2 bg-warning rounded" onclick="showEditLetter(${letter.id})">ویرایش نامه </a>
                                         </td>
 
                                     </tr>
@@ -168,7 +167,7 @@
 
                                         <td class="d-flex justify-content-center">
                                             <a href="#" class="text-dark p-2 bg-warning rounded" onclick="selectReference(${reference.id})">مشاهده ارجاع </a>
-                                            <a href="#" class="text-dark p-2 bg-warning rounded" onclick="edit(${reference.id})">ویرایش ارجاع </a>
+                                            <a href="#" class="text-dark p-2 bg-warning rounded" onclick="showEditReference(${reference.id})">ویرایش ارجاع </a>
                                         </td>
                                     </tr>
                                     </c:forEach>
@@ -241,18 +240,13 @@
 </div>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="../../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="../../assets/js/letter.js"></script>
+<script src="../../assets/js/reference.js"></script>
 <script type="text/javascript"></script>
 
 <script>
-    function editLetter(id) {
-        document.location.replace("/letterEdit.do?id=" + id);
-    }
-    function selectLetter(id) {
-        document.location.replace("/letterDisplay.do?id=" + id);
-    }
-    function selectReference(id) {
-        document.location.replace("/referenceDisplay.do?id=" + id);
-    }
+
+
 </script>
 </body>
 </html>
