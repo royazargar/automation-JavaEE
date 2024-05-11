@@ -4,11 +4,11 @@
 <head>
     <title>جدول افراد</title>
     <link rel="stylesheet" href="../../assets/css/myTable.css">
-    <link rel="stylesheet" href="../../assets/css/all.css">">
+    <link rel="stylesheet" href="../../assets/css/all.css">
 </head>
 <body>
 <!--nav bar-->
-<%--<jsp:include page="../../jsp/all.jsp"></jsp:include>--%>
+<jsp:include page="../../jsp/dashboard.jsp"></jsp:include>
 
 <!--table-->
 <table>
