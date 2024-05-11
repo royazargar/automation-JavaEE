@@ -3,21 +3,25 @@
 <html>
 <head>
     <title>نامه</title>
-    <link rel="stylesheet" href="../../../assets/css/form.css">
-    <link rel="stylesheet" href="../../../assets/css/kamadatepicker.min.css">
-    <link rel="stylesheet" href="../../../assets/css/all.css">
     <jsp:include page="../../css-import.jsp"></jsp:include>
+    <link rel="stylesheet" href="../../../assets/css/kamadatepicker.min.css">
+    <link rel="stylesheet" href="../../../assets/css/form.css">
     <meta charset="UTF-8" lang="fa">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 <body>
+<!--nav bar-->
+<jsp:include page="../../../jsp/dashboard.jsp"></jsp:include>
 
 <div class="formbold-main-wrapper">
     <div class="formbold-form-wrapper">
         <!--img-->
-        <img src="../../../assets/image/lettering.jpg" alt="">
+<%--        <img src="../../assets/image/lettering.jpg" alt="">--%>
+        <div class="formbold-form-title">
+            <h2>ایجاد نامه جدید</h2>
+        </div>
 
         <!--start form-->
         <form action="letter.do" method="post" enctype="multipart/form-data">
@@ -59,7 +63,7 @@
                 <label class="formbold-form-label"> ارجاع گیرندکان نامه </label>
                 <div class="position-relative">
                     <div class="col-12 position-relative">
-                        <input class="col-12 formbold-form-input" oninput="getReferences(event)" type="text" placeholder="نام و نام خانوادگی ارجاع گیرندگان"/>
+                        <input class="col-12 formbold-form-input" oninput="getReferences(event)" type="text" placeholder="ارجاع گیرندگان نامه را وارد کنید"/>
                         <div   id="person-ref-list" class="border col-12">
                         </div>
                     </div>
