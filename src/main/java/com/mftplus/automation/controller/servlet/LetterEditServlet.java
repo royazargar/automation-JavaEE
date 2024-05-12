@@ -65,7 +65,7 @@ public class LetterEditServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("LetterEditServlet - put");
         try {
-            long id = Integer.parseInt(req.getParameter("id"));
+//            long id = Integer.parseInt(req.getParameter("id"));
             String title = req.getParameter("title");
             String letterNumber = req.getParameter("letter_number");
             String faDate = req.getParameter("date").replace("/", "-");
@@ -102,7 +102,7 @@ public class LetterEditServlet extends HttpServlet {
                     Letter letter =
                             Letter
                                     .builder()
-                                    .id(id)
+//                                    .id(id)
                                     .user(user.get())
                                     .title(title)
                                     .letterNumber(letterNumber)
