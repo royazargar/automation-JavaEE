@@ -39,7 +39,7 @@
         <td>${reference.paraph}</td>
         <td>${reference.explanation}</td>
         <td>${reference.refDateAndTime}</td>
-        <td>${reference.expiration}</td>
+        <td>${reference.getFaExpiration()}</td>
         <td>
             <a href="#" onclick="selectReference(${reference.id})"><i class="fas fa-eye show"></i></a>
             <a href="#" onclick="showEditReference(${reference.id})"><i class="fa fa-edit edit"></i></a>

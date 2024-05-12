@@ -80,6 +80,8 @@ public class ReferenceServlet extends HttpServlet {
             //todo : number format exception
             Optional<Letter> letter = letterService.findById(Long.valueOf(letterId));
 
+                //todo : how to show localDateTime.now in persian for display
+
                 if (letter.isPresent()){
                     Reference reference =
                             Reference
