@@ -34,6 +34,16 @@ public class ReferenceDisplayServlet extends HttpServlet {
                 Optional<Reference> reference = referenceService.findById(id);
                 reference.ifPresent(value -> req.getSession().setAttribute("reference", value));
 
+                //for reference seen
+                String user = req.getUserPrincipal().getName();
+                if (reference.isPresent()){
+                    String refReceiver = reference.get().getReferenceReceiverId().getUsername();
+                    if (!reference.get().isSeen() && user.equals(refReceiver)){
+                        reference.get().setSeen(true);
+                        referenceService.edit(reference.get());
+                    }
+                }
+
                 req.getSession().setAttribute("refTypes", Arrays.asList(ReferenceType.values()));
                 req.getSession().setAttribute("priorities", Arrays.asList(ReferencePriority.values()));
                 req.getSession().setAttribute("referenceList", referenceService.findAll());

@@ -102,4 +102,7 @@ public class Reference extends Base implements Serializable {
     @Column(name = "r_validate")
     private boolean validate;
 
+    @Column(name = "r_seen")
+    private boolean seen;
+
 }
