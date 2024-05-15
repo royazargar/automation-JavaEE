@@ -29,6 +29,9 @@ a{
     border: 0 solid transparent;
     border-radius: 0;
 }
+.card-color {
+    background-color: #6a64f1;
+}
 .mailbox-widget .custom-tab .nav-item .nav-link {
     border: 0;
     color: #fff;
@@ -49,4 +52,14 @@ a{
 }
 .font-light {
     font-weight: 300;
+}
+.new-msg {
+    font-size: 18px;
+    color: #cc0202;
+    border-radius: 25% 10%;
+    border: 2px solid #6a64f1;
+    background-color: #6a64f1;
+}
+.td-btn{
+    float: left;
 }

@@ -3,8 +3,8 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="../../assets/css/letterBox.css">
     <jsp:include page="../../jsp/css-import.jsp"></jsp:include>
+    <link rel="stylesheet" href="../../assets/css/letterBox.css">
     <meta charset="UTF-8" lang="fa">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -16,13 +16,13 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-body bg-primary text-white mailbox-widget pb-0">
+                <div class="card-body card-color text-white mailbox-widget pb-0">
                     <!--header-->
 <%--                    <div>--%>
 <%--                        <a class="text-light" href="home.do"><span class="fa fa-home text-light home"></span></a>--%>
 <%--                    </div>--%>
 
-                    <h2 class="text-white pb-3">صندوق نامه و ارجاع</h2>
+                    <h4 class="text-white pb-3">صندوق نامه و ارجاع</h4>
                     <!--navbar start-->
                     <ul class="nav nav-tabs custom-tab border-bottom-0 mt-4" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -100,7 +100,7 @@
 
                                         <td class="text-muted">${letter.getFaDate()}</td>
 
-                                        <td class="d-flex justify-content-center">
+                                        <td class="d-flex justify-content-end">
                                             <a href="#" class="text-dark p-2 bg-warning rounded" onclick="selectLetter(${letter.id})">مشاهده نامه </a>
                                             <a href="#" class="text-dark p-2 bg-warning rounded" onclick="showEditLetter(${letter.id})">ویرایش نامه </a>
                                         </td>
@@ -166,7 +166,7 @@
 
                                         <td class="text-muted">${reference.refDateAndTime}</td>
 
-                                        <td class="d-flex justify-content-center">
+                                        <td class="d-flex justify-content-end">
                                             <a href="#" class="text-dark p-2 bg-warning rounded" onclick="selectReference(${reference.id})">مشاهده ارجاع </a>
                                             <a href="#" class="text-dark p-2 bg-warning rounded" onclick="showEditReference(${reference.id})">ویرایش ارجاع </a>
                                         </td>
@@ -223,8 +223,16 @@
 
                                             <td class="text-muted">${reference.refDateAndTime}</td>
 
-                                            <td class="d-flex justify-content-center">
-                                                <a href="#" class="btn text-dark p-2 bg-warning rounded">مشاهده ارجاع </a>
+                                            <td class="d-flex justify-content-end">
+                                                <a href="#" class="text-dark p-2 bg-warning rounded" onclick="selectReference(${reference.id})">مشاهده ارجاع </a>
+
+
+                                                <c:if test="${reference.seen == false}">
+                                                    <a href="#" class="text-dark p-2 rounded" onclick="selectReference(${reference.id})">
+                                                        <span class="new-msg">new</span>
+                                                    </a>
+                                                </c:if>
+
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -239,8 +247,9 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="../../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+
+<jsp:include page="../../jsp/js-import.jsp"></jsp:include>
+
 <script src="../../assets/js/letter.js"></script>
 <script src="../../assets/js/reference.js"></script>
 <script type="text/javascript"></script>
