@@ -191,4 +191,10 @@
     </login-config>
     <!--end security login form-->
 
+    <!--session listener-->
+    <listener>
+        <listener-class>com.mftplus.automation.controller.session.SessionListener</listener-class>
+    </listener>
+    <!--end session listener-->
+
 </web-app>

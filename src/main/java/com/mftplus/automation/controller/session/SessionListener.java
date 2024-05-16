@@ -27,4 +27,23 @@ public class SessionListener implements HttpSessionListener {
         online--;
         HttpSessionListener.super.sessionDestroyed(se);
     }
+
+    public SessionListener() {
+    }
+
+    public static int getOnline() {
+        return online;
+    }
+
+    public static void setOnline(int online) {
+        SessionListener.online = online;
+    }
+
+    public static int getVisited() {
+        return visited;
+    }
+
+    public static void setVisited(int visited) {
+        SessionListener.visited = visited;
+    }
 }
