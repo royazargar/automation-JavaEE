@@ -18,4 +18,17 @@ Automation System
 
         - check out web.xml and login servlet for more info
 
+New rtl templates which were added :
+    
+    - form
+    - table
+    - displayForm : it is another form but for display
+
+    - dashboard for admin
+    - dashboard for user
+    - note : sidebar and navbar templates are inside dashboard
+
+    -homepage
+    -loginpage
+
         
