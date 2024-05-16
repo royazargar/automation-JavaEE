@@ -65,6 +65,7 @@ public class Letter extends Base implements Serializable {
         userList.add(user);
     }
 
+    //todo : why validation fails for persian value?
     @Column (name = "l_sender_name" , columnDefinition = "NVARCHAR2(20)")
     @Pattern(regexp = "^[a-zA-Zآ-ی\\s]{3,20}$", message = "Invalid SenderName")
     @Size(min = 3, max = 20, message = "SenderName must be between 3 and 20 characters")
