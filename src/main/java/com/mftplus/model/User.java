@@ -28,15 +28,15 @@ import java.util.List;
 public class User extends Base implements Serializable {
     @Id
     @Column(name = "u_username", columnDefinition = "NVARCHAR2(15)", nullable = false)
-    @Pattern(regexp = "^[a-zA-Z\\s]{4,15}$", message = "Invalid Username")
-    @Size(min = 4, max = 15, message = "Username must be between 4 and 15 characters")
-    @NotBlank(message = "Should Not Be Null")
+//    @Pattern(regexp = "^[a-zA-Z\\s]{4,15}$", message = "Invalid Username")
+//    @Size(min = 4, max = 15, message = "Username must be between 4 and 15 characters")
+//    @NotBlank(message = "Should Not Be Null")
     private String username;
 
     @Column(name = "u_password", columnDefinition = "NVARCHAR2(20)", nullable = false)
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{5,20}$",message = "Minimum five characters, at least one letter and one number!")
-    @Size(min = 5, max = 20, message = "Password must be between 3 and 20 characters")
-    @NotBlank(message = "Should Not Be Null")
+//    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{5,20}$",message = "Minimum five characters, at least one letter and one number!")
+//    @Size(min = 5, max = 20, message = "Password must be between 3 and 20 characters")
+//    @NotBlank(message = "Should Not Be Null")
     private String password;
 
     //todo : mapped by gives stack overflow error while saving reference receivers in letter

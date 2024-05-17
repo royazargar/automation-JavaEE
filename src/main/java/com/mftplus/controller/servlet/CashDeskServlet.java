@@ -61,7 +61,6 @@ public class CashDeskServlet extends HttpServlet {
                     log.info("CashDeskServlet - CashDesk Saved");
                     resp.sendRedirect("/cashDesk.do");
                     req.getSession().setAttribute("CashDeskId",cashDesk.getId());
-                    resp.sendRedirect("/cashDesk.do?selectedCashDesk="+cashDesk.getId());
                 }
             else {
                 log.info("Invalid Cashier");
@@ -69,7 +68,7 @@ public class CashDeskServlet extends HttpServlet {
             }
         } catch (Exception e) {
             log.info(e.getMessage());
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 

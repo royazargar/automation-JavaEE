@@ -35,6 +35,6 @@ public class CashDesk extends Base{
     @Column(name ="cashDesk_cashBalance" ,length =15)
     private Long cashBalance;//  موجودی صندوق
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     private User cashier;//صندوقدار
 }

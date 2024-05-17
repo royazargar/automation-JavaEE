@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="../assets/css/cashDesk.css">
 </head>
 <body>
-<div class="container-fluid">
-    <div id="cash-form">
+<div>
+    <div>
 
         <form action="/cashDesk.do" method="post">
 
