@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 @Slf4j
-@WebServlet(name = "/financialTransactionServlet", urlPatterns = "/FinancialTransaction.do")
+@WebServlet(urlPatterns = "/financialTransaction.do")
 public class FinancialTransactionServlet extends HttpServlet {
     @Inject
     private FinancialTransactionServiceImpl financialTransactionService;
@@ -39,22 +39,94 @@ public class FinancialTransactionServlet extends HttpServlet {
     private CashDeskServiceImp cashDeskService;
 
     @Inject
-    private FinancialTransaction financialTransaction;
+    private DepartmentServiceImp departmentService;
 
-//    @Inject
-//    private SectionServiceImpl sectionService;
+    @Inject
+    private FinancialTransaction financialTransaction;
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            String checkNumber=req.getParameter("checkNumber");
-            String faCheckDueDate=req.getParameter("faCheckDueDate");
-            long amount3= Long.parseLong((req.getParameter("amount")));
-            String faDateTime3=req.getParameter("faDateTime");
-            Optional<CashDesk> cashDesk=cashDeskService.findByCashDeskNumber(Integer.parseInt(req.getParameter("cashDeskNumber")));
-            Optional<Bank> bank=bankService.findByAccountNumber(req.getParameter("accountNumber"));
-            Optional<User> user=userService.findByUsername(req.getParameter("username"));
+//            String checkNumber=req.getParameter("checkNumber");
+//            String faCheckDueDate=req.getParameter("faCheckDueDate");
+//            long amount3= Long.parseLong((req.getParameter("amount")));
+//            String faDateTime3=req.getParameter("faDateTime");
+//            Optional<CashDesk> cashDesk=cashDeskService.findByCashDeskNumber(Integer.parseInt(req.getParameter("cashDeskNumber")));
+//            Optional<Bank> bank=bankService.findByAccountNumber(req.getParameter("accountNumber"));
+            String username = req.getParameter("username");
+            Optional<User> userOptional = userService.findByUsername(username);
+            String title = req.getParameter("title");
+            Optional<Department> departmentOptional = departmentService.findByTitle(title);
+
+//            if (cashDesk.isPresent() && bank.isPresent() && userOptional.isPresent() && departmentOptional.isPresent()) {
+            if (userOptional.isPresent() && departmentOptional.isPresent()) {
+//                checkPayment = CheckPayment
+//                        .builder()
+//                        .checkNumber(checkNumber)
+//                        .faCheckDueDate(LocalDateTime.parse(faCheckDueDate))
+//                        .cashDesk(cashDesk.get())
+//                        .amount(amount3)
+//                        .faDateTime(LocalDateTime.parse(faDateTime3))
+//                        .deleted(false)
+//                        .build();
+
+//                String depositCode = req.getParameter("depositCode");
+//                long amount2 = Long.parseLong((req.getParameter("amount")));
+//                String faDateTime2 = req.getParameter("faDateTime");
+//
+//                cardPayment = CardPayment
+//                        .builder()
+//                        .depositCode(depositCode)
+//                        .bankInvolved(bank.get())
+//                        .amount(amount2)
+//                        .faDateTime(LocalDateTime.parse(faDateTime2))
+//                        .deleted(false)
+//                        .build();
+
+                String faDateTime = req.getParameter("faDateTime");
+                Long amount = Long.valueOf(req.getParameter("amount"));
+                int trackingCode = Integer.parseInt(req.getParameter("trackingCode"));
+                String paymentType = req.getParameter("paymentType");
+                String transactionType = req.getParameter("transactionType");
+
+                financialTransaction = FinancialTransaction
+                        .builder()
+                        .user(userOptional.get())
+                        .referringDepartment(departmentOptional.get())
+                        .paymentType(PaymentType.valueOf(paymentType))
+//                        .cardPayment(cardPayment)
+//                        .checkPayment(checkPayment)
+                        .amount(amount)
+                        .trackingCode(trackingCode)
+                        .transactionType(FinancialTransactionType.valueOf(transactionType))
+                        .faDateTime(faDateTime)
+                        .deleted(false)
+                        .build();
+
+                financialTransactionService.save(financialTransaction);
+                log.info("FinancialTransactionServlet - FinancialTransaction Saved");
+                resp.sendRedirect("/financialTransaction.do");
+            } else {
+                log.info("Invalid Information");
+                resp.sendRedirect("/financialTransaction.do");
+            }
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            String checkNumber = req.getParameter("checkNumber");
+            String faCheckDueDate = req.getParameter("faCheckDueDate");
+            long amount3 = Long.parseLong((req.getParameter("amount")));
+            String faDateTime3 = req.getParameter("faDateTime");
+            Optional<CashDesk> cashDesk = cashDeskService.findByCashDeskNumber(Integer.parseInt(req.getParameter("cashDeskNumber")));
+            Optional<Bank> bank = bankService.findByAccountNumber(req.getParameter("accountNumber"));
+            Optional<User> user = userService.findByUsername(req.getParameter("username"));
 //            Optional<Section> section=sectionService.findByTitle(req.getParameter("title"));
 
             if (cashDesk.isPresent() && bank.isPresent() && user.isPresent()) {
@@ -90,91 +162,20 @@ public class FinancialTransactionServlet extends HttpServlet {
                 financialTransaction = FinancialTransaction
                         .builder()
                         .user(user.get())
-
                         .paymentType(PaymentType.valueOf(paymentType))
-                        .cardPayment(cardPayment)
-                        .checkPayment(checkPayment)
+//                        .cardPayment(cardPayment)
+//                        .checkPayment(checkPayment)
                         .amount(amount1)
                         .trackingCode(trackingCode)
                         .transactionType(FinancialTransactionType.valueOf(transactionType))
-                        .faDateTime(LocalDateTime.parse(faDateTime1))
+                        .faDateTime(faDateTime1)
                         .deleted(false)
                         .build();
 
                 financialTransactionService.save(financialTransaction);
                 log.info("FinancialTransactionServlet - FinancialTransaction Saved");
                 resp.sendRedirect("/financialTransaction.do");
-            }
-            else {
-                log.info("Invalid Information");
-                resp.sendRedirect("/financialTransaction.do");
-            }
-        } catch (Exception e) {
-            log.info(e.getMessage());
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            String checkNumber=req.getParameter("checkNumber");
-            String faCheckDueDate=req.getParameter("faCheckDueDate");
-            long amount3= Long.parseLong((req.getParameter("amount")));
-            String faDateTime3=req.getParameter("faDateTime");
-            Optional<CashDesk> cashDesk=cashDeskService.findByCashDeskNumber(Integer.parseInt(req.getParameter("cashDeskNumber")));
-            Optional<Bank> bank=bankService.findByAccountNumber(req.getParameter("accountNumber"));
-            Optional<User> user=userService.findByUsername(req.getParameter("username"));
-//            Optional<Section> section=sectionService.findByTitle(req.getParameter("title"));
-
-            if (cashDesk.isPresent() && bank.isPresent() && user.isPresent() ) {
-                checkPayment = CheckPayment
-                        .builder()
-                        .checkNumber(checkNumber)
-                        .faCheckDueDate(LocalDateTime.parse(faCheckDueDate))
-                        .cashDesk(cashDesk.get())
-                        .amount(amount3)
-                        .faDateTime(LocalDateTime.parse(faDateTime3))
-                        .deleted(false)
-                        .build();
-
-                String depositCode = req.getParameter("depositCode");
-                long amount2 = Long.parseLong((req.getParameter("amount")));
-                String faDateTime2 = req.getParameter("faDateTime");
-
-                cardPayment = CardPayment
-                        .builder()
-                        .depositCode(depositCode)
-                        .bankInvolved(bank.get())
-                        .amount(amount2)
-                        .faDateTime(LocalDateTime.parse(faDateTime2))
-                        .deleted(false)
-                        .build();
-
-                String faDateTime1 = req.getParameter("faDateTime");
-                Long amount1 = Long.valueOf(req.getParameter("amount"));
-                int trackingCode = Integer.parseInt(req.getParameter("trackingCode"));
-                String paymentType = req.getParameter("paymentType");
-                String transactionType = req.getParameter("transactionType");
-
-                financialTransaction = FinancialTransaction
-                        .builder()
-                        .user(user.get())
-                        .paymentType(PaymentType.valueOf(paymentType))
-                        .cardPayment(cardPayment)
-                        .checkPayment(checkPayment)
-                        .amount(amount1)
-                        .trackingCode(trackingCode)
-                        .transactionType(FinancialTransactionType.valueOf(transactionType))
-                        .faDateTime(LocalDateTime.parse(faDateTime1))
-                        .deleted(false)
-                        .build();
-
-                financialTransactionService.save(financialTransaction);
-                log.info("FinancialTransactionServlet - FinancialTransaction Saved");
-                resp.sendRedirect("/financialTransaction.do");
-            }
-            else {
+            } else {
                 log.info("Invalid Information");
                 resp.sendRedirect("/financialTransaction.do");
             }
@@ -188,7 +189,9 @@ public class FinancialTransactionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             req.getSession().setAttribute("paymentTypes", Arrays.asList(PaymentType.values()));
-            req.getSession().setAttribute("transactionTypes",Arrays.asList(FinancialTransactionType.values()));
+            req.getSession().setAttribute("transactionTypes", Arrays.asList(FinancialTransactionType.values()));
+            req.getSession().setAttribute("userList", userService.findAll());
+            req.getSession().setAttribute("departmentList", departmentService.findAll());
             req.getSession().setAttribute("financialTransactionList", financialTransactionService.findAll());
             req.getRequestDispatcher("/jsp/financialTransaction.jsp").forward(req, resp);
         } catch (Exception e) {
@@ -199,7 +202,7 @@ public class FinancialTransactionServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            long id= Long.parseLong(req.getParameter("id"));
+            long id = Long.parseLong(req.getParameter("id"));
             financialTransactionService.removeById(id);
 
             log.info("FinancialTransactionServlet - FinancialTransaction Removed");

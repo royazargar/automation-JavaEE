@@ -1,5 +1,6 @@
 package com.mftplus.model;
 
+import com.github.mfathi91.time.PersianDate;
 import com.github.mfathi91.time.PersianDateTime;
 import com.mftplus.model.enums.FinancialTransactionType;
 import com.mftplus.model.enums.PaymentType;
@@ -12,6 +13,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -31,22 +34,22 @@ public class FinancialTransaction extends Base{
 
     @Column(name ="financialTransaction_dateTime")
 //    @PastOrPresent(message = "Invalid Date")
-    private LocalDateTime dateTime; //تاریخ
+    private LocalDate dateTime; //تاریخ
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     private User user; // پرداخت کننده یا دریافت کننده
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     private Department referringDepartment; // واحد ارجاع کننده
 
     @Enumerated(EnumType.ORDINAL)
     private PaymentType paymentType;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private CardPayment cardPayment;
+//    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    private CardPayment cardPayment;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private CheckPayment checkPayment;
+//    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    private CheckPayment checkPayment;
 
 //    @Pattern(regexp = "^{1,15}$",message = "Invalid Amount")
     @Column(name ="financialTransaction_amount" ,length =15)
@@ -56,16 +59,17 @@ public class FinancialTransaction extends Base{
     @Column(name = "financialTransaction_trackingCode",length = 20,unique = true)
     private int trackingCode; // کد تراکنش
 
+    @Enumerated(EnumType.ORDINAL)
     private FinancialTransactionType transactionType;
 
     @Transient
-    private LocalDateTime faDateTime;
+    private String faDateTime;
 
     public String getFaDateTime() {
-        return PersianDateTime.fromGregorian(dateTime).toString();
+        return  String.valueOf(PersianDate.fromGregorian(dateTime));
     }
 
     public void setFaDateTime(String faDateTime) {
-        this.dateTime = PersianDateTime.parse(faDateTime).toGregorian();
+        this.dateTime =PersianDate.parse(faDateTime).toGregorian();
     }
 }

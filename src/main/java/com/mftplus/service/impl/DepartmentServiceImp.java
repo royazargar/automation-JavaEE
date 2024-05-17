@@ -1,6 +1,7 @@
 package com.mftplus.service.impl;
 
 import com.mftplus.model.Department;
+import com.mftplus.model.User;
 import com.mftplus.service.DepartmentService;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.persistence.EntityManager;
@@ -64,9 +65,8 @@ public class DepartmentServiceImp implements DepartmentService, Serializable {
     @Override
     public Optional<Department> findByTitle(String title) throws Exception {
         TypedQuery<Department> query = entityManager.createQuery("select oo from departmentEntity oo where oo.title=:title", Department.class);
-        query.setParameter(title,"title");
-        List<Department> result = query.getResultList();
-        return Optional.ofNullable((result.isEmpty()) ? null : result.get(0));
+        query.setParameter( "title",title);
+        return Optional.ofNullable(entityManager.find(Department.class, title));
     }
 
 }

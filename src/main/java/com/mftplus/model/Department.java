@@ -36,30 +36,30 @@ public class Department extends Base {
     @Column(name = "department_name", length = 20)
     private String phoneNumber;
 
-    @ManyToOne
-    private Organisation organisation;
+//    @ManyToOne
+//    private Organisation organisation;
+//
+//    @OneToMany
+//    private List<User> userList;
+//
+//    @OneToMany
+//    private List<Department> departmentPart;
 
-    @OneToMany
-    private List<User> userList;
+//    @OneToOne
+//    private Attach attach;
 
-    @OneToMany
-    private List<Department> departmentPart;
-
-    @OneToOne
-    private Attach attach;
-
-    public List<User> userArray() {
-        if (userList == null) {
-            userList = new ArrayList<>();
-        }
-        return userList;
-    }
-
-    public List<Department> getDepartmentArray() {
-        if (departmentPart == null) {
-            departmentPart = new ArrayList<>();
-        }
-        return departmentPart;
-    }
+//    public List<User> userArray() {
+//        if (userList == null) {
+//            userList = new ArrayList<>();
+//        }
+//        return userList;
+//    }
+//
+//    public List<Department> getDepartmentArray() {
+//        if (departmentPart == null) {
+//            departmentPart = new ArrayList<>();
+//        }
+//        return departmentPart;
+//    }
 
 }

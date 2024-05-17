@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Department</title>
+    <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,8 +11,8 @@
     <link rel="stylesheet" href="../assets/css/department.css">
 </head>
 <body>
-<div class="container-fluid">
-    <div id="cash-form">
+<div>
+    <div>
 
         <form action="/department.do" method="post">
 
@@ -31,19 +32,11 @@
             </div>
 
             <div class="row mb-4">
-                <label for="organisation">Select user: </label>
-                <select name="organisation" id="organisation">
-                    <c:forEach items="${organisationList}" var="organisation">
-                        <option>${organisation.name}</option>
-                    </c:forEach>
-                </select>
-            </div>
-
-            <div class="row mb-4">
                 <input type="submit" class="btn btn-primary" value="Save">
             </div>
 
         </form>
+
     </div>
 
     <div id="cash-table">
@@ -54,7 +47,6 @@
                 <th>title</th>
                 <th>duty</th>
                 <th>phoneNumber</th>
-                <th>Organisation</th>
                 <th>operation</th>
             </tr>
             </thead>
@@ -65,7 +57,6 @@
                     <td>${department.title}</td>
                     <td>${department.duty}</td>
                     <td>${department.phoneNumber}</td>
-                    <td>${department.organisation.name}</td>
                     <td>
                         <button class="btn btn-warning" onclick="edit(${department.id})"><i class="fa fa-edit"></i> Edit
                         </button>
@@ -79,6 +70,6 @@
     </div>
 </div>
 
-<jsp:include page="js-import.jsp"></jsp:include>
 </body>
+<jsp:include page="js-import.jsp"></jsp:include>
 </html>
