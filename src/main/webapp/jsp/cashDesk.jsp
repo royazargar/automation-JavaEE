@@ -13,32 +13,40 @@
 <body>
 <div class="container-fluid">
     <div id="cash-form">
-        <form action="cashDesk.do" method="post" enctype="multipart/form-data">
+
+        <form action="/cashDesk.do" method="post">
+
             <div class="row mb-4">
                 <label class="col form-label" for="name">Name</label>
                 <input id="name" class="col form-control" type="text" name="name">
             </div>
+
             <div class="row mb-4">
                 <label class="col form-label" for="cashDeskNumber">Cash Desk Number</label>
                 <input id="cashDeskNumber" class="col form-control" type="number" name="cashDeskNumber">
             </div>
+
             <div class="row mb-4">
                 <label class="col form-label" for="cashBalance">Cash Balance</label>
                 <input id="cashBalance" class="col form-control" type="number" name="cashBalance">
             </div>
+
             <div class="row mb-4">
                 <label for="user">Select user: </label>
-                <select name="user" id="user">
+                <select name="username" id="user">
                     <c:forEach items="${userList}" var="user">
-                        <option name="username">${user.username}</option>
+                        <option>${user.username}</option>
                     </c:forEach>
                 </select>
             </div>
+
             <div class="row mb-4">
                 <input type="submit" class="btn btn-primary" value="Save">
             </div>
+
         </form>
     </div>
+
     <div id="cash-table">
         <table class="table table-hover table-dark">
             <thead>
@@ -58,7 +66,7 @@
                     <td>${cashDesk.name}</td>
                     <td>${cashDesk.cashDeskNumber}</td>
                     <td>${cashDesk.cashBalance}</td>
-                    <td>${cashDesk.cashier}</td>
+                    <td>${cashDesk.cashier.username}</td>
                     <td>
                         <button class="btn btn-warning" onclick="edit(${cashDesk.id})"><i class="fa fa-edit"></i> Edit
                         </button>
@@ -73,17 +81,4 @@
 </div>
 
 <jsp:include page="js-import.jsp"></jsp:include>
-<script src="../assets/js/cashDesk.js"></script>
-</body>
-<script>
-    async function showFind() {
-        username_txt = document.getElementById("username");
-        username = username_txt.value;
-        const response = await fetch("/api/user/findByUsername/" + username, {
-            method: "GET"
-        });
-        const data = await response.json();
-        console.log(data);
-    }
-</script>
 </html>
