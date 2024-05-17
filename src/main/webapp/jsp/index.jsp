@@ -33,7 +33,7 @@
               <li><a href="reference.do">ارجاع</a></li>
             </ul>
           </li>
-          <li><a href="#">بانک </a></li>
+          <li><a href="bankBox.do">بانک </a></li>
           <li><a href="">انبار </a>
             <ul class="submenu">
               <li><a href="#">کالا</a></li>

@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<jsp:include page="../jsp/navbar.jsp"></jsp:include>
+<%--<jsp:include page="../jsp/navbar.jsp"></jsp:include>--%>
 
 <div class="content">
     <div id="org-form">
