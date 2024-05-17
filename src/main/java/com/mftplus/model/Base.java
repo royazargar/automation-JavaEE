@@ -1,0 +1,25 @@
+package com.mftplus.model;
+
+import jakarta.json.bind.annotation.JsonbTransient;
+import jakarta.persistence.Version;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
+import jakarta.persistence.MappedSuperclass;
+
+@NoArgsConstructor
+@Getter
+@Setter
+@SuperBuilder
+
+@MappedSuperclass
+public class Base {
+    @Version
+    @JsonbTransient
+    private Long versionId;
+
+    @JsonbTransient
+    private Boolean deleted;
+}
