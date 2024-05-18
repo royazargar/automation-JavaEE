@@ -99,6 +99,7 @@ What we used for building this project
 * TomEE 10.0.27
 * Jdk 11
 * Oracle Data Base
+* Hibernate Orm
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
