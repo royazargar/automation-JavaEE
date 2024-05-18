@@ -73,7 +73,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-<img src="images/home.png" alt="Home">
+  <a href="https://github.com/AhmadMessbah/JavaEE_Automation">
+    <img src="images/home.png" alt="Home">
+  </a>
 
 [//]: # ([![]&#40;E:\JavaFinalProject\letter\docs\images\home.png&#41;]&#40;https://example.com&#41;)
 
