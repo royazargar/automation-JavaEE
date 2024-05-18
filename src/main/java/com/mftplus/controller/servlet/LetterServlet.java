@@ -124,12 +124,18 @@ public class LetterServlet extends HttpServlet {
 
                     //validate
                     BeanValidator<Letter> validator = new BeanValidator<>();
-                    validator.validate(letter);
+
+                    if (validator.validate(letter) != null){
+                        resp.setStatus(500);
+                        resp.getWriter().write(validator.validate(letter).toString());
+                    }
 
                     letterService.save(letter);
                     log.info("LetterServlet - Letter Saved");
                     req.getSession().setAttribute("letterId", letter.getId());
                     resp.sendRedirect("/letter.do");
+
+
             } else {
                 throw new NoContentException("The required user does not exist !");
             }
