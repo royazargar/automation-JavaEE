@@ -207,7 +207,7 @@
                 </a>
             </li>
             <li class="item">
-                <a href="person.do" class="nav_link">
+                <a href="#" class="nav_link">
               <span class="navlink_icon">
                 <i class="fas fa-user-plus"></i>
               </span>
