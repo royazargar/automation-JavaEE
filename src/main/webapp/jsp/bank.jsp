@@ -20,24 +20,24 @@
                 <input id="name" class="col form-control" type="text" name="name">
             </div>
             <div class="row mb-4">
-                <label class="col form-label" for="accountNumber">Account Number</label>
-                <input id="accountNumber" class="col form-control" type="text" name="accountNumber">
+                <label class="col form-label" for="s_accountNumber">Account Number</label>
+                <input id="s_accountNumber" class="col form-control" type="text" name="accountNumber">
             </div>
             <div class="row mb-4">
-                <label class="col form-label" for="branchCode">Branch Code</label>
-                <input id="branchCode" class="col form-control" type="number" name="branchCode">
+                <label class="col form-label" for="s_branchCode">Branch Code</label>
+                <input id="s_branchCode" class="col form-control" type="number" name="branchCode">
             </div>
             <div class="row mb-4">
-                <label class="col form-label" for="branchName">Branch Name</label>
-                <input id="branchName" class="col form-control" type="text" name="branchName">
+                <label class="col form-label" for="s_branchName">Branch Name</label>
+                <input id="s_branchName" class="col form-control" type="text" name="branchName">
             </div>
             <div class="row mb-4">
-                <label class="col form-label" for="accountType">Account Type</label>
-                <input id="accountType" class="col form-control" type="text" name="accountType">
+                <label class="col form-label" for="s_accountType">Account Type</label>
+                <input id="s_accountType" class="col form-control" type="text" name="accountType">
             </div>
             <div class="row mb-4">
-                <label class="col form-label" for="accountBalance">Account Balance</label>
-                <input id="accountBalance" class="col form-control" type="number" name="accountBalance">
+                <label class="col form-label" for="s_accountBalance">Account Balance</label>
+                <input id="s_accountBalance" class="col form-control" type="number" name="accountBalance">
             </div>
             <div class="row mb-4">
                 <input type="submit" class="btn btn-primary" value="Save">
@@ -70,10 +70,10 @@
                     <td>${bank.accountType}</td>
                     <td>${bank.accountBalance}</td>
                     <td>
-                        <button class="btn btn-warning" onclick="edit(${bank.id})"><i class="fa fa-edit"></i>
+                        <button class="btn btn-warning" onclick="edit('${bank.id}')"><i class="fa fa-edit"></i>
                             Edit
                         </button>
-                        <button class="btn btn-danger" onclick="remove(${bank.id})"><i class="fa fa-remove"></i>Remove
+                        <button class="btn btn-danger" onclick="removeBank('${bank.id}')"><i class="fa fa-remove"></i>Remove
                         </button>
                     </td>
                 </tr>
@@ -81,9 +81,43 @@
             </tbody>
         </table>
     </div>
+
+    <div id="edit-form" style="display:none;">
+        <form onsubmit="return submitEditForm(event);">
+            <input  id="edit-id" name="id">
+            <div>
+                <label for="edit-name">Name:</label>
+                <input type="text" id="edit-name" name="name" required>
+            </div>
+            <div>
+                <label for="edit-accountNumber">Account Number:</label>
+                <input type="text" id="edit-accountNumber" name="accountNumber" required>
+            </div>
+            <div>
+                <label for="edit-branchCode">Branch Code:</label>
+                <input type="number" id="edit-branchCode" name="branchCode" required>
+            </div>
+            <div>
+                <label for="edit-branchName">Branch Name:</label>
+                <input type="text" id="edit-branchName" name="branchName" required>
+            </div>
+            <div>
+                <label for="edit-accountType">Account Type:</label>
+                <input type="text" id="edit-accountType" name="accountType" required>
+            </div>
+            <div>
+                <label for="edit-accountBalance">Account Balance:</label>
+                <input type="number" id="edit-accountBalance" name="accountBalance" required>
+            </div>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+
 </div>
 
 <jsp:include page="js-import.jsp"></jsp:include>
 <script src="../assets/js/bank.js"></script>
+<script src="../assets/js"></script>
 </body>
 </html>
