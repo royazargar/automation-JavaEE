@@ -3,46 +3,60 @@
 <html>
 <head>
     <title>Financial Doc</title>
+    <link rel="stylesheet" href="../assets/css/kamadatepicker.min.css">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <jsp:include page="css-import.jsp"></jsp:include>
-    <link rel="stylesheet" href="../assets/css/financialDoc.css">
+    <link rel="stylesheet" href="../assets/css/user.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/all.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
 </head>
 <body>
-<div class="container-fluid">
-    <div id="fdoc-form">
-        <form action="financialDoc.do" method="post" enctype="multipart/form-data">
+<div class="content">
+    <div id="org-form">
+        <form id="financialDoc_form" action="financialDoc.do" method="post">
+
             <div class="row mb-4">
                 <label class="col form-label" for="docNumber">Doc Number</label>
                 <input id="docNumber" class="col form-control" type="text" name="docNumber">
             </div>
+
             <div class="row mb-4">
-                <label class="col form-label" for="faDateTime">Fa Date Time</label>
-                <input id="faDateTime" class="col form-control" type="text" name="faDateTime">
+                <label for="date" class="formbold-form-label"> تاریخ </label>
+                <input type="text" name="date" id="date" placeholder="تاریخ نامه را وارد کنید" class="formbold-form-input" required/>
             </div>
+
             <div class="row mb-4">
                 <label class="col form-label" for="description">description</label>
                 <input id="description" class="col form-control" type="text" name="description">
             </div>
+
             <div class="row mb-4">
-                <label class="col form-label" for="financialTransaction">Financial Transaction</label>
-                <input id="financialTransaction" class="col form-control" type="text" name="financialTransaction">
+                <label for="fId">Financial Transaction</label>
+                <select name="fId" id="fId">
+                    <c:forEach items="${financialTransaction}" var="fId">
+                        <option value="${fId.id}">${fId.trackingCode}</option>
+                    </c:forEach>
+                </select>
             </div>
+
             <div class="row mb-4">
                 <input type="submit" class="btn btn-primary" value="Save">
             </div>
         </form>
     </div>
 
-    <div id="fdoc-table">
+    <div id="financialDoc-table">
         <table class="table table-hover table-primary">
             <thead>
             <tr>
                 <th>id</th>
                 <th>docNumber</th>
-                <th>faDateTime</th>
+                <th>faDate</th>
                 <th>description</th>
                 <th>financialTransaction</th>
                 <th>operation</th>
@@ -53,9 +67,9 @@
                 <tr>
                     <td>${financialDoc.id}</td>
                     <td>${financialDoc.docNumber}</td>
-                    <td>${financialDoc.faDateTime}</td>
+<%--                    <td>${financialDoc.faDate}</td>--%>
                     <td>${financialDoc.description}</td>
-                    <td>${financialDoc.financialTransaction}</td>
+                    <td>${financialDoc.financialTransaction.trackingCode}</td>
                     <td>
                         <button class="btn btn-warning" onclick="edit(${financialDoc.id})"><i class="fa fa-edit"></i>
                             Edit
@@ -70,7 +84,16 @@
     </div>
 </div>
 
-<jsp:include page="js-import.jsp"></jsp:include>
 <script src="../assets/js/financialDoc.js"></script>
+<script src="../../../assets/js/jquery-3.7.1.min.js"></script>
+<script src="../../../assets/js/kamadatepicker.holidays.js"></script>
+<script src="../../../assets/js/kamadatepicker.min.js"></script>
+<script>
+    let myElement = document.querySelector('#date');
+    kamaDatepicker(myElement);
+
+    kamaDatepicker('date', { buttonsColor: "red", forceFarsiDigits: true });
+</script>
+
 </body>
 </html>

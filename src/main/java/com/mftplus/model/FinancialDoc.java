@@ -1,5 +1,6 @@
 package com.mftplus.model;
 
+import com.github.mfathi91.time.PersianDate;
 import com.github.mfathi91.time.PersianDateTime;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.*;
@@ -11,6 +12,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -28,29 +30,29 @@ public class FinancialDoc extends Base{
     @Column(name = "financialDoc_id",length = 20)
     private Long id;
 
-    @Pattern(regexp = "^{1,5}$",message = "Invalid Doc Number")
+//    @Pattern(regexp = "^{1,5}$",message = "Invalid Doc Number")
     @Column(name ="financialDoc_docNumber" ,length =5, unique = true)
     private Long docNumber;//شماره سند
 
     @Column(name ="financialDoc_dateTime")
-    @PastOrPresent(message = "Invalid Date")
-    private LocalDateTime dateTime;//تاریخ
+//    @PastOrPresent(message = "Invalid Date")
+    private LocalDate date;//تاریخ
 
-    @Pattern(regexp = "^[a-zA-Z\\s]{3,20}$",message = "Invalid Description")
+//    @Pattern(regexp = "^[a-zA-Z\\s]{3,20}$",message = "Invalid Description")
     @Column(name ="financialDoc_description" ,length =20 )
     private String description; //بابت
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     private FinancialTransaction financialTransaction;
 
     @Transient
-    private LocalDateTime faDateTime;
+    private String faDate;
 
-    public String getFaDateTime() {
-        return PersianDateTime.fromGregorian(dateTime).toString();
+    public String getFaDate() {
+        return String.valueOf(PersianDate.fromGregorian(date));
     }
 
-    public void setFaDateTime(String faDateTime) {
-        this.dateTime = PersianDateTime.parse(faDateTime).toGregorian();
+    public void setFaDate(String faDate) {
+        this.date =PersianDate.parse(faDate).toGregorian();
     }
 }

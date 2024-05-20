@@ -69,24 +69,24 @@ public class BankApi {
         }
     }
 
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response edit(Bank bank) {
-        try {
-            log.info("Edit Bank");
-            bankService.edit(bank);
-            return Response
-                    .ok()
-                    .entity(bank)
-                    .build();
-        } catch (Exception e) {
-            return Response
-                    .serverError()
-                    .entity("{\"message\": \"" + e.getMessage() + "\"}")
-                    .build();
-        }
-    }
+//    @PUT
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response edit(Bank bank) {
+//        try {
+//            log.info("Edit Bank");
+//            bankService.edit(bank);
+//            return Response
+//                    .ok()
+//                    .entity(bank)
+//                    .build();
+//        } catch (Exception e) {
+//            return Response
+//                    .serverError()
+//                    .entity("{\"message\": \"" + e.getMessage() + "\"}")
+//                    .build();
+//        }
+//    }
 
     @DELETE
     @Path("/{id}")

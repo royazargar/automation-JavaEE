@@ -33,15 +33,16 @@ public class FinancialDocServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             long docNumber = Long.parseLong((req.getParameter("docNumber")));
-            String faDateTime2 = req.getParameter("faDateTime");
+            String faDate1 = req.getParameter("faDate1");
             String description = req.getParameter("description");
-            Optional<FinancialTransaction> financialTransaction = financialTransactionService.findByTrackingCode(Integer.parseInt("trackingCode"));
+            Long id= Long.valueOf(req.getParameter("fId"));
+            Optional<FinancialTransaction> financialTransaction = financialTransactionService.findById(id);
 
             if (financialTransaction.isPresent()) {
                 financialDoc = FinancialDoc
                         .builder()
                         .docNumber(docNumber)
-                        .faDateTime(LocalDateTime.parse(faDateTime2))
+                        .faDate(faDate1)
                         .description(description)
                         .financialTransaction(financialTransaction.get())
                         .deleted(false)
@@ -56,8 +57,7 @@ public class FinancialDocServlet extends HttpServlet {
                 resp.sendRedirect("/financialDoc.do");
             }
         } catch (Exception e) {
-            log.info(e.getMessage());
-            throw new RuntimeException(e);
+          e.printStackTrace();
         }
     }
 
@@ -65,7 +65,7 @@ public class FinancialDocServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             long docNumber = Long.parseLong((req.getParameter("docNumber")));
-            String faDateTime2 = req.getParameter("faDateTime");
+            String faDate2 = req.getParameter("faDate2");
             String description = req.getParameter("description");
             Optional<FinancialTransaction> financialTransaction = financialTransactionService.findByTrackingCode(Integer.parseInt("trackingCode"));
 
@@ -73,7 +73,7 @@ public class FinancialDocServlet extends HttpServlet {
                 financialDoc = FinancialDoc
                         .builder()
                         .docNumber(docNumber)
-                        .faDateTime(LocalDateTime.parse(faDateTime2))
+                        .faDate(faDate2)
                         .description(description)
                         .financialTransaction(financialTransaction.get())
                         .deleted(false)
@@ -97,6 +97,7 @@ public class FinancialDocServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             req.getSession().setAttribute("financialDocList", financialDocService.findAll());
+            req.getSession().setAttribute("financialTransaction",financialTransactionService.findAll());
             req.getRequestDispatcher("/jsp/financialDoc.jsp").forward(req, resp);
         } catch (Exception e) {
             throw new RuntimeException(e);
