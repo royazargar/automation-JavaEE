@@ -54,7 +54,9 @@
       </div>
       <div class="left">
         <ul>
-          <li><a href="person.do" class="fas fa-user-circle"></a></li>
+
+            <li><a href="person.do" class="fas fa-user-circle"></a></li>
+
           <li class="logOut"><a href="logout.do" class="fas fa-sign-out"></a></li>
         </ul>
       </div>
