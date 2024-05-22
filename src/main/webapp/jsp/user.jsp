@@ -12,11 +12,9 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/all.css">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/sidebar.css">
 
 </head>
 <body>
-<%--<jsp:include page="../jsp/navbar.jsp"></jsp:include>--%>
 
 <div class="content">
     <div id="org-form">
