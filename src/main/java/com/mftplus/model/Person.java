@@ -4,7 +4,6 @@ import com.mftplus.model.enums.Gender;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -62,7 +61,7 @@ public class Person extends Base implements Serializable {
 
     //todo : has not been set in servlet or form
     @Column(name = "p_birthdate")
-    @Past(message = "Invalid Birthdate")
+//    @Past(message = "Invalid Birthdate")
     private LocalDate birthdate;
 
     //todo : attachment

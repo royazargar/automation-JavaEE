@@ -1,9 +1,6 @@
 package com.mftplus.controller.servlet;
 
-
-import com.mftplus.model.Person;
 import com.mftplus.model.User;
-import com.mftplus.model.enums.Gender;
 import com.mftplus.model.enums.Role;
 import com.mftplus.service.impl.UserServiceImpl;
 import jakarta.inject.Inject;
@@ -60,7 +57,7 @@ public class UserEditServlet extends HttpServlet {
 
             user.setUsername(username);
             user.setPassword(password);
-            user.setRole(Role.valueOf(role));
+//            user.setRole(Role.valueOf(role));
 
             userService.edit(user);
             log.info("UserEditServlet - User Edited");

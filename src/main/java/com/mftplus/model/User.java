@@ -1,6 +1,5 @@
 package com.mftplus.model;
 
-import com.mftplus.model.enums.Role;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -39,13 +38,6 @@ public class User extends Base implements Serializable {
     @NotBlank(message = "Should Not Be Null")
     private String password;
 
-    //todo : mapped by gives stack overflow error while saving reference receivers in letter
-    @OneToOne
-    private Person person;
-
-    @Enumerated(EnumType.ORDINAL)
-    private Role role;
-
     @Column(name="u_active")
     private boolean active;
 
@@ -62,6 +54,5 @@ public class User extends Base implements Serializable {
 
     @ManyToOne
     private Department department;
-
 
 }

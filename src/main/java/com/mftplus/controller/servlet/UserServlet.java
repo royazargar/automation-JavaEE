@@ -3,6 +3,7 @@ package com.mftplus.controller.servlet;
 import com.mftplus.controller.validation.BeanValidator;
 import com.mftplus.model.Roles;
 import com.mftplus.model.User;
+import com.mftplus.service.impl.PersonServiceImpl;
 import com.mftplus.service.impl.RolesServiceImpl;
 import com.mftplus.service.impl.UserServiceImpl;
 import jakarta.inject.Inject;
@@ -24,6 +25,8 @@ public class UserServlet extends HttpServlet {
     private UserServiceImpl userService;
     @Inject
     private RolesServiceImpl rolesService;
+    @Inject
+    private PersonServiceImpl personService;
     @Inject
     private User user;
 
@@ -67,7 +70,21 @@ public class UserServlet extends HttpServlet {
 
                 //save user
                 userService.save(user);
-                log.info("User Saved");
+
+                //save person for user
+//                Person person =
+//                        Person
+//                                .builder()
+//                                        .name("null")
+//                                        .family("null")
+//                                        .nationalCode("0000000000")
+//                                        .user(user)
+//                                        .deleted(false)
+//                                        .build();
+//
+//
+//                personService.save(person);
+//                user.setPerson(person);
 
                 //build role for user
                 Roles userRole =
@@ -87,7 +104,7 @@ public class UserServlet extends HttpServlet {
 //                rolesList.add(rolesService.findById(userRole.getId()).get());
 //                user.setRoleList(rolesList);
 //
-//                userService.save(user);
+//                userService.edit(user);
 
 
                 resp.sendRedirect("/user.do");

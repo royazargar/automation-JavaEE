@@ -69,7 +69,7 @@ public class PersonServiceImpl implements PersonService, Serializable {
     public Optional<Person> findByUsername(String username) throws Exception {
         TypedQuery<Person> query = entityManager.createQuery("select p from personEntity p where p.user.username=:username", Person.class);
         query.setParameter("username", username);
-        return Optional.ofNullable(entityManager.find(Person.class, username));
+        return query.getResultList().stream().findFirst();
     }
 
     @Transactional
