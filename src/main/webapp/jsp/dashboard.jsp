@@ -183,19 +183,11 @@
             <!-- End -->
 
             <li class="item">
-                <a href="#" class="nav_link">
+                <a href="user.do" class="nav_link">
               <span class="navlink_icon">
                 <i class="fas fa-user-circle"></i>
               </span>
                     <span class="navlink">کاربران</span>
-                </a>
-            </li>
-            <li class="item">
-                <a href="#" class="nav_link">
-              <span class="navlink_icon">
-                <i class="fas fa-user-lock"></i>
-              </span>
-                    <span class="navlink">سطوح دسترسی</span>
                 </a>
             </li>
             <li class="item">
@@ -207,19 +199,11 @@
                 </a>
             </li>
             <li class="item">
-                <a href="#" class="nav_link">
+                <a href="user.do" class="nav_link">
               <span class="navlink_icon">
                 <i class="fas fa-user-plus"></i>
               </span>
                     <span class="navlink">ایجاد کاربر جدید</span>
-                </a>
-            </li>
-            <li class="item">
-                <a href="roles.do" class="nav_link">
-              <span class="navlink_icon">
-                <i class="fas fa-user-check"></i>
-              </span>
-                    <span class="navlink">تعلق نقش</span>
                 </a>
             </li>
         </ul>
