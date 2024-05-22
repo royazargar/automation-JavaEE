@@ -1,7 +1,9 @@
 package com.mftplus.controller.servlet;
 
+import com.mftplus.controller.validation.BeanValidator;
+import com.mftplus.model.Roles;
 import com.mftplus.model.User;
-import com.mftplus.model.enums.Role;
+import com.mftplus.service.impl.RolesServiceImpl;
 import com.mftplus.service.impl.UserServiceImpl;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
@@ -12,7 +14,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 @Slf4j
 @WebServlet(name = "UserServlet" , urlPatterns = "/user.do")
@@ -22,15 +23,16 @@ public class UserServlet extends HttpServlet {
     @Inject
     private UserServiceImpl userService;
     @Inject
+    private RolesServiceImpl rolesService;
+    @Inject
     private User user;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("UserServlet - Get");
         try {
-            req.getSession().setAttribute("roles", Arrays.asList(Role.values()));
-            req.getSession().setAttribute("userList", userService.findAll());
-            req.getRequestDispatcher("/jsp/user.jsp").forward(req, resp);
+            req.getSession().setAttribute("userList", rolesService.findAll());
+            req.getRequestDispatcher("/jsp/form/save/user-form.jsp").forward(req, resp);
         } catch (Exception e) {
             log.error("User - Get : " + e.getMessage());
             throw new RuntimeException(e);
@@ -43,46 +45,64 @@ public class UserServlet extends HttpServlet {
         try {
             String username = req.getParameter("username");
             String password = req.getParameter("password");
-            String role = req.getParameter("role");
 
+            //build user
             user = User
                     .builder()
                     .username(username)
                     .password(password)
-                    .role(Role.valueOf(role))
                     .deleted(false)
                     .build();
+
+            //validate user
+            BeanValidator<User> validator = new BeanValidator<>();
+
+            if (validator.validate(user) != null){
+                resp.setStatus(500);
+                resp.getWriter().write(validator.validate(user).toString());
+            }
+
+            //check for duplicate username
             if (userService.findByUsername(username).isEmpty()){
+
+                //save user
                 userService.save(user);
                 log.info("User Saved");
+
+                //build role for user
+                Roles userRole =
+                        Roles
+                                .builder()
+                                .user(user)
+                                .role("user")
+                                .deleted(false)
+                                .build();
+                if (rolesService.findByUsernameAndRoleName(user.getUsername(),"user").isEmpty()){
+                    rolesService.save(userRole);
+                    log.info("new user role saved");
+                }
+
+
+//                List<Roles> rolesList = new ArrayList<>();
+//                rolesList.add(rolesService.findById(userRole.getId()).get());
+//                user.setRoleList(rolesList);
+//
+//                userService.save(user);
+
+
                 resp.sendRedirect("/user.do");
                 req.getSession().removeAttribute("duplicateUsername");
+
             }else {
                 resp.sendRedirect("/user.do");
-                String e = "Duplicate Username";
+                String e = "نام کاربری تکراری است !";
                 req.getSession().setAttribute("duplicateUsername",e);
-//               throw new DuplicateUsernameException("Duplicate Username");
             }
         }
         catch (Exception e){
             log.error("User - POST : " + e.getMessage());
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
-//    @Override
-//    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String userId = req.getParameter("id");
-//        int id = Integer.parseInt(userId);
-//
-//         try{
-//             userService.removeById((long) id);
-//         }catch (Exception e){
-//             System.out.println(e.getMessage());
-//             log.info("UserServlet - Error Delete User By Id");
-//             req.getSession().setAttribute("error", e.getMessage());
-//             req.getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
-//         }
-//
-//    }
 }
