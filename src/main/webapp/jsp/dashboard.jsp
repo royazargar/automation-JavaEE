@@ -214,31 +214,31 @@
             <span>
             <i class="fa fa-bank"></i>
             </span>
-                <span class="navlink">بانک</span>
+                <span href="bank.do" class="navlink">بانک</span>
                 <i class="bx bx-chevron-right arrow-left"></i>
             </div>
             <li class="item">
-                <a href="#" class="nav_link">
+                <a href="cashDesk.do" class="nav_link">
               <span class="navlink_icon">
                 <i class="bx bx-flag"></i>
               </span>
-                    <span class="navlink">خالی</span>
+                    <span class="navlink">صندوق</span>
                 </a>
             </li>
             <li class="item">
-                <a href="#" class="nav_link">
+                <a href="financialTransaction.do" class="nav_link">
               <span class="navlink_icon">
                 <i class="bx bx-medal"></i>
               </span>
-                    <span class="navlink">خالی</span>
+                    <span class="navlink">تراکنش مالی</span>
                 </a>
             </li>
             <li class="item">
-                <a href="#" class="nav_link">
+                <a href="financialDoc.do" class="nav_link">
               <span class="navlink_icon">
                 <i class="bx bx-cog"></i>
               </span>
-                    <span class="navlink">خالی</span>
+                    <span class="navlink">سند مالی</span>
                 </a>
             </li>
             <li class="item">

@@ -103,8 +103,6 @@ public class CashDeskServlet extends HttpServlet {
             req.getSession().setAttribute("cashDeskList", cashDeskService.findAll());
             req.getSession().setAttribute("userList",userService.findAll());
             req.getRequestDispatcher("/jsp/cashDesk.jsp").forward(req, resp);
-
-            System.out.println(userService.findAll());
         } catch (Exception e) {
             log.info(e.getMessage());
             throw new RuntimeException(e);

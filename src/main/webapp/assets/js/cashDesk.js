@@ -1,7 +1,3 @@
-// function edit(id) {
-//     alert(id);
-// }
-
 async function removeCashDesk(id) {
     alert(id);
     const response = await fetch("/api/cashDesk/" + id, {

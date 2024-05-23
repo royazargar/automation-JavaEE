@@ -1,10 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Asus
-  Date: 5/23/2024
-  Time: 2:29 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -24,6 +19,8 @@
 
         <input id="cashBalance" class="col form-control" type="number" name="cashBalance"
                value="${sessionScope.cashDeskEdit.cashBalance}">
+
+
 
         <select name="username" id="user">
             <c:forEach items="${sessionScope.userList}" var="user">

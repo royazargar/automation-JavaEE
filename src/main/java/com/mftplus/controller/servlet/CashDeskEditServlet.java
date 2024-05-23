@@ -31,13 +31,15 @@ public class CashDeskEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            System.out.println("GET");
             if (req.getParameter("id") == null) {
                 resp.sendRedirect("/cashDesk.do");
             } else {
                 Long id = Long.valueOf(req.getParameter("id"));
                 Optional<CashDesk> cashDesk = cashDeskService.findById(id);
                 cashDesk.ifPresent(desk -> req.getSession().setAttribute("cashDeskEdit", desk));
-                req.getSession().setAttribute("userList", userService.findAll());
+                req.getSession().setAttribute("userList",userService.findAll());
+                System.out.println(req.getSession().getAttribute("userList"));
                 req.getRequestDispatcher("/jsp/editCashDesk.jsp").forward(req, resp);
             }
         } catch (Exception e) {
@@ -50,6 +52,7 @@ public class CashDeskEditServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             Long id = Long.valueOf(req.getParameter("id"));
+            System.out.println("ID CASH DESK : " + id);
             String name = req.getParameter("name");
             int cashDeskNumber = Integer.parseInt(req.getParameter("cashDeskNumber"));
             Long cashBalance = Long.valueOf(req.getParameter("cashBalance"));
@@ -65,6 +68,7 @@ public class CashDeskEditServlet extends HttpServlet {
                         .cashier(user.get())
                         .deleted(false)
                         .build();
+                System.out.println("CASH DESK : " + cashDesk);
                 cashDeskService.edit(cashDesk);
                 resp.sendRedirect("/cashDesk.do");
             }else {
