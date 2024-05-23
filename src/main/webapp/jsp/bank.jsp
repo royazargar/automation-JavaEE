@@ -82,39 +82,46 @@
         </table>
     </div>
 
-    <div>
-        <form id="bankEditForm" enctype="multipart/form-data">
-            <input  id="edit-id" name="id">
-            <div>
-                <label for="edit-name">Name:</label>
-                <input type="text" id="edit-name" name="name">
-            </div>
-            <div>
-                <label for="edit-accountNumber">Account Number:</label>
-                <input type="text" id="edit-accountNumber" name="accountNumber">
-            </div>
-            <div>
-                <label for="edit-branchCode">Branch Code:</label>
-                <input type="number" id="edit-branchCode" name="branchCode">
-            </div>
-            <div>
-                <label for="edit-branchName">Branch Name:</label>
-                <input type="text" id="edit-branchName" name="branchName">
-            </div>
-            <div>
-                <label for="edit-accountType">Account Type:</label>
-                <input type="text" id="edit-accountType" name="accountType">
-            </div>
-            <div>
-                <label for="edit-accountBalance">Account Balance:</label>
-                <input type="number" id="edit-accountBalance" name="accountBalance">
-            </div>
-                <button id="submit" class="a-btn" onclick="editBank(event)">ویرایش</button>
-        </form>
-    </div>
+    <%--    <div>--%>
+    <%--        <form id="bankEditForm" enctype="multipart/form-data">--%>
+    <%--            <input  id="edit-id" name="id">--%>
+    <%--            <div>--%>
+    <%--                <label for="edit-name">Name:</label>--%>
+    <%--                <input type="text" id="edit-name" name="name">--%>
+    <%--            </div>--%>
+    <%--            <div>--%>
+    <%--                <label for="edit-accountNumber">Account Number:</label>--%>
+    <%--                <input type="text" id="edit-accountNumber" name="accountNumber">--%>
+    <%--            </div>--%>
+    <%--            <div>--%>
+    <%--                <label for="edit-branchCode">Branch Code:</label>--%>
+    <%--                <input type="number" id="edit-branchCode" name="branchCode">--%>
+    <%--            </div>--%>
+    <%--            <div>--%>
+    <%--                <label for="edit-branchName">Branch Name:</label>--%>
+    <%--                <input type="text" id="edit-branchName" name="branchName">--%>
+    <%--            </div>--%>
+    <%--            <div>--%>
+    <%--                <label for="edit-accountType">Account Type:</label>--%>
+    <%--                <input type="text" id="edit-accountType" name="accountType">--%>
+    <%--            </div>--%>
+    <%--            <div>--%>
+    <%--                <label for="edit-accountBalance">Account Balance:</label>--%>
+    <%--                <input type="number" id="edit-accountBalance" name="accountBalance">--%>
+    <%--            </div>--%>
+    <%--                <button id="submit" class="a-btn" onclick="editBank(event)">ویرایش</button>--%>
+    <%--        </form>--%>
+    <%--    </div>--%>
 
 
 </div>
+
+<script>
+    function edit(id) {
+        document.location.replace("/bankEdit.do?id=" + id);
+    }
+</script>
+
 
 <jsp:include page="js-import.jsp"></jsp:include>
 

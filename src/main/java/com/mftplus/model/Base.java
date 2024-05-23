@@ -16,9 +16,9 @@ import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class Base {
-    @Version
-    @JsonbTransient
-    private Long versionId;
+//    @Version
+//    @JsonbTransient
+//    private Long versionId;
 
     @JsonbTransient
     private Boolean deleted;
