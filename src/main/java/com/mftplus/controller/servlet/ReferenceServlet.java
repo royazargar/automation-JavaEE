@@ -1,6 +1,7 @@
 package com.mftplus.controller.servlet;
 
 import com.mftplus.controller.exception.NoUserFoundException;
+import com.mftplus.controller.validation.BeanValidator;
 import com.mftplus.model.Letter;
 import com.mftplus.model.Reference;
 import com.mftplus.model.User;
@@ -100,6 +101,15 @@ public class ReferenceServlet extends HttpServlet {
                                     .referenceReceiverId(referenceReceiverId.get())
                                     .build();
                     reference.setFaExpiration(faExpiration);
+
+                    //validate
+                    BeanValidator<Reference> validator = new BeanValidator<>();
+
+                    if (validator.validate(reference) != null){
+                        resp.setStatus(500);
+                        resp.getWriter().write(validator.validate(reference).toString());
+                    }
+
                     referenceService.save(reference);
                     log.info("ReferenceServlet - Reference Saved");
                 resp.sendRedirect("/reference.do");
