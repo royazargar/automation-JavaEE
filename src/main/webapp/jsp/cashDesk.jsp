@@ -69,7 +69,7 @@
                     <td>${cashDesk.cashBalance}</td>
                     <td>${cashDesk.cashier.username}</td>
                     <td>
-                        <button class="btn btn-warning" onclick="edit('${cashDesk.id}')"><i class="fa fa-edit"></i> Edit
+                        <button class="btn btn-warning" onclick="editCashDesk('${cashDesk.id}')"><i class="fa fa-edit"></i> Edit
                         </button>
                         <button class="btn btn-danger" onclick="removeCashDesk('${cashDesk.id}')"><i class="fa fa-remove"></i>Remove
                         </button>
@@ -82,7 +82,7 @@
 </div>
 
 <script>
-    function edit(id) {
+    function editCashDesk(id) {
         document.location.replace("/cashDeskEdit.do?id=" + id);
     }
 </script>
