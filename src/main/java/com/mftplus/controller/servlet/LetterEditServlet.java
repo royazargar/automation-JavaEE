@@ -2,6 +2,7 @@ package com.mftplus.controller.servlet;
 
 import com.mftplus.controller.exception.IdIsRequiredException;
 import com.mftplus.controller.exception.NoContentException;
+import com.mftplus.controller.validation.BeanValidator;
 import com.mftplus.model.Letter;
 import com.mftplus.model.User;
 import com.mftplus.model.enums.LetterAccessLevel;
@@ -65,7 +66,7 @@ public class LetterEditServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("LetterEditServlet - put");
         try {
-//            long id = Integer.parseInt(req.getParameter("id"));
+            long id = Integer.parseInt(req.getParameter("id"));
             String title = req.getParameter("title");
             String letterNumber = req.getParameter("letter_number");
             String faDate = req.getParameter("date").replace("/", "-");
@@ -102,7 +103,7 @@ public class LetterEditServlet extends HttpServlet {
                     Letter letter =
                             Letter
                                     .builder()
-//                                    .id(id)
+                                    .id(id)
                                     .user(user.get())
                                     .title(title)
                                     .letterNumber(letterNumber)
@@ -120,6 +121,15 @@ public class LetterEditServlet extends HttpServlet {
                                     .userList(userList)
                                     .build();
                     letter.setFaDate(faDate);
+
+                    //validate
+                    BeanValidator<Letter> validator = new BeanValidator<>();
+
+                    if (validator.validate(letter) != null){
+                        resp.setStatus(500);
+                        resp.getWriter().write(validator.validate(letter).toString());
+                    }
+
                     letterService.edit(letter);
                     log.info("LetterEditServlet - Letter Edited");
                     resp.setStatus(200);
