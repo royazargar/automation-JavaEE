@@ -11,7 +11,7 @@ import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,8 +82,8 @@ public class FinancialDocServiceImpl implements FinancialDocService, Serializabl
 
     @Transactional
     @Override
-    public List<FinancialDoc> findByDateTime(LocalDateTime dateTime) throws Exception {
-        TypedQuery<FinancialDoc> query=entityManager.createQuery("SELECT oo FROM financialDocEntity oo WHERE oo.dateTime=:dateTime AND oo.deleted=false",FinancialDoc.class);
+    public List<FinancialDoc> findByDate(LocalDate date) throws Exception {
+        TypedQuery<FinancialDoc> query=entityManager.createQuery("SELECT oo FROM financialDocEntity oo WHERE oo.date=:date AND oo.deleted=false",FinancialDoc.class);
         return query.getResultList();
     }
 }

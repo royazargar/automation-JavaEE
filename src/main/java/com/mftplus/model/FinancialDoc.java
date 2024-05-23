@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 @Setter
 @SuperBuilder
 @ToString
+
 @RequestScoped
 @Entity(name = "financialDocEntity")
 @Table(name = "financial_doc_tbl")

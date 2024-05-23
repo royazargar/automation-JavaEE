@@ -27,7 +27,8 @@
 
             <div class="row mb-4">
                 <label for="date" class="formbold-form-label"> تاریخ </label>
-                <input type="text" name="date" id="date" placeholder="تاریخ نامه را وارد کنید" class="formbold-form-input" required/>
+                <input type="text" name="date" id="date" placeholder="تاریخ نامه را وارد کنید"
+                       class="formbold-form-input" required/>
             </div>
 
             <div class="row mb-4">
@@ -67,14 +68,15 @@
                 <tr>
                     <td>${financialDoc.id}</td>
                     <td>${financialDoc.docNumber}</td>
-<%--                    <td>${financialDoc.faDate}</td>--%>
+                        <%--                    <td>${financialDoc.faDate}</td>--%>
                     <td>${financialDoc.description}</td>
                     <td>${financialDoc.financialTransaction.trackingCode}</td>
                     <td>
                         <button class="btn btn-warning" onclick="edit(${financialDoc.id})"><i class="fa fa-edit"></i>
                             Edit
                         </button>
-                        <button class="btn btn-danger" onclick="removeFinancialDoc('${financialDoc.id}')"><i class="fa fa-remove"></i>Remove
+                        <button class="btn btn-danger" onclick="removeFinancialDoc('${financialDoc.id}')"><i
+                                class="fa fa-remove"></i>Remove
                         </button>
                     </td>
                 </tr>
@@ -84,7 +86,6 @@
     </div>
 </div>
 
-<script src="../assets/js/financialDoc.js"></script>
 <script src=../assets/js/jquery-3.7.1.min.js"></script>
 <script src="../assets/js/kamadatepicker.holidays.js"></script>
 <script src="../assets/js/kamadatepicker.min.js"></script>
@@ -92,7 +93,19 @@
     let myElement = document.querySelector('#date');
     kamaDatepicker(myElement);
 
-    kamaDatepicker('date', { buttonsColor: "red", forceFarsiDigits: true });
+    kamaDatepicker('date', {buttonsColor: "red", forceFarsiDigits: true});
+</script>
+
+<%--<script src="../assets/js/financialDoc.js"></script>--%>
+
+<script>
+    async function removeFinancialDoc(id) {
+        alert(id);
+        const response = await fetch("/api/financialDoc/" + id, {
+            method: "DELETE"
+        });
+        document.location.replace("/financialDoc.do")
+    }
 </script>
 
 </body>

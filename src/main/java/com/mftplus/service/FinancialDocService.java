@@ -2,7 +2,7 @@ package com.mftplus.service;
 
 import com.mftplus.model.FinancialDoc;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,5 +25,5 @@ public interface FinancialDocService {
 
     List<FinancialDoc> findAll() throws Exception;
 
-    List<FinancialDoc> findByDateTime(LocalDateTime dateTime) throws Exception;
+    List<FinancialDoc> findByDate(LocalDate date) throws Exception;
 }
