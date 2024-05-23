@@ -9,11 +9,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <jsp:include page="css-import.jsp"></jsp:include>
-    <link rel="stylesheet" href="../assets/css/user.css">
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/all.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/financialDoc.css">
 </head>
 <body>
 <div class="content">
@@ -86,7 +82,9 @@
     </div>
 </div>
 
-<script src=../assets/js/jquery-3.7.1.min.js"></script>
+<%--<script src="../assets/js/financialDoc.js"></script>--%>
+<script src="../assets/js/jquery-3.7.1.min.js"></script>
+
 <script src="../assets/js/kamadatepicker.holidays.js"></script>
 <script src="../assets/js/kamadatepicker.min.js"></script>
 <script>
@@ -96,7 +94,7 @@
     kamaDatepicker('date', {buttonsColor: "red", forceFarsiDigits: true});
 </script>
 
-<%--<script src="../assets/js/financialDoc.js"></script>--%>
+
 
 <script>
     async function removeFinancialDoc(id) {

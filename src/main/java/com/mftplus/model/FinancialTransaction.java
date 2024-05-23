@@ -36,7 +36,7 @@ public class FinancialTransaction extends Base{
 //    @PastOrPresent(message = "Invalid Date")
     private LocalDate dateTime; //تاریخ
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user; // پرداخت کننده یا دریافت کننده
 
     @ManyToOne

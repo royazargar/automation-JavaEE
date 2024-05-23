@@ -41,6 +41,7 @@ public class FinancialTransactionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+
             String username = req.getParameter("username");
             Optional<User> userOptional = userService.findByUsername(username);
             Long id = Long.valueOf(req.getParameter("id"));
