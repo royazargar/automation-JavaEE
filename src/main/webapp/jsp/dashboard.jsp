@@ -22,7 +22,8 @@
         <i class="bi bi-grid"></i>
         <i class='bx bx-sun' id="darkLight"></i>
         <i class='bx bx-bell' ></i>
-        <img src="../assets/image/profile.jpg" alt="" class="profile" />
+        <a href="person.do"><img src="../assets/image/profile.jpg" alt="" class="profile" /></a>
+
     </div>
 </nav>
 
