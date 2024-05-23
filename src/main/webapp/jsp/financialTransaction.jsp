@@ -105,7 +105,7 @@
                     <td>${financialTransaction.dateTime}</td>
                     <td>
                         <button class="btn btn-warning" onclick="edit(${financialTransaction.id})"><i class="fa fa-edit"></i>Edit</button>
-                        <button class="btn btn-danger" onclick="remove(${financialTransaction.id})"><i class="fa fa-remove"></i>Remove</button>
+                        <button class="btn btn-danger" onclick="removeFinancialTransaction('${financialTransaction.id}')"><i class="fa fa-remove"></i>Remove</button>
                     </td>
                 </tr>
             </c:forEach>
@@ -116,9 +116,9 @@
 
 <%--<jsp:include page="js-import.jsp"></jsp:include>--%>
 <script src="../assets/js/financialTransaction.js"></script>
-<script src="../../../assets/js/jquery-3.7.1.min.js"></script>
-<script src="../../../assets/js/kamadatepicker.holidays.js"></script>
-<script src="../../../assets/js/kamadatepicker.min.js"></script>
+<script src="../assets/js/jquery-3.7.1.min.js"></script>
+<script src="../assets/js/kamadatepicker.holidays.js"></script>
+<script src="../assets/js/kamadatepicker.min.js"></script>
 <script>
     let myElement = document.querySelector('#dateTime');
     kamaDatepicker(myElement);

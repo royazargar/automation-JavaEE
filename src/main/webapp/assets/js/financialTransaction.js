@@ -2,10 +2,9 @@ function edit(id) {
     alert(id);
 }
 
-async function remove(id) {
+async function removeFinancialTransaction(id) {
     alert(id);
-    // const response = await fetch("/api/financialTransaction/" + id, {
-    const response = await fetch("/financialTransaction.do?id=" + id, {
+    const response = await fetch("/api/financialTransaction/" + id, {
         method: "DELETE"
     });
     document.location.replace("/financialTransaction.do")

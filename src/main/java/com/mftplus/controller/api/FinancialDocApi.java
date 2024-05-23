@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Slf4j
 @Path("/financialDoc")
-public class FinancialDocServiceApi {
+public class FinancialDocApi {
 
     @Inject
     private FinancialDocServiceImpl financialDocService;

@@ -74,7 +74,7 @@
                         <button class="btn btn-warning" onclick="edit(${financialDoc.id})"><i class="fa fa-edit"></i>
                             Edit
                         </button>
-                        <button class="btn btn-danger" onclick="remove(${financialDoc.id})"><i class="fa fa-remove"></i>Remove
+                        <button class="btn btn-danger" onclick="removeFinancialDoc('${financialDoc.id}')"><i class="fa fa-remove"></i>Remove
                         </button>
                     </td>
                 </tr>
@@ -85,9 +85,9 @@
 </div>
 
 <script src="../assets/js/financialDoc.js"></script>
-<script src="../../../assets/js/jquery-3.7.1.min.js"></script>
-<script src="../../../assets/js/kamadatepicker.holidays.js"></script>
-<script src="../../../assets/js/kamadatepicker.min.js"></script>
+<script src=../assets/js/jquery-3.7.1.min.js"></script>
+<script src="../assets/js/kamadatepicker.holidays.js"></script>
+<script src="../assets/js/kamadatepicker.min.js"></script>
 <script>
     let myElement = document.querySelector('#date');
     kamaDatepicker(myElement);

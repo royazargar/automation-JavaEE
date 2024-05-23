@@ -2,7 +2,7 @@ function edit(id) {
     alert(id);
 }
 
-async function remove(id) {
+async function removeCashDesk(id) {
     alert(id);
     const response = await fetch("/api/cashDesk/" + id, {
         method: "DELETE"

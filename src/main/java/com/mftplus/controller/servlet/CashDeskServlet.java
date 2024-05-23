@@ -1,11 +1,7 @@
 package com.mftplus.controller.servlet;
 
 import com.mftplus.model.CashDesk;
-import com.mftplus.model.Letter;
 import com.mftplus.model.User;
-import com.mftplus.model.enums.LetterAccessLevel;
-import com.mftplus.model.enums.LetterType;
-import com.mftplus.model.enums.TransferMethod;
 import com.mftplus.service.impl.CashDeskServiceImp;
 import com.mftplus.service.impl.UserServiceImpl;
 import jakarta.inject.Inject;
@@ -17,8 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -107,8 +101,10 @@ public class CashDeskServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             req.getSession().setAttribute("cashDeskList", cashDeskService.findAll());
-            req.getRequestDispatcher("/jsp/cashDesk.jsp").forward(req, resp);
             req.getSession().setAttribute("userList",userService.findAll());
+            req.getRequestDispatcher("/jsp/cashDesk.jsp").forward(req, resp);
+
+            System.out.println(userService.findAll());
         } catch (Exception e) {
             log.info(e.getMessage());
             throw new RuntimeException(e);

@@ -2,7 +2,7 @@ function edit(id) {
     alert(id);
 }
 
-async function remove(id) {
+async function removeFinancialDoc(id) {
     alert(id);
     const response = await fetch("/api/financialDoc/" + id, {
         method: "DELETE"

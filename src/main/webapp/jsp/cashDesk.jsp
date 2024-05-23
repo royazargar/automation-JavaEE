@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Cash Desk</title>
+    <link rel="stylesheet" href="../assets/css/kamadatepicker.min.css">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -34,7 +35,7 @@
             <div class="row mb-4">
                 <label for="user">Select user: </label>
                 <select name="username" id="user">
-                    <c:forEach items="${userList}" var="user">
+                    <c:forEach items="${sessionScope.userList}" var="user">
                         <option>${user.username}</option>
                     </c:forEach>
                 </select>
@@ -68,9 +69,9 @@
                     <td>${cashDesk.cashBalance}</td>
                     <td>${cashDesk.cashier.username}</td>
                     <td>
-                        <button class="btn btn-warning" onclick="edit(${cashDesk.id})"><i class="fa fa-edit"></i> Edit
+                        <button class="btn btn-warning" onclick="edit('${cashDesk.id}')"><i class="fa fa-edit"></i> Edit
                         </button>
-                        <button class="btn btn-danger" onclick="remove(${cashDesk.id})"><i class="fa fa-remove"></i>Remove
+                        <button class="btn btn-danger" onclick="removeCashDesk('${cashDesk.id}')"><i class="fa fa-remove"></i>Remove
                         </button>
                     </td>
                 </tr>
@@ -80,5 +81,15 @@
     </div>
 </div>
 
+<script>
+    function edit(id) {
+        document.location.replace("/cashDeskEdit.do?id=" + id);
+    }
+</script>
+
 <jsp:include page="js-import.jsp"></jsp:include>
+
+<script src="../assets/js/cashDesk.js"></script>
+
+</body>
 </html>
