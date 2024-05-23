@@ -135,7 +135,6 @@ public class LetterServlet extends HttpServlet {
                     req.getSession().setAttribute("letterId", letter.getId());
                     resp.sendRedirect("/letter.do");
 
-
             } else {
                 throw new NoContentException("The required user does not exist !");
             }

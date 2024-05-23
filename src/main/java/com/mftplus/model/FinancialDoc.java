@@ -1,11 +1,8 @@
 package com.mftplus.model;
 
 import com.github.mfathi91.time.PersianDate;
-import com.github.mfathi91.time.PersianDateTime;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

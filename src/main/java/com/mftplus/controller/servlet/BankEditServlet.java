@@ -1,5 +1,6 @@
 package com.mftplus.controller.servlet;
 
+import com.mftplus.controller.validation.BeanValidator;
 import com.mftplus.model.Bank;
 import com.mftplus.service.impl.BankServiceImpl;
 import jakarta.inject.Inject;
@@ -30,7 +31,9 @@ public class BankEditServlet extends HttpServlet {
             }else {
                 Long id= Long.valueOf(req.getParameter("id"));
                 Optional<Bank> bank=bankService.findById(id);
-                req.getSession().setAttribute("bankEdit",bank.get());
+                if (bank.isPresent()) {
+                    req.getSession().setAttribute("bankEdit", bank);
+                }
                 req.getRequestDispatcher("/jsp/editBank.jsp").forward(req,resp);
             }
         } catch (Exception e) {
@@ -62,10 +65,21 @@ public class BankEditServlet extends HttpServlet {
                     .deleted(false)
                     .build();
 
+            //validate
+            BeanValidator<Bank> validator = new BeanValidator<>();
+
+            if (validator.validate(bank) != null){
+                resp.setStatus(500);
+                resp.getWriter().write(validator.validate(bank).toString());
+            }
+
             bankService.edit(bank);
+            log.info("BankEditServlet - Bank Edited");
             resp.sendRedirect("/bank.do");
+            resp.setStatus(200);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 

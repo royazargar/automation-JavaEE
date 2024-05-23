@@ -10,7 +10,7 @@ import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,8 +76,8 @@ public class FinancialTransactionServiceImpl implements FinancialTransactionServ
 
     @Transactional
     @Override
-    public List<FinancialTransaction> findByDateTime(LocalDateTime dateTime) throws Exception {
-        TypedQuery<FinancialTransaction> query=entityManager.createQuery("SELECT oo FROM financialTransactionEntity oo WHERE oo.dateTime=:dateTime AND oo.deleted=false",FinancialTransaction.class);
+    public List<FinancialTransaction> findByDate(LocalDate date) throws Exception {
+        TypedQuery<FinancialTransaction> query=entityManager.createQuery("SELECT oo FROM financialTransactionEntity oo WHERE oo.date=:dateTime AND oo.deleted=false",FinancialTransaction.class);
         return query.getResultList();
     }
 

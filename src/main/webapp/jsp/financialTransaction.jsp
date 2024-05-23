@@ -67,8 +67,8 @@
             </div>
 
             <div class="row mb-4">
-                <label for="dateTime" class="formbold-form-label"> تاریخ </label>
-                <input type="text" name="dateTime" id="dateTime" placeholder="تاریخ نامه را وارد کنید" class="formbold-form-input" required/>
+                <label for="date" class="formbold-form-label"> تاریخ </label>
+                <input type="text" name="date" id="date" placeholder="تاریخ  را وارد کنید" class="formbold-form-input" required/>
             </div>
 
             <div class="row mb-4">
@@ -102,9 +102,9 @@
                     <td>${financialTransaction.amount}</td>
                     <td>${financialTransaction.trackingCode}</td>
                     <td>${financialTransaction.transactionType}</td>
-                    <td>${financialTransaction.dateTime}</td>
+                    <td>${financialTransaction.date}</td>
                     <td>
-                        <button class="btn btn-warning" onclick="edit(${financialTransaction.id})"><i class="fa fa-edit"></i>Edit</button>
+                        <button class="btn btn-warning" onclick="editFinancialTransaction(${financialTransaction.id})"><i class="fa fa-edit"></i>Edit</button>
                         <button class="btn btn-danger" onclick="removeFinancialTransaction('${financialTransaction.id}')"><i class="fa fa-remove"></i>Remove</button>
                     </td>
                 </tr>
@@ -120,10 +120,10 @@
 <script src="../assets/js/kamadatepicker.holidays.js"></script>
 <script src="../assets/js/kamadatepicker.min.js"></script>
 <script>
-    let myElement = document.querySelector('#dateTime');
+    let myElement = document.querySelector('#date');
     kamaDatepicker(myElement);
 
-    kamaDatepicker('dateTime', { buttonsColor: "red", forceFarsiDigits: true });
+    kamaDatepicker('date', { buttonsColor: "red", forceFarsiDigits: true });
 </script>
 </body>
 </html>

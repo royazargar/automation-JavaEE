@@ -2,7 +2,7 @@ package com.mftplus.service;
 
 import com.mftplus.model.FinancialTransaction;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +23,7 @@ public interface  FinancialTransactionService {
 
     Optional<FinancialTransaction> findByTrackingCode(int trackingCode) throws Exception;
 
-    List<FinancialTransaction> findByDateTime(LocalDateTime dateTime) throws Exception;
+    List<FinancialTransaction> findByDate(LocalDate date) throws Exception;
 
     List<FinancialTransaction> findByUser(String username) throws Exception;
 

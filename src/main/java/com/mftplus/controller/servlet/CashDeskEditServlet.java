@@ -1,5 +1,7 @@
 package com.mftplus.controller.servlet;
 
+import com.mftplus.controller.exception.NoContentException;
+import com.mftplus.controller.validation.BeanValidator;
 import com.mftplus.model.CashDesk;
 import com.mftplus.model.User;
 import com.mftplus.service.impl.CashDeskServiceImp;
@@ -68,12 +70,19 @@ public class CashDeskEditServlet extends HttpServlet {
                         .cashier(user.get())
                         .deleted(false)
                         .build();
-                System.out.println("CASH DESK : " + cashDesk);
+                //validate
+                BeanValidator<CashDesk> validator = new BeanValidator<>();
+
+                if (validator.validate(cashDesk) != null){
+                    resp.setStatus(500);
+                    resp.getWriter().write(validator.validate(cashDesk).toString());
+                }
+
                 cashDeskService.edit(cashDesk);
-                resp.sendRedirect("/cashDesk.do");
-            }else {
-                log.info("Invalid Cashier");
-                resp.sendRedirect("/cashDesk.do");
+                log.info("CashDeskEditServlet - CashDesk Edited");
+                resp.setStatus(200);
+            } else {
+                throw new NoContentException("The required user does not exist !");
             }
 
         } catch (Exception e) {

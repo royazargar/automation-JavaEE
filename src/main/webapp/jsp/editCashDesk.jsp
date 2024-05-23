@@ -8,7 +8,7 @@
 
 <div id="data-form">
     <form id="myForm">
-        <h1>Edit Bank</h1>
+        <h1>Edit Cash Desk</h1>
         <input class="form-control" type="text" name="id" value="${sessionScope.cashDeskEdit.id}" hidden="hidden">
 
         <input id="name" class="col form-control" type="text" name="name" value="${sessionScope.cashDeskEdit.name}">

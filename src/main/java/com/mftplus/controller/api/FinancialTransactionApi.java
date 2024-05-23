@@ -8,6 +8,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Slf4j
@@ -71,15 +72,15 @@ public class FinancialTransactionApi {
     }
 
     @GET
-    @Path("/{dateTime}")
+    @Path("/{date}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findByDateTime(@PathParam("dateTime") String dateTime) {
+    public Response findByDate(@PathParam("date") String date) {
         try {
-            LocalDateTime dateTimePars = LocalDateTime.parse(dateTime);
-            log.info("FindByDateTimeFinancialTransaction");
+            LocalDateTime datePars = LocalDateTime.parse(date);
+            log.info("FindByDateFinancialTransaction");
             return Response
                     .ok()
-                    .entity(financialTransactionService.findByDateTime(dateTimePars))
+                    .entity(financialTransactionService.findByDate(LocalDate.from(datePars)))
                     .build();
         } catch (Exception e) {
             return Response
@@ -110,9 +111,9 @@ public class FinancialTransactionApi {
     @GET
     @Path("/{title}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findBySection(@PathParam("title") String title) {
+    public Response findByDepartment(@PathParam("title") String title) {
         try {
-            log.info("FindBySectionFinancialTransaction");
+            log.info("FindByDepartmentFinancialTransaction");
             return Response
                     .ok()
                     .entity(financialTransactionService.findByDepartment(title))

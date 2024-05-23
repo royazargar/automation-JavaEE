@@ -9,7 +9,6 @@ import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Slf4j
 @Path("/financialDoc")
@@ -58,7 +57,7 @@ public class FinancialDocApi {
 
     @DELETE
     @Path("/{id}")
-    public Response removeById(@PathParam("id") Long id) {
+    public Response remove(@PathParam("id") Long id) {
         try {
             log.info("Remove By Id Financial Doc");
             financialDocService.removeById(id);

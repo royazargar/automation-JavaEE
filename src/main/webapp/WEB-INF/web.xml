@@ -30,7 +30,7 @@
 
 <!--      initial servlet  -->
     <welcome-file-list>
-        <welcome-file>loginn.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 
     <servlet>
@@ -96,6 +96,13 @@
             <url-pattern>/home.do</url-pattern>
             <url-pattern>/user.do</url-pattern>
 
+            <!--security for finance pages-->
+            <url-pattern>/bank.do</url-pattern>
+            <url-pattern>/cashDesk.do</url-pattern>
+            <url-pattern>/financialTransaction.do</url-pattern>
+            <url-pattern>/financialDoc.do</url-pattern>
+            <!--end security for finance pages-->
+
             <http-method>GET</http-method>
             <http-method>POST</http-method>
             <http-method>PUT</http-method>
@@ -130,6 +137,13 @@
             <url-pattern>/organisation.do</url-pattern>
             <url-pattern>/home.do</url-pattern>
             <url-pattern>/user.do</url-pattern>
+
+            <!--security for finance pages-->
+            <url-pattern>/bank.do</url-pattern>
+            <url-pattern>/cashDesk.do</url-pattern>
+            <url-pattern>/financialTransaction.do</url-pattern>
+            <url-pattern>/financialDoc.do</url-pattern>
+            <!--end security for finance pages-->
 
             <http-method>GET</http-method>
             <http-method>POST</http-method>
@@ -166,6 +180,13 @@
             <url-pattern>/referenceDisplay.do</url-pattern>
             <url-pattern>/referenceEdit.do</url-pattern>
             <!--end security for reference pages-->
+
+            <!--security for finance pages-->
+            <url-pattern>/bank.do</url-pattern>
+            <url-pattern>/cashDesk.do</url-pattern>
+            <url-pattern>/financialTransaction.do</url-pattern>
+            <url-pattern>/financialDoc.do</url-pattern>
+            <!--end security for finance pages-->
 
             <url-pattern>/home.do</url-pattern>
 

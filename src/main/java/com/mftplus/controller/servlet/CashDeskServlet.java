@@ -1,5 +1,7 @@
 package com.mftplus.controller.servlet;
 
+import com.mftplus.controller.exception.NoContentException;
+import com.mftplus.controller.validation.BeanValidator;
 import com.mftplus.model.CashDesk;
 import com.mftplus.model.User;
 import com.mftplus.service.impl.CashDeskServiceImp;
@@ -27,7 +29,6 @@ public class CashDeskServlet extends HttpServlet {
     @Inject
     private CashDesk cashDesk;
 
-    // TODO: 5/9/2024 null exception
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
@@ -51,48 +52,22 @@ public class CashDeskServlet extends HttpServlet {
                             .deleted(false)
                             .build();
 
+                    //validate
+                    BeanValidator<CashDesk> validator = new BeanValidator<>();
+                    if (validator.validate(cashDesk) != null) {
+                        resp.setStatus(500);
+                        resp.getWriter().write(validator.validate(cashDesk).toString());
+                    }
+
                     cashDeskService.save(cashDesk);
                     log.info("CashDeskServlet - CashDesk Saved");
+                    req.getSession().setAttribute("cashDeskId", cashDesk.getId());
                     resp.sendRedirect("/cashDesk.do");
-                    req.getSession().setAttribute("CashDeskId",cashDesk.getId());
+                } else {
+                    throw new NoContentException("The required user does not exist !");
                 }
-            else {
-                log.info("Invalid Cashier");
-                resp.sendRedirect("/cashDesk.do");
-            }
         } catch (Exception e) {
-            log.info(e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            String name = req.getParameter("name");
-            int cashDeskNumber = Integer.parseInt(req.getParameter("cashDeskNumber"));
-            Long cashBalance = Long.valueOf(req.getParameter("cashBalance"));
-            Optional<User> user = userService.findByUsername(req.getParameter("username"));
-
-            if (user.isPresent()) {
-                cashDesk = CashDesk
-                        .builder()
-                        .name(name)
-                        .cashDeskNumber(cashDeskNumber)
-                        .cashBalance(cashBalance)
-                        .cashier(user.get())
-                        .deleted(false)
-                        .build();
-
-                cashDeskService.edit(cashDesk);
-                log.info("CashDeskServlet - CashDesk Edited");
-                resp.sendRedirect("/cashDesk.do");
-            } else {
-                log.info("Invalid Cashier");
-                resp.sendRedirect("/cashDesk.do");
-            }
-        } catch (Exception e) {
-            log.info(e.getMessage());
+            log.error(e.getMessage());
             throw new RuntimeException(e);
         }
     }

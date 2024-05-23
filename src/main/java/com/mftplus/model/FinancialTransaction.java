@@ -1,13 +1,10 @@
 package com.mftplus.model;
 
 import com.github.mfathi91.time.PersianDate;
-import com.github.mfathi91.time.PersianDateTime;
 import com.mftplus.model.enums.FinancialTransactionType;
 import com.mftplus.model.enums.PaymentType;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +12,7 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 @NoArgsConstructor
 @Getter
@@ -34,7 +31,7 @@ public class FinancialTransaction extends Base{
 
     @Column(name ="financialTransaction_dateTime")
 //    @PastOrPresent(message = "Invalid Date")
-    private LocalDate dateTime; //تاریخ
+    private LocalDate date; //تاریخ
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user; // پرداخت کننده یا دریافت کننده
@@ -57,13 +54,13 @@ public class FinancialTransaction extends Base{
     private FinancialTransactionType transactionType;
 
     @Transient
-    private String faDateTime;
+    private String faDate;
 
-    public String getFaDateTime() {
-        return  String.valueOf(PersianDate.fromGregorian(dateTime));
+    public String getFaDate() {
+        return String.valueOf(PersianDate.fromGregorian(date));
     }
 
-    public void setFaDateTime(String faDateTime) {
-        this.dateTime =PersianDate.parse(faDateTime).toGregorian();
+    public void setFaDate(String faDate) {
+        this.date =PersianDate.parse(faDate).toGregorian();
     }
 }
