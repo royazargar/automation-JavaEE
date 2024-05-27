@@ -33,10 +33,10 @@ public class FinancialTransaction extends Base{
 //    @PastOrPresent(message = "Invalid Date")
     private LocalDate date; //تاریخ
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private User user; // پرداخت کننده یا دریافت کننده
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Department referringDepartment; // واحد ارجاع کننده
 
     @Enumerated(EnumType.ORDINAL)

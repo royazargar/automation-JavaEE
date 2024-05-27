@@ -67,7 +67,7 @@ public class FinancialTransactionEditServlet extends HttpServlet {
             long id = Integer.parseInt(req.getParameter("id"));
             String username = req.getParameter("username");
             Optional<User> userOptional = userService.findByUsername(username);
-            Long dId = Long.valueOf(req.getParameter("id"));
+            Long dId = Long.valueOf(req.getParameter("dId"));
             Optional<Department> departmentOptional = departmentService.findById(dId);
 
             if (userOptional.isPresent() && departmentOptional.isPresent()) {
