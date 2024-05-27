@@ -15,7 +15,7 @@
                value="${sessionScope.financialDocEdit.docNumber}">
 
         <input type="text" name="date" id="date" placeholder="تاریخ  را وارد کنید"
-               class="formbold-form-input" value="${sessionScope.financialDocEdit.date}">
+               class="formbold-form-input" value="${sessionScope.financialDocEdit.faDate}" required/>
 
         <input id="description" class="col form-control" type="text" name="description"
                value="${sessionScope.financialDocEdit.description}">

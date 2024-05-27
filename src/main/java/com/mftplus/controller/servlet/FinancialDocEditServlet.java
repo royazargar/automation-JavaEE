@@ -38,7 +38,7 @@ public class FinancialDocEditServlet extends HttpServlet {
                 Long id = Long.valueOf(req.getParameter("id"));
                 Optional<FinancialDoc> financialDoc = financialDocService.findById(id);
                 if (financialDoc.isPresent()) {
-                    req.getSession().setAttribute("financialDocEdit", financialDoc);
+                    req.getSession().setAttribute("financialDocEdit", financialDoc.get());
                 }
                 req.getSession().setAttribute("financialTransaction", financialTransactionService.findAll());
                 req.getRequestDispatcher("/jsp/editFinancialDoc.jsp").forward(req, resp);

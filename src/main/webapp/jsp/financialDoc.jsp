@@ -71,7 +71,7 @@
                         <button class="btn btn-warning" onclick="editFinancialDoc(${financialDoc.id})"><i class="fa fa-edit"></i>
                             Edit
                         </button>
-                        <button class="btn btn-danger" onclick="removeFinancialDoc('${financialDoc.id}')"><i
+                        <button class="btn btn-danger" onclick="removeFinancialDoc(${financialDoc.id})"><i
                                 class="fa fa-remove"></i>Remove
                         </button>
                     </td>

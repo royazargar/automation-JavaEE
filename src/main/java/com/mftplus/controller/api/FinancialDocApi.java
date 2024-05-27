@@ -73,24 +73,6 @@ public class FinancialDocApi {
         }
     }
 
-    @DELETE
-    @Path("/{docNumber}")
-    public Response removeByDocNumber(@PathParam("docNumber") Long docNumber) {
-        try {
-            log.info("Remove By Doc Number Financial Doc");
-            financialDocService.removeByDocNumber(docNumber);
-            return Response
-                    .ok()
-                    .entity(docNumber)
-                    .build();
-        } catch (Exception e) {
-            return Response
-                    .serverError()
-                    .entity("{\"message\": \"" + e.getMessage() + "\"}")
-                    .build();
-        }
-    }
-
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
