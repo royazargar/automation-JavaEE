@@ -39,7 +39,7 @@ public class FinancialDoc extends Base{
     @Column(name ="financialDoc_description" ,length =20 )
     private String description; //بابت
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private FinancialTransaction financialTransaction;
 
     @Transient
