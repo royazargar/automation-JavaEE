@@ -32,7 +32,7 @@ public class BankEditServlet extends HttpServlet {
                 Long id= Long.valueOf(req.getParameter("id"));
                 Optional<Bank> bank=bankService.findById(id);
                 if (bank.isPresent()) {
-                    req.getSession().setAttribute("bankEdit", bank);
+                    req.getSession().setAttribute("bankEdit", bank.get());
                 }
                 req.getRequestDispatcher("/jsp/editBank.jsp").forward(req,resp);
             }

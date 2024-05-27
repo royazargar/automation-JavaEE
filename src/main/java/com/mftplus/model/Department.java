@@ -8,7 +8,6 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -27,21 +26,22 @@ public class Department extends Base {
     @Column(name = "department_id", length = 20)
     private Long id;
 
-    @Column(name = "department_title", length = 20)
+    @Column(name = "department_title", length = 50)
     private String title;
 
-    @Column(name = "department_duty", length = 20)
+    @Column(name = "department_duty", length = 50)
     private String duty;
 
     @Column(name = "department_name", length = 20)
     private String phoneNumber;
 
-//    @ManyToOne
-//    private Organisation organisation;
-//
-//    @OneToMany
-//    private List<User> userList;
-//
+    @ManyToOne
+    private Organisation organisation;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "department")
+    private List<User> userList;
+
 //    @OneToMany
 //    private List<Department> departmentPart;
 
@@ -61,5 +61,4 @@ public class Department extends Base {
 //        }
 //        return departmentPart;
 //    }
-
 }
