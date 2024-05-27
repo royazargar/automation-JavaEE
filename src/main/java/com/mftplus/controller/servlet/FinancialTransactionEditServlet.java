@@ -46,9 +46,7 @@ public class FinancialTransactionEditServlet extends HttpServlet {
             } else {
                 Long id = Long.valueOf(req.getParameter("id"));
                 Optional<FinancialTransaction> financialTransaction = financialTransactionService.findById(id);
-                if (financialTransaction.isPresent()) {
-                    req.getSession().setAttribute("financialTransactionEdit", financialTransaction);
-                }
+                financialTransaction.ifPresent(transaction -> req.getSession().setAttribute("financialTransactionEdit", transaction));
                 req.getSession().setAttribute("paymentTypes", Arrays.asList(PaymentType.values()));
                 req.getSession().setAttribute("transactionTypes", Arrays.asList(FinancialTransactionType.values()));
                 req.getSession().setAttribute("userList", userService.findAll());
@@ -65,6 +63,7 @@ public class FinancialTransactionEditServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             long id = Integer.parseInt(req.getParameter("id"));
+            System.out.println("id : ----"+id);
             String username = req.getParameter("username");
             Optional<User> userOptional = userService.findByUsername(username);
             Long dId = Long.valueOf(req.getParameter("dId"));
@@ -106,8 +105,7 @@ public class FinancialTransactionEditServlet extends HttpServlet {
                 throw new NoContentException("The required financialTransaction and department does not exist !");
             }
         } catch (Exception e) {
-            log.error(e.getMessage());
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 }

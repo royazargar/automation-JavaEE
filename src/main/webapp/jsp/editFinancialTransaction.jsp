@@ -42,8 +42,7 @@
             </c:forEach>
         </select>
 
-        <input type="text" name="date" id="date" placeholder="تاریخ را وارد کنید" class="formbold-form-input"
-               value="${sessionScope.financialTransactionEdit.date}">
+        <input type="text" name="date" id="date" placeholder="تاریخ  را وارد کنید" class="formbold-form-input" value="${sessionScope.financialTransactionEdit.faDate}" required/>
 
     </form>
     <button id="submit" class="btn btn-warning" onclick="edit()"><i class="fa fa-edit"></i> Edit</button>
