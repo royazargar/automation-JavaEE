@@ -38,9 +38,9 @@ public class Department extends Base {
     @ManyToOne
     private Organisation organisation;
 
-    @ToString.Exclude
-    @OneToMany(mappedBy = "department")
-    private List<User> userList;
+//    @ToString.Exclude
+//    @OneToMany(mappedBy = "department")
+//    private List<User> userList;
 
 //    @OneToMany
 //    private List<Department> departmentPart;

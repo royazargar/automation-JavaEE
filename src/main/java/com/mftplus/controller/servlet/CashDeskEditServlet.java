@@ -41,7 +41,6 @@ public class CashDeskEditServlet extends HttpServlet {
                 Optional<CashDesk> cashDesk = cashDeskService.findById(id);
                 cashDesk.ifPresent(desk -> req.getSession().setAttribute("cashDeskEdit", desk));
                 req.getSession().setAttribute("userList",userService.findAll());
-                System.out.println(req.getSession().getAttribute("userList"));
                 req.getRequestDispatcher("/jsp/editCashDesk.jsp").forward(req, resp);
             }
         } catch (Exception e) {
