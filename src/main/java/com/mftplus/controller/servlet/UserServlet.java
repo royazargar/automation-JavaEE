@@ -26,8 +26,6 @@ public class UserServlet extends HttpServlet {
     @Inject
     private RolesServiceImpl rolesService;
     @Inject
-    private PersonServiceImpl personService;
-    @Inject
     private User user;
 
     @Override
@@ -90,7 +88,6 @@ public class UserServlet extends HttpServlet {
                 Roles userRole =
                         Roles
                                 .builder()
-                                .user(user)
                                 .role("user")
                                 .deleted(false)
                                 .build();
@@ -99,13 +96,11 @@ public class UserServlet extends HttpServlet {
                     log.info("new user role saved");
                 }
 
-
 //                List<Roles> rolesList = new ArrayList<>();
 //                rolesList.add(rolesService.findById(userRole.getId()).get());
 //                user.setRoleList(rolesList);
 //
 //                userService.edit(user);
-
 
                 resp.sendRedirect("/user.do");
                 req.getSession().removeAttribute("duplicateUsername");
@@ -121,5 +116,4 @@ public class UserServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
-
 }

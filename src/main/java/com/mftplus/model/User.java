@@ -54,5 +54,4 @@ public class User extends Base implements Serializable {
 
     @ManyToOne
     private Department department;
-
 }

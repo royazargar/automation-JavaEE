@@ -28,7 +28,6 @@ public class Organisation extends Base implements Serializable {
     @Column(name = "O_id")
     private Long id;
 
-
     @Column(name = "o_title" , length = 40)
     private String title;
 
@@ -48,15 +47,13 @@ public class Organisation extends Base implements Serializable {
     @Column(name = "o_description")
     private String description;
 
-
-    @OneToMany
+    @OneToMany(mappedBy = "organisation")
     private List<Department> departmentList;
 
-    public void addSection(Department department){
+    public void addDepartment(Department department){
         if (departmentList==null){
             departmentList=new ArrayList<>();
         }
         departmentList.add(department);
     }
-
 }

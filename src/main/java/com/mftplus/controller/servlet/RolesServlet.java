@@ -49,7 +49,6 @@ public class RolesServlet extends HttpServlet {
                     Roles role =
                             Roles
                                     .builder()
-                                    .user(user.get())
                                     .role(roleName)
                                     .build();
                     rolesService.save(role);
