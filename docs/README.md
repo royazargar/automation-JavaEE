@@ -203,9 +203,9 @@ Distributed under the MFT plus License. See <a href="https://mftplus.com/">mftpl
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Your Name - ahadzadeparnian@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/AhmadMessbah/JavaEE_Automation](https://github.com/AhmadMessbah/JavaEE_Automation)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
