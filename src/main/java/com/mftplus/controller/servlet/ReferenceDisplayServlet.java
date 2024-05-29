@@ -48,6 +48,7 @@ public class ReferenceDisplayServlet extends HttpServlet {
                 req.getSession().setAttribute("priorities", Arrays.asList(ReferencePriority.values()));
                 req.getSession().setAttribute("referenceList", referenceService.findAll());
                 req.getRequestDispatcher("/jsp/form/display/reference.jsp").forward(req, resp);
+                req.getSession().removeAttribute("ok");
             }
         } catch (Exception e) {
             log.error(e.getMessage());

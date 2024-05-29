@@ -228,3 +228,8 @@ a{
 .formbold-form-title h2:hover{
     text-shadow: 10px 10px 10px #444343;
 }
+.success {
+    color: #2cd07e;
+    font-size: 18px;
+    font-weight: bold;
+}

@@ -52,10 +52,9 @@ public class Letter extends Base implements Serializable {
     @ManyToOne
     private User user;
 
+    //todo : Problem with writing the data, class java.util.ArrayList, ContentType: application/json
     //ref receivers
-    @ManyToMany(fetch = FetchType.EAGER)
-    @ToString.Exclude
-    @NotNull(message = "Should Not Be Null")
+    @ManyToMany
     private List<User> userList;
 
     public void addUser(User user){
@@ -125,7 +124,7 @@ public class Letter extends Base implements Serializable {
     @Size(min = 3,max = 250,message = "Context must be at least 3 characters")
     private String context;
 
-    //todo : does this need @futureOrPresent? I set is as localDateTime.now in servlet
+    //todo : does this need @futureOrPresent? I set it as localDateTime.now in servlet
     @Column(name = "register_date_and_time")
     private LocalDateTime registerDateAndTime;
 

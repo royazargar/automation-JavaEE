@@ -39,7 +39,6 @@ public class LetterEditServlet extends HttpServlet {
     @Inject
     private UserServiceImpl userService;
 
-    //todo : a better way instead of 500 error page
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("LetterEditServlet - Get");
@@ -133,6 +132,8 @@ public class LetterEditServlet extends HttpServlet {
                     letterService.edit(letter);
                     log.info("LetterEditServlet - Letter Edited");
                     resp.setStatus(200);
+                    String msg = "تغییرات با موفقیت ثبت شد !";
+                    req.getSession().setAttribute("ok",msg);
             } else {
                 throw new NoContentException("The required user does not exist !");
             }

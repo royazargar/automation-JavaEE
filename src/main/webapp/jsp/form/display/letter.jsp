@@ -12,6 +12,7 @@
 
 <div class="formbold-main-wrapper">
     <div class="formbold-form-wrapper">
+        <p class="success">${sessionScope.ok}</p>
         <!--img-->
 <%--        <img src="../../../assets/image/lettering.jpg" alt="">--%>
 

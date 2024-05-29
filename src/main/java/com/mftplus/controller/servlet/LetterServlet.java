@@ -133,7 +133,9 @@ public class LetterServlet extends HttpServlet {
                     letterService.save(letter);
                     log.info("LetterServlet - Letter Saved");
                     req.getSession().setAttribute("letterId", letter.getId());
-                    resp.sendRedirect("/letter.do");
+                    resp.sendRedirect("/letterDisplay.do?id=" + letter.getId());
+                    String msg = "نامه با موفقیت ثبت شد !";
+                    req.getSession().setAttribute("ok",msg);
 
             } else {
                 throw new NoContentException("The required user does not exist !");

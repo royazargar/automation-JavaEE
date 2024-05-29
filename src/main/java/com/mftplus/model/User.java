@@ -42,7 +42,7 @@ public class User extends Base implements Serializable {
     private boolean active;
 
     //realm roles
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Roles> roleList;
 
     public void addRole(Roles role){

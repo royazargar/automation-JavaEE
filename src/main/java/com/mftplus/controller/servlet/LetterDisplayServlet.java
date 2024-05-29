@@ -40,6 +40,7 @@ public class LetterDisplayServlet extends HttpServlet {
                 req.getSession().setAttribute("transferMethods", Arrays.asList(TransferMethod.values()));
                 req.getSession().setAttribute("letterTypes", Arrays.asList(LetterType.values()));
                 req.getRequestDispatcher("/jsp/form/display/letter.jsp").forward(req,resp);
+                req.getSession().removeAttribute("ok");
             }
         } catch (Exception e) {
             log.error(e.getMessage());

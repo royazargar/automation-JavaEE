@@ -55,7 +55,7 @@ public class Person extends Base implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private Gender gender;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "p_username", nullable = false,unique = true)
     private User user;
 

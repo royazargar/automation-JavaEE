@@ -12,6 +12,7 @@
 
 <div class="formbold-main-wrapper">
     <div class="formbold-form-wrapper">
+        <p class="success">${sessionScope.ok}</p>
 
         <div class="formbold-form-title">
             <h2 class="">ارجاع</h2>

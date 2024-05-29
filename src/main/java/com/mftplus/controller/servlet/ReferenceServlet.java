@@ -112,7 +112,9 @@ public class ReferenceServlet extends HttpServlet {
 
                     referenceService.save(reference);
                     log.info("ReferenceServlet - Reference Saved");
-                resp.sendRedirect("/reference.do");
+                    resp.sendRedirect("/referenceDisplay.do?id=" + reference.getId());
+                    String msg = "ارجاع با موفقیت ثبت شد !";
+                    req.getSession().setAttribute("ok",msg);
                 }
         } catch (Exception e) {
             log.error(e.getMessage());
