@@ -57,6 +57,10 @@
 .wrapper .menu .right ul li:hover .submenu{
     display: block;
 }
+.wrapper .menu .right ul li .submenu a{
+    font-size : 0.875rem;
+    color : rgb(71 85 105 );
+}
 .wrapper .menu .left ul li{
     /*display: inline-block;*/
     width: 100px;

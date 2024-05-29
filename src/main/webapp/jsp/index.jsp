@@ -33,43 +33,17 @@
               <li><a href="reference.do">ارجاع</a></li>
             </ul>
           </li>
-          <li><a href="bank.do">بانک </a></li>
+          <li><a href="bank.do">بانک </a>
+            <ul class="submenu">
+              <li><a href="cashDesk.do">صندوق</a></li>
+              <li><a href="financialTransaction.do">تراکنش </a></li>
+              <li><a href="financialDoc.do">سند </a></li>
+            </ul>
+          </li>
           <li><a href="">انبار </a>
             <ul class="submenu">
               <li><a href="#">کالا</a></li>
             </ul>
-          </li>
-          <li class="item">
-            <a href="cashDesk.do" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bx-flag"></i>
-              </span>
-              <span class="navlink">صندوق</span>
-            </a>
-          </li>
-          <li class="item">
-            <a href="financialTransaction.do" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bx-medal"></i>
-              </span>
-              <span class="navlink">تراکنش مالی</span>
-            </a>
-          </li>
-          <li class="item">
-            <a href="financialDoc.do" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bx-cog"></i>
-              </span>
-              <span class="navlink">سند مالی</span>
-            </a>
-          </li>
-          <li class="item">
-            <a href="user.do" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bx-cog"></i>
-              </span>
-              <span class="navlink">شخص</span>
-            </a>
           </li>
 
           <%--todo : how to get role instead of username , this is not dynamic.--%>
