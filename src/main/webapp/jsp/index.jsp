@@ -21,8 +21,8 @@
     <section class="menu">
       <div class="right">
         <ul>
-          <li><a href="department.do" class="fa-solid fa-house"></a></li>
-          <li><a>سازمان</a>
+          <li><a href="home.do" class="fa-solid fa-house"></a></li>
+          <li><a href="#">سازمان</a>
             <ul class="submenu">
               <li><a href="#">چارت</a></li>
             </ul>

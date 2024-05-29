@@ -37,11 +37,11 @@
             <div class="formbold-input-flex">
                 <div>
                     <label for="priority" class="formbold-form-label"> اولویت ارجاع : </label>
-                    <input type="text" name="priority" id="priority" class="formbold-form-input" value="${sessionScope.reference.priority}"/>
+                    <input type="text" name="priority" id="priority" class="formbold-form-input" value="${sessionScope.reference.priority.title}"/>
                 </div>
                 <div>
                     <label for="r_refType" class="formbold-form-label"> نوع ارجاع : </label>
-                    <input type="text" name="r_refType" id="r_refType" class="formbold-form-input" value="${sessionScope.reference.refType}"/>
+                    <input type="text" name="r_refType" id="r_refType" class="formbold-form-input" value="${sessionScope.reference.refType.title}"/>
                 </div>
             </div>
 

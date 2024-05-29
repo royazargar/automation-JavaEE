@@ -143,6 +143,7 @@ public class LoginServlet extends HttpServlet {
                             .nationalCode("1111111111")
                             .birthdate(LocalDate.now())
                             .user(admin)
+                            .deleted(false)
                             .build();
 
             Person person2 =
@@ -154,6 +155,7 @@ public class LoginServlet extends HttpServlet {
                             .nationalCode("2222222222")
                             .birthdate(LocalDate.now())
                             .user(user)
+                            .deleted(false)
                             .build();
 
             personService.save(person1);

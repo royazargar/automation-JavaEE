@@ -66,18 +66,18 @@
                 </div>
                 <div>
                     <label for="accessLevel" class="formbold-form-label"> سطح دسترسی نامه : </label>
-                    <input type="text" name="accessLevel" id="accessLevel" class="formbold-form-input" value="${sessionScope.letter.accessLevel}"/>
+                    <input type="text" name="accessLevel" id="accessLevel" class="formbold-form-input" value="${sessionScope.letter.accessLevel.title}"/>
                 </div>
             </div>
 
             <div class="formbold-input-flex">
                 <div>
                     <label for="transferMethod" class="formbold-form-label"> روش فرستادن نامه : </label>
-                    <input type="text" name="transferMethod" id="transferMethod" class="formbold-form-input" value="${sessionScope.letter.transferMethod}"/>
+                    <input type="text" name="transferMethod" id="transferMethod" class="formbold-form-input" value="${sessionScope.letter.transferMethod.title}"/>
                 </div>
                 <div>
                     <label for="letterType" class="formbold-form-label"> نوع نامه : </label>
-                    <input type="text" name="letterType" id="letterType" class="formbold-form-input" value="${sessionScope.letter.letterType}"/>
+                    <input type="text" name="letterType" id="letterType" class="formbold-form-input" value="${sessionScope.letter.letterType.title}"/>
                 </div>
             </div>
 
