@@ -1,9 +1,14 @@
 package com.mftplus.controller.servlet;
 
 
+import com.mftplus.controller.exception.IdIsRequiredException;
+import com.mftplus.controller.exception.NoContentException;
+import com.mftplus.controller.validation.BeanValidator;
 import com.mftplus.model.Person;
+import com.mftplus.model.User;
 import com.mftplus.model.enums.Gender;
 import com.mftplus.service.impl.PersonServiceImpl;
+import com.mftplus.service.impl.UserServiceImpl;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,23 +27,22 @@ public class PersonEditServlet extends HttpServlet {
     @Inject
     private PersonServiceImpl personService;
 
+    @Inject
+    private UserServiceImpl userService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("PersonEditServlet - Get");
         try {
             if (req.getParameter("id") == null) {
-                resp.sendRedirect("/person.do");
+                throw new IdIsRequiredException("Please set person id !");
             } else {
                 long id = Long.parseLong(req.getParameter("id"));
                 Optional<Person> person = personService.findById(id);
-                if (person.isPresent()) {
-                    req.getSession().setAttribute("person", person.get());
-                } else {
-                    log.error("person is not available");
-                }
+                person.ifPresent(value -> req.getSession().setAttribute("person", value));
 
                 req.getSession().setAttribute("gender", Arrays.asList(Gender.values()));
-                req.getRequestDispatcher("/jsp/person-edit.jsp").forward(req, resp);
+                req.getRequestDispatcher("/jsp/form/edit/profile-edit.jsp").forward(req, resp);
             }
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -51,22 +55,43 @@ public class PersonEditServlet extends HttpServlet {
         log.info("PersonEditServlet - Post");
         try {
             long id = Integer.parseInt(req.getParameter("id"));
-            Person person = personService.findById(id).get();
             String name = req.getParameter("name");
             String family = req.getParameter("family");
             String nationalCode = req.getParameter("nationalCode");
             String gender = req.getParameter("gender");
 
-            person.setName(name);
-            person.setFamily(family);
-            person.setNationalCode(nationalCode);
-            person.setGender(Gender.valueOf(gender));
+            String username = req.getUserPrincipal().getName();
 
-            log.info(String.valueOf(person));
-            personService.edit(person);
-            log.info("PersonEditServlet - Person Edited");
-//            resp.sendRedirect("/person.do");
+            Optional<User> user = userService.findByUsername(username);
 
+            if (user.isPresent()){
+                Person person = Person
+                        .builder()
+                        .id(id)
+                        .name(name)
+                        .family(family)
+                        .nationalCode(nationalCode)
+                        .gender(Gender.valueOf(gender))
+                        .user(user.get())
+//                            .deleted(false)
+                        .build();
+                person.setDeleted(false);
+
+                //validate
+                BeanValidator<Person> validator = new BeanValidator<>();
+
+                if (validator.validate(person) != null){
+                    resp.setStatus(500);
+                    resp.getWriter().write(validator.validate(person).toString());
+                }
+
+                //todo : problem with redirect after edit
+                personService.edit(person);
+                log.info("PersonEditServlet - Person Edited");
+                resp.setStatus(200);
+            } else {
+                throw new NoContentException("The required user does not exist !");
+            }
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);

@@ -89,7 +89,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-12">
-                                <a class="btn btn-info " target="__blank" href="#">ویرایش</a>
+                                <a class="btn btn-info " target="__blank" href="#" onclick="showEditPerson(${sessionScope.person.id})">ویرایش</a>
                             </div>
                         </div>
                     </div>
@@ -100,5 +100,7 @@
 
     </div>
 </div>
+
+<script src="../../../assets/js/person.js"></script>
 </body>
 </html>

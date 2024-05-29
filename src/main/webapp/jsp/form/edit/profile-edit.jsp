@@ -16,7 +16,7 @@
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">خانه</a></li>
+                <li class="breadcrumb-item"><a href="home.do">خانه</a></li>
                 <li class="breadcrumb-item"><a href="javascript:void(0)">حساب کاربری</a></li>
                 <li class="breadcrumb-item active" aria-current="page">پروفایل</li>
             </ol>
@@ -28,11 +28,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" class="rounded-circle p-1 bg-primary" width="110">
+                            <span class="fas fa-user-circle"></span>
                             <div class="mt-3">
-                                <h4>نام کابری</h4>
-                                <p class="text-secondary mb-1">نام فامیلی</p>
-                                <p class="text-muted font-size-sm">نقش</p>
+                                <h4>${sessionScope.principalUser}</h4>
+                                <p class="text-muted font-size-sm">role</p>
                                 <button class="btn btn-outline-primary">Message</button>
                             </div>
                         </div>
@@ -42,66 +41,60 @@
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">نام</h6>
+                        <form id="personEditForm">
+                            <input class="form-control" type="text" name="id" value="${sessionScope.person.id}" hidden="hidden">
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">نام</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="name" id="name" value="${sessionScope.person.name}" class="form-control">
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="John Doe">
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">نام خانوادگی</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="family" id="family" value="${sessionScope.person.family}" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">نام خانوادگی</h6>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">کد ملی</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="nationalCode" id="nationalCode" value="${sessionScope.person.nationalCode}" class="form-control">
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="john@example.com">
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">جنسیت</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <select class="form-select" name="gender" id="gender">
+                                        <c:forEach var="gender" items="${sessionScope.genders}">
+                                            <option value="${gender}">${gender.title}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">کد ملی</h6>
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-9 text-secondary">
+                                    <button id="submit" class="btn btn-primary px-4" onclick="editPerson()">ویرایش</button>
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="(239) 816-9029">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">جنسیت</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="(320) 380-4539">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">نام کاربری</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="Bay Area, San Francisco, CA">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">رمز عبور</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="password" class="form-control" value="Bay Area, San Francisco, CA">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3"></div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="button" class="btn btn-primary px-4" value="Save Changes">
-                            </div>
-                        </div>
+                        </form>
                     </div>
+
                 </div>
 
             </div>
         </div>
     </div>
 </div>
+
+<script src="../../../assets/js/person.js"></script>
 </body>
 </html>
