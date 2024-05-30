@@ -242,11 +242,11 @@
                 </a>
             </li>
             <li class="item">
-                <a href="#" class="nav_link">
+                <a href="bank.do" class="nav_link">
               <span class="navlink_icon">
                 <i class="bx bx-layer"></i>
               </span>
-                    <span class="navlink">خالی</span>
+                    <span class="navlink">بانک</span>
                 </a>
             </li>
         </ul>
