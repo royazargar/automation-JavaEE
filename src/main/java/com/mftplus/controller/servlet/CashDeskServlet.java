@@ -33,7 +33,7 @@ public class CashDeskServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             String name = req.getParameter("name");
-            Integer cashDeskNumber = Integer.valueOf(req.getParameter("cashDeskNumber"));
+            int cashDeskNumber = Integer.parseInt(req.getParameter("cashDeskNumber"));
             Long cashBalance = Long.valueOf(req.getParameter("cashBalance"));
             String username = req.getParameter("username");
             System.out.println(username);
