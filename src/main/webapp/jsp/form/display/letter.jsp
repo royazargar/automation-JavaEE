@@ -17,7 +17,7 @@
 <%--        <img src="../../../assets/image/lettering.jpg" alt="">--%>
 
         <div class="formbold-form-title">
-            <h2 class="">نامه</h2>
+<%--            <h2 class="">نامه</h2>--%>
             <a class="formbold-btn primary" href="#" onclick="reference(${sessionScope.letter.id})">ارجاع</a>
             <a class="formbold-btn warning" href="#" onclick="showEditLetter(${sessionScope.letter.id})">ویرایش</a>
             <a class="formbold-btn danger" href="#" onclick="removeLetter(${sessionScope.letter.id})">حذف</a>

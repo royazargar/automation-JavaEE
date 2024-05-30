@@ -33,6 +33,7 @@ public class User extends Base implements Serializable {
     @NotBlank(message = "Should Not Be Null")
     private String username;
 
+    @JsonbTransient
     @Column(name = "u_password", columnDefinition = "NVARCHAR2(20)", nullable = false)
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{5,20}$",message = "Minimum five characters, at least one letter and one number!")
     @Size(min = 5, max = 20, message = "Password must be between 3 and 20 characters")
