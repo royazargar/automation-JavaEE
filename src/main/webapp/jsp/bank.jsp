@@ -32,8 +32,12 @@
                 <input id="s_branchName" class="col form-control" type="text" name="branchName">
             </div>
             <div class="row mb-4">
-                <label class="col form-label" for="s_accountType">Account Type</label>
-                <input id="s_accountType" class="col form-control" type="text" name="accountType">
+                <label class="col form-label" for="accountType">Account Type</label>
+                <select name="accountType" id="accountType">
+                    <c:forEach var="accountType" items="${sessionScope.accessTypes}">
+                        <option value="${accountType}">${accountType}</option>
+                    </c:forEach>
+                </select>
             </div>
             <div class="row mb-4">
                 <label class="col form-label" for="s_accountBalance">Account Balance</label>

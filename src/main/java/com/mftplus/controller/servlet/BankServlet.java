@@ -2,8 +2,10 @@ package com.mftplus.controller.servlet;
 
 import com.mftplus.controller.validation.BeanValidator;
 import com.mftplus.model.Bank;
+import com.mftplus.model.enums.AccountType;
 import com.mftplus.service.impl.BankServiceImpl;
 import jakarta.inject.Inject;
+import jakarta.persistence.AccessType;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 
 @WebServlet(urlPatterns = "/bank.do")
@@ -40,7 +43,7 @@ public class BankServlet extends HttpServlet {
                     .accountNumber(accountNumber)
                     .branchCode(branchCode)
                     .branchName(branchName)
-                    .accountType(accountType)
+                    .accountType(AccountType.valueOf(accountType))
                     .accountBalance(accountBalance)
                     .deleted(false)
                     .build();
@@ -67,6 +70,7 @@ public class BankServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            req.getSession().setAttribute("accessTypes", Arrays.asList(AccountType.values()));
             req.getSession().setAttribute("bankList", bankService.findAll());
             req.getRequestDispatcher("/jsp/bank.jsp").forward(req, resp);
         } catch (Exception e) {

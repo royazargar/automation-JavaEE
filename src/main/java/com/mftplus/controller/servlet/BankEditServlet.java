@@ -2,8 +2,10 @@ package com.mftplus.controller.servlet;
 
 import com.mftplus.controller.validation.BeanValidator;
 import com.mftplus.model.Bank;
+import com.mftplus.model.enums.AccountType;
 import com.mftplus.service.impl.BankServiceImpl;
 import jakarta.inject.Inject;
+import jakarta.persistence.AccessType;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Optional;
 
 @Slf4j
@@ -29,6 +32,7 @@ public class BankEditServlet extends HttpServlet {
             if(req.getParameter("id")==null){
                 resp.sendRedirect("/bank.do");
             }else {
+                req.getSession().setAttribute("accessTypes", Arrays.asList(AccountType.values()));
                 Long id= Long.valueOf(req.getParameter("id"));
                 Optional<Bank> bank=bankService.findById(id);
                 if (bank.isPresent()) {
@@ -60,7 +64,7 @@ public class BankEditServlet extends HttpServlet {
                     .accountNumber(accountNumber)
                     .branchCode(branchCode)
                     .branchName(branchName)
-                    .accountType(accountType)
+                    .accountType(AccountType.valueOf(accountType))
                     .accountBalance(accountBalance)
                     .deleted(false)
                     .build();

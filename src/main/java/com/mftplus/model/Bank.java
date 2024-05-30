@@ -1,7 +1,9 @@
 package com.mftplus.model;
 
+import com.mftplus.model.enums.AccountType;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,38 +30,35 @@ public class Bank extends Base implements Serializable {
     private Long id;
 
     @Column(name = "bank_name", columnDefinition = "NVARCHAR2(20)")
-//    @Pattern(regexp = "^[a-zA-Zآ-ی\\s]{3,20}$", message = "Invalid Name")
-//    @Size(min = 3, max = 20, message = "Name must be between 3 and 20 characters")
-//    @NotBlank(message = "Should Not Be Null")
+    @Pattern(regexp = "^[a-zA-Zآ-ی\\s]{3,20}$", message = "Invalid Name")
+    @Size(min = 3, max = 20, message = "Name must be between 3 and 20 characters")
+    @NotBlank(message = "Should Not Be Null")
     private String name;// نام بانک
 
     @Column(name = "bank_accountNumber", columnDefinition = "NVARCHAR2(16)")
-//    @Pattern(regexp = "^[0-9]{16}$", message = "Invalid Account Number")
-//    @Size(min = 16, max = 16, message = " Account Number must be 16 characters")
-//    @NotBlank(message = "Should Not Be Null")
+    @Pattern(regexp = "^[0-9]{5,16}$", message = "Invalid Account Number")
+    @Size(min = 5, max = 16, message = " Account Number must be between 5 and 16 characters")
+    @NotBlank(message = "Should Not Be Null")
     private String accountNumber;// شماره حساب
 
     @Column(name = "bank_branchCode", columnDefinition = "NVARCHAR2(5)")
-//    @Pattern(regexp = "^[0-9]{1,5}$", message = "Invalid Branch Code")
-//    @Size(min = 1, max = 5, message = " Branch Code must be between 1 and 5 characters")
-//    @NotBlank(message = "Should Not Be Null")
+    @Min(value = 1, message = "Branch code must be at least 1")
+    @Max(value = 5, message = "Branch code must be at most 5")
     private int branchCode;// کد شعبه
 
     @Column(name = "bank_branchName", columnDefinition = "NVARCHAR2(20)")
-//    @Pattern(regexp = "^[a-zA-Zآ-ی\\s]{3,20}$", message = "Invalid Branch Name")
-//    @Size(min = 1, max = 20, message = " Branch Name must be between 1 and 20 characters")
-//    @NotBlank(message = "Should Not Be Null")
+    @Pattern(regexp = "^[a-zA-Zآ-ی\\s]{3,20}$", message = "Invalid Branch Name")
+    @Size(min = 3, max = 20, message = " Branch Name must be between 3 and 20 characters")
+    @NotBlank(message = "Should Not Be Null")
     private String branchName;// نام شعبه
 
-    @Column(name = "bank_accountType", columnDefinition = "NVARCHAR2(20)")
-    private String accountType;// نوع حساب بانکی
+    @Enumerated(EnumType.ORDINAL)
+    private AccountType accountType;// نوع حساب بانکی
 
     @Column(name = "bank_accountBalance", columnDefinition = "NVARCHAR2(15)")
-//    @Pattern(regexp = "^[0-9]{1,15}$", message = "Invalid Account Balance")
-//    @Size(min = 1, max = 15, message = " Account Balance must be between 1 and 15 characters")
-//    @NotBlank(message = "Should Not Be Null")
+    @Positive(message = "The account balance must be a positive number.")
+    @Min(value = 1, message = "The account balance must be at least 1.")
+    @Max(value = 15, message = "The account balance cannot exceed 15.")
     private Long accountBalance;// موجودی حساب
 
 }
-
-
