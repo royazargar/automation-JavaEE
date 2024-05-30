@@ -5,7 +5,6 @@ import com.mftplus.model.Bank;
 import com.mftplus.model.enums.AccountType;
 import com.mftplus.service.impl.BankServiceImpl;
 import jakarta.inject.Inject;
-import jakarta.persistence.AccessType;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

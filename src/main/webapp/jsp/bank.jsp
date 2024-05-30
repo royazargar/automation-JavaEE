@@ -93,11 +93,9 @@
     }
 </script>
 
-
 <jsp:include page="js-import.jsp"></jsp:include>
 
 <script src="../assets/js/bank.js"></script>
-<%--<script src="../assets/js"></script>--%>
 
 </body>
 </html>
