@@ -271,3 +271,7 @@ body.dark {
         right: -100%;
     }
 }
+.profile {
+    font-size: 32px;
+    color: #4B6587;
+}

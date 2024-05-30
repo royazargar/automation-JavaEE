@@ -22,7 +22,7 @@
         <i class="bi bi-grid"></i>
         <i class='bx bx-sun' id="darkLight"></i>
         <i class='bx bx-bell' ></i>
-        <a href="person.do"><img src="../assets/image/profile.jpg" alt="" class="profile" /></a>
+        <a href="person.do"><span class="fas fa-user-circle profile"></span></a>
 
     </div>
 </nav>
