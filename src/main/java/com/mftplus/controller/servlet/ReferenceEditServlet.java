@@ -57,38 +57,35 @@ public class ReferenceEditServlet extends HttpServlet {
         //todo : name is null error, does not work
 
         try {
-            System.out.println("vayyyyyyyyyyyyy");
             long id = Integer.parseInt(req.getParameter("id"));
             String refType = req.getParameter("refType");
             String priority = req.getParameter("priority");
             String faExpiration = req.getParameter("r_expiration");
             String paraph = req.getParameter("paraph");
             String explanation = req.getParameter("explanation");
-            String status = req.getParameter("status");
-            boolean validate = req.getParameter("validate") != null && req.getParameter("validate").equals("on");
 
 
             Optional<Reference> optionalReference = referenceService.findById(id);
+            System.out.println(optionalReference);
 
 //            if (username != null) {
 
-//                if (user.isPresent() && referenceReceiverId.isPresent()) {
+                if (optionalReference.isPresent()) {
                     Reference reference =
                             Reference
                                     .builder()
                                     .id(id)
                                     .paraph(paraph)
                                     .explanation(explanation)
-                                    .status(Boolean.parseBoolean(status))
-                                    .validate(validate)
                                     .priority(ReferencePriority.valueOf(priority))
                                     .refType(ReferenceType.valueOf(refType))
-//                                    .faExpiration(faExpiration)
+                                    .faExpiration(faExpiration)
                                     .referenceSenderId(optionalReference.get().getReferenceSenderId())
                                     .referenceReceiverId(optionalReference.get().getReferenceReceiverId())
                                     .deleted(false)
                                     .build();
-//                    reference.setFaExpiration(faExpiration);
+                    reference.setFaExpiration(faExpiration);
+            System.out.println(reference);
 
             //validate
             BeanValidator<Reference> validator = new BeanValidator<>();
@@ -99,9 +96,10 @@ public class ReferenceEditServlet extends HttpServlet {
             }
 
                     referenceService.edit(reference);
+
                     log.info("ReferenceEditServlet - Reference Edited");
                     resp.setStatus(200);
-//                }
+                }
 //            }
         } catch (Exception e) {
             log.error(e.getMessage());

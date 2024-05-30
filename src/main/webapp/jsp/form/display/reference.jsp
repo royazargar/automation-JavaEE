@@ -22,7 +22,7 @@
         </div>
 
         <!--start form-->
-        <form inert action="" method="POST">
+        <form inert>
             <div class="formbold-input-flex">
                 <div>
                     <label for="username" class="formbold-form-label"> ارجاع دهنده : </label>

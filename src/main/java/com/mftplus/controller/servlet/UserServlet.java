@@ -3,7 +3,6 @@ package com.mftplus.controller.servlet;
 import com.mftplus.controller.validation.BeanValidator;
 import com.mftplus.model.Roles;
 import com.mftplus.model.User;
-import com.mftplus.service.impl.PersonServiceImpl;
 import com.mftplus.service.impl.RolesServiceImpl;
 import com.mftplus.service.impl.UserServiceImpl;
 import jakarta.inject.Inject;
@@ -88,6 +87,7 @@ public class UserServlet extends HttpServlet {
                 Roles userRole =
                         Roles
                                 .builder()
+                                .user(user)
                                 .role("user")
                                 .deleted(false)
                                 .build();
