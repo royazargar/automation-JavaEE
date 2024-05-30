@@ -50,9 +50,9 @@ public class Letter extends Base implements Serializable {
     private String letterNumber;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    //todo : Problem with writing the data, class java.util.ArrayList, ContentType: application/json
     //ref receivers
     @ManyToMany
     private List<User> userList;

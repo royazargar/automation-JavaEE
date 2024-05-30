@@ -1,6 +1,7 @@
 package com.mftplus.model;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -42,7 +43,8 @@ public class User extends Base implements Serializable {
     private boolean active;
 
     //realm roles
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonbTransient
+    @OneToMany(mappedBy = "user")
     private List<Roles> roleList;
 
     public void addRole(Roles role){
@@ -52,6 +54,12 @@ public class User extends Base implements Serializable {
         roleList.add(role);
     }
 
+    @JsonbTransient
+    @OneToOne(mappedBy = "user")
+    @JoinColumn(name = "person_id")
+    private Person person;
+
     @ManyToOne
+    @JoinColumn(name = "department_id")
     private Department department;
 }

@@ -55,8 +55,8 @@ public class Person extends Base implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private Gender gender;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "p_username", nullable = false,unique = true)
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false,unique = true)
     private User user;
 
     //todo : has not been set in servlet or form

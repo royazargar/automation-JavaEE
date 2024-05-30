@@ -33,8 +33,8 @@ public class Reference extends Base implements Serializable {
     @Column (name = "r_id")
     private long id;
 
-    @ManyToOne (fetch = FetchType.EAGER)
-    @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name = "letter_id")
     private Letter letterId;
 
     @Enumerated (EnumType.ORDINAL)

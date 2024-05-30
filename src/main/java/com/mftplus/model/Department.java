@@ -1,6 +1,7 @@
 package com.mftplus.model;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -38,27 +40,26 @@ public class Department extends Base {
     @ManyToOne
     private Organisation organisation;
 
-//    @ToString.Exclude
-//    @OneToMany(mappedBy = "department")
-//    private List<User> userList;
+    @JsonbTransient
+    @OneToMany(mappedBy = "department")
+    private List<User> userList;
 
-//    @OneToMany
-//    private List<Department> departmentPart;
+    public void addUser(User user){
+        if (userList==null){
+            userList = new ArrayList<>();
+        }
+        userList.add(user);
+    }
 
-//    @OneToOne
-//    private Attach attach;
+    @JsonbTransient
+    @OneToMany
+    private List<Department> departmentPart;
 
-//    public List<User> userArray() {
-//        if (userList == null) {
-//            userList = new ArrayList<>();
-//        }
-//        return userList;
-//    }
-//
-//    public List<Department> getDepartmentArray() {
-//        if (departmentPart == null) {
-//            departmentPart = new ArrayList<>();
-//        }
-//        return departmentPart;
-//    }
+    public void addDepartment(Department department){
+        if (departmentPart==null){
+            departmentPart = new ArrayList<>();
+        }
+        departmentPart.add(department);
+    }
+
 }

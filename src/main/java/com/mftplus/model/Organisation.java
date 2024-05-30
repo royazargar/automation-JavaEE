@@ -1,6 +1,7 @@
 package com.mftplus.model;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,13 +48,14 @@ public class Organisation extends Base implements Serializable {
     @Column(name = "o_description")
     private String description;
 
-//    @OneToMany(mappedBy = "organisation")
-//    private List<Department> departmentList;
-//
-//    public void addDepartment(Department department){
-//        if (departmentList==null){
-//            departmentList=new ArrayList<>();
-//        }
-//        departmentList.add(department);
-//    }
+    @JsonbTransient
+    @OneToMany(mappedBy = "organisation")
+    private List<Department> departmentList;
+
+    public void addDepartment(Department department){
+        if (departmentList==null){
+            departmentList=new ArrayList<>();
+        }
+        departmentList.add(department);
+    }
 }

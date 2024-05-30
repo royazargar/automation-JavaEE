@@ -7,6 +7,7 @@ import com.mftplus.model.Reference;
 import com.mftplus.model.enums.ReferencePriority;
 import com.mftplus.model.enums.ReferenceType;
 import com.mftplus.service.impl.ReferenceServiceImpl;
+import com.mftplus.service.impl.UserServiceImpl;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,6 +25,8 @@ import java.util.Optional;
 public class ReferenceEditServlet extends HttpServlet {
     @Inject
     private ReferenceServiceImpl referenceService;
+    @Inject
+    private UserServiceImpl userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -54,6 +57,7 @@ public class ReferenceEditServlet extends HttpServlet {
         //todo : name is null error, does not work
 
         try {
+            System.out.println("vayyyyyyyyyyyyy");
             long id = Integer.parseInt(req.getParameter("id"));
             String refType = req.getParameter("refType");
             String priority = req.getParameter("priority");
@@ -63,6 +67,8 @@ public class ReferenceEditServlet extends HttpServlet {
             String status = req.getParameter("status");
             boolean validate = req.getParameter("validate") != null && req.getParameter("validate").equals("on");
 
+
+            Optional<Reference> optionalReference = referenceService.findById(id);
 
 //            if (username != null) {
 
@@ -78,6 +84,8 @@ public class ReferenceEditServlet extends HttpServlet {
                                     .priority(ReferencePriority.valueOf(priority))
                                     .refType(ReferenceType.valueOf(refType))
 //                                    .faExpiration(faExpiration)
+                                    .referenceSenderId(optionalReference.get().getReferenceSenderId())
+                                    .referenceReceiverId(optionalReference.get().getReferenceReceiverId())
                                     .deleted(false)
                                     .build();
 //                    reference.setFaExpiration(faExpiration);
