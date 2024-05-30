@@ -39,6 +39,7 @@ public class LetterDisplayServlet extends HttpServlet {
                 req.getSession().setAttribute("accessLevels", Arrays.asList(LetterAccessLevel.values()));
                 req.getSession().setAttribute("transferMethods", Arrays.asList(TransferMethod.values()));
                 req.getSession().setAttribute("letterTypes", Arrays.asList(LetterType.values()));
+//                req.getSession().setAttribute("userList", letter.get().getUserList());
                 req.getRequestDispatcher("/jsp/form/display/letter.jsp").forward(req,resp);
                 req.getSession().removeAttribute("ok");
             }

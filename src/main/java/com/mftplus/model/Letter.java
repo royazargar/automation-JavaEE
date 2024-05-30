@@ -54,7 +54,7 @@ public class Letter extends Base implements Serializable {
     private User user;
 
     //ref receivers
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<User> userList;
 
     public void addUser(User user){

@@ -24,7 +24,7 @@
         </div>
 
         <!--start form-->
-        <form id="letter-display" inert action="" method="POST">
+        <form id="letter-display" inert>
             <div class="formbold-input-flex">
                 <input class="form-control" type="text" name="id" value="${sessionScope.letter.id}" hidden="hidden">
 
@@ -80,6 +80,19 @@
                     <label for="letterType" class="formbold-form-label"> نوع نامه : </label>
                     <input type="text" name="letterType" id="letterType" class="formbold-form-input" value="${sessionScope.letter.letterType.title}"/>
                 </div>
+            </div>
+
+            <div class="formbold-input-group">
+                <label for="refReceivers" class="formbold-form-label">
+                    ارجاع گیرندگان نامه :
+                </label>
+
+<%--                todo : does not work properly--%>
+                <select class="formbold-form-select" name="refReceivers" id="refReceivers">
+                    <c:forEach var="refReceivers" items="${sessionScope.letter.userList}">
+                        <option>${refReceivers.username}</option>
+                    </c:forEach>
+                </select>
             </div>
 
             <div>
