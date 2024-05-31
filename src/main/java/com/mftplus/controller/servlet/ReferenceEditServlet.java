@@ -7,7 +7,6 @@ import com.mftplus.model.Reference;
 import com.mftplus.model.enums.ReferencePriority;
 import com.mftplus.model.enums.ReferenceType;
 import com.mftplus.service.impl.ReferenceServiceImpl;
-import com.mftplus.service.impl.UserServiceImpl;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
