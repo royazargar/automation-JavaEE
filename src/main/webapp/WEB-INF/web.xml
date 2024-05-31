@@ -66,6 +66,7 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>admin</web-resource-name>
+            <url-pattern>/test.do</url-pattern>
             <!--security for dashboard-->
             <url-pattern>/dashboard.do</url-pattern>
             <url-pattern>/userDashboard.do</url-pattern>
