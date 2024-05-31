@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
 //            organisation.addDepartment(department2);
 //            organisationService.edit(organisation);
 
-                     User admin =
+            User admin =
                     User
                             .builder()
                             .username("admin")
@@ -160,7 +160,6 @@ public class LoginServlet extends HttpServlet {
 
             personService.save(person1);
             personService.save(person2);
-
 
 
         } catch (Exception e) {

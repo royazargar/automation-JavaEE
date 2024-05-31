@@ -5,6 +5,7 @@
     <title>حساب کاربری</title>
     <link rel="stylesheet" href="../../../assets/css/form.css">
     <link rel="stylesheet" href="../../../assets/css/myTable.css">
+    <link rel="stylesheet" href="../../../assets/css/user.css">
     <link rel="stylesheet" href="../../../assets/css/all.css">
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -19,7 +20,7 @@
     <div class="formbold-form-wrapper">
 
         <div class="formbold-form-title">
-            <h2>ایجاد حساب کاربری</h2>
+            <h2>ایجاد کاربر جدید</h2>
         </div>
 
         <!--start form-->
@@ -41,7 +42,6 @@
         <!--end form-->
     </div>
 </div>
-
 <!--table-->
 <table>
     <thead>
