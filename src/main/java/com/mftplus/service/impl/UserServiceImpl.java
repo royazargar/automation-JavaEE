@@ -72,7 +72,6 @@ public class UserServiceImpl implements UserService, Serializable {
         return Optional.ofNullable(entityManager.find(User.class, username));
     }
 
-    //todo
     @Transactional
     @Override
     public Optional<User> findByUsernameAndPassword(String username, String password) throws Exception {

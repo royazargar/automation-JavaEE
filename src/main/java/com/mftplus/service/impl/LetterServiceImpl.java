@@ -49,7 +49,6 @@ public class LetterServiceImpl implements LetterService, Serializable {
         entityManager.merge(letter);
     }
 
-    //todo : does not have id check, did not work here
     @Transactional
     @Override
     public void removeById(Long id) throws Exception {

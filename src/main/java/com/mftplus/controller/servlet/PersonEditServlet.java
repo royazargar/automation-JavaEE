@@ -85,7 +85,7 @@ public class PersonEditServlet extends HttpServlet {
                     resp.getWriter().write(validator.validate(person).toString());
                 }
 
-                //todo : problem with redirect after edit
+                //todo : problem with redirect after edit, does not redirect
                 personService.edit(person);
                 log.info("PersonEditServlet - Person Edited");
                 resp.setStatus(200);

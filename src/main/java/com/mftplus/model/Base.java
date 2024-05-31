@@ -1,7 +1,6 @@
 package com.mftplus.model;
 
 import jakarta.json.bind.annotation.JsonbTransient;
-import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +15,7 @@ import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class Base {
+    //todo : version id creates new row for editing
 //    @Version
 //    @JsonbTransient
 //    private Long versionId;

@@ -78,7 +78,6 @@ public class ReferenceServlet extends HttpServlet {
                     throw new NoUserFoundException("no user found for reference receiver !");
                 }
 
-            //todo : number format exception
             Optional<Letter> letter = letterService.findById(Long.valueOf(letterId));
 
                 //todo : how to show localDateTime.now in persian for display

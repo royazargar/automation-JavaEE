@@ -24,7 +24,6 @@ public class LetterDisplayServlet extends HttpServlet {
     @Inject
     private LetterServiceImpl letterService;
 
-    //todo : a better way instead of 500 error page
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("LetterDisplayServlet - Get");

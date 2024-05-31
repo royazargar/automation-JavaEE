@@ -25,8 +25,6 @@ import java.util.Optional;
 public class ReferenceEditServlet extends HttpServlet {
     @Inject
     private ReferenceServiceImpl referenceService;
-    @Inject
-    private UserServiceImpl userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -54,7 +52,7 @@ public class ReferenceEditServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("ReferenceEditServlet - Put");
 
-        //todo : name is null error, does not work
+        //todo : edit method does not work
 
         try {
             long id = Integer.parseInt(req.getParameter("id"));

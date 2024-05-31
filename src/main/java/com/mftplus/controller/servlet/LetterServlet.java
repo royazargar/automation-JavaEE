@@ -36,8 +36,6 @@ import java.util.Optional;
 )
 public class LetterServlet extends HttpServlet {
 
-    //todo : how to show validation msg in jsp ?
-
     @Inject
     private LetterServiceImpl letterService;
 
