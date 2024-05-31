@@ -203,7 +203,7 @@ Distributed under the MFT plus License. See <a href="https://mftplus.com/">mftpl
 <!-- CONTACT -->
 ## Contact
 
-Your Name - ahadzadeparnian@gmail.com
+Contact Us - ahadzadeparnian@gmail.com
 
 Project Link: [https://github.com/AhmadMessbah/JavaEE_Automation](https://github.com/AhmadMessbah/JavaEE_Automation)
 
