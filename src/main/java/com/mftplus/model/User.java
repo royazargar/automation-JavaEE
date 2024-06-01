@@ -20,11 +20,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @SuperBuilder
+@ToString
 
 @Entity(name = "userEntity")
 @Table(name = "user_tbl")
 @RequestScoped
-@ToString
 public class User extends Base implements Serializable {
     @Id
     @Column(name = "u_username", columnDefinition = "NVARCHAR2(15)", nullable = false)
@@ -33,7 +33,7 @@ public class User extends Base implements Serializable {
     @NotBlank(message = "Should Not Be Null")
     private String username;
 
-    @JsonbTransient
+//    @JsonbTransient
     @Column(name = "u_password", columnDefinition = "NVARCHAR2(20)", nullable = false)
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{5,20}$",message = "Minimum five characters, at least one letter and one number!")
     @Size(min = 5, max = 20, message = "Password must be between 3 and 20 characters")
@@ -44,8 +44,8 @@ public class User extends Base implements Serializable {
     private boolean active;
 
     //realm roles
-    @JsonbTransient
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+//    @JsonbTransient
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Roles> roleList;
 
     public void addRole(Roles role){
@@ -55,17 +55,12 @@ public class User extends Base implements Serializable {
         roleList.add(role);
     }
 
-    @JsonbTransient
-    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
-    @JoinColumn
-    private Person person;
+//    @JsonbTransient
+//    @OneToOne(mappedBy = "user")
+//    @JoinColumn(name = "person_id")
+//    private Person person;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
+    @ManyToOne
+//    @JoinColumn(name = "department_id")
     private Department department;
-
-    @Override
-    public String toString() {
-        return "User{username=" + username + ", password='[PROTECTED]', roles=" + (roleList != null ? roleList.size() : "null") + ", personId=" + (person != null ? person.getId() : "null") + ", department=" + department + "}";
-    }
 }

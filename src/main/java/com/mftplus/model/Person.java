@@ -19,11 +19,11 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @SuperBuilder
+@ToString
 
 @Entity(name = "personEntity")
 @Table(name = "person_tbl")
 @RequestScoped
-@ToString
 public class Person extends Base implements Serializable {
 
     //todo : for all entities validation msg is in eng, we need to decide for the persian msg

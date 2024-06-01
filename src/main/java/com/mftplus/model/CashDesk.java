@@ -1,6 +1,7 @@
 package com.mftplus.model;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;

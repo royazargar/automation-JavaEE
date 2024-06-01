@@ -37,41 +37,29 @@ public class Department extends Base {
     @Column(name = "department_name", length = 20)
     private String phoneNumber;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Organisation organisation;
 
-    @JsonbTransient
-    @OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
-    private List<User> userList;
+//    @JsonbTransient
+//    @OneToMany(mappedBy = "department")
+//    private List<User> userList;
+//
+//    public void addUser(User user){
+//        if (userList==null){
+//            userList = new ArrayList<>();
+//        }
+//        userList.add(user);
+//    }
+//
+//    @JsonbTransient
+//    @OneToMany
+//    private List<Department> departmentPart;
+//
+//    public void addDepartment(Department department){
+//        if (departmentPart==null){
+//            departmentPart = new ArrayList<>();
+//        }
+//        departmentPart.add(department);
+//    }
 
-    public void addUser(User user){
-        if (userList==null){
-            userList = new ArrayList<>();
-        }
-        userList.add(user);
-    }
-
-    @JsonbTransient
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Department> departmentPart;
-
-    public void addDepartment(Department department){
-        if (departmentPart==null){
-            departmentPart = new ArrayList<>();
-        }
-        departmentPart.add(department);
-    }
-
-    @JsonbTransient
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Department parentDepartment;
-
-    @JsonbTransient
-    @OneToMany(mappedBy = "parentDepartment", fetch = FetchType.EAGER)
-    private List<Department> childDepartments;
-
-    @Override
-    public String toString() {
-        return "Department{id=" + id + ", title='" + title + "', duty='" + duty + "', phoneNumber='" + phoneNumber + "', organisation='" + organisation + "', userListSize=" + (userList != null ? userList.size() : "null") + ", departmentPartSize=" + (departmentPart != null ? departmentPart.size() : "null") + "}";
-    }
 }
