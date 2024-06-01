@@ -8,8 +8,6 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-
-
 @NoArgsConstructor
 @Getter
 @Setter
@@ -38,21 +36,12 @@ public class Stuff extends Base {
     @Column(name = "stuff_model", length = 20)
     private String model;
 
-
     @Column(name = "stuff_status", length = 20)
     private String status;
 
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Department department;
 
-
-
-
-
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Attach attach;
-
 }
-
-

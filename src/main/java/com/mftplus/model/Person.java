@@ -27,7 +27,6 @@ import java.time.LocalDate;
 public class Person extends Base implements Serializable {
 
     //todo : for all entities validation msg is in eng, we need to decide for the persian msg
-
     @Id
     @SequenceGenerator(name = "personSeq", sequenceName = "person_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personSeq")
@@ -55,8 +54,8 @@ public class Person extends Base implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private Gender gender;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false,unique = true)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false, unique = true)
     private User user;
 
     //todo : has not been set in servlet or form
@@ -68,5 +67,8 @@ public class Person extends Base implements Serializable {
     @Column(name = "p_image")
     private String image;
 
-
+    @Override
+    public String toString() {
+        return "Person{id=" + id + ", name='" + name + "', family='" + family + "', nationalCode='" + nationalCode + "', gender='" + gender + "', userId=" + (user != null ? user.getUsername() : "null") + ", birthdate='" + birthdate + "', image='" + image + "'}";
+    }
 }

@@ -45,7 +45,7 @@ public class User extends Base implements Serializable {
 
     //realm roles
     @JsonbTransient
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<Roles> roleList;
 
     public void addRole(Roles role){
@@ -56,11 +56,16 @@ public class User extends Base implements Serializable {
     }
 
     @JsonbTransient
-    @OneToOne(mappedBy = "user")
-    @JoinColumn(name = "person_id")
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    @JoinColumn
     private Person person;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private Department department;
+
+    @Override
+    public String toString() {
+        return "User{username=" + username + ", password='[PROTECTED]', roles=" + (roleList != null ? roleList.size() : "null") + ", personId=" + (person != null ? person.getId() : "null") + ", department=" + department + "}";
+    }
 }

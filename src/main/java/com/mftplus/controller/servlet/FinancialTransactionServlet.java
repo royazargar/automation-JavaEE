@@ -31,7 +31,6 @@ public class FinancialTransactionServlet extends HttpServlet {
     @Inject
     private FinancialTransaction financialTransaction;
 
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {

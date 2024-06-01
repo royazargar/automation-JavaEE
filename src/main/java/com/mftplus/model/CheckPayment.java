@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,7 +36,7 @@ public class CheckPayment extends Payment{
     @FutureOrPresent(message = "Invalid Date")
     private LocalDateTime checkDueDate;//تاریخ سررسید چک
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER)
     private CashDesk cashDesk;// صندوق
 
     @Transient

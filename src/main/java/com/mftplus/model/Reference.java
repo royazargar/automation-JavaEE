@@ -33,8 +33,8 @@ public class Reference extends Base implements Serializable {
     @Column (name = "r_id")
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "letter_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private Letter letterId;
 
     @Enumerated (EnumType.ORDINAL)
@@ -43,11 +43,11 @@ public class Reference extends Base implements Serializable {
     @Enumerated (EnumType.ORDINAL)
     private ReferencePriority priority;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "reference_sender",nullable = false)
     private User referenceSenderId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "reference_receiver",nullable = false)
     private User referenceReceiverId;
 
@@ -104,5 +104,4 @@ public class Reference extends Base implements Serializable {
 
     @Column(name = "r_seen")
     private boolean seen;
-
 }

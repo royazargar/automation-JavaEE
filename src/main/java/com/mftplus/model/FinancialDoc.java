@@ -26,20 +26,20 @@ public class FinancialDoc extends Base{
     @Id
     @SequenceGenerator(name = "financialDocSeq", sequenceName = "financial_doc_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "financialDocSeq")
-    @Column(name = "financialDoc_id",length = 20)
+    @Column(name = "fDoc_id",length = 20)
     private Long id;
 
-    @Column(name ="financialDoc_docNumber" ,length =4, unique = true)
+    @Column(name ="fDoc_docNumber" ,length =4, unique = true)
     @Positive(message = "The doc number must be a positive number.")
     @Min(value = 1, message = "The doc number must be at least 1.")
     @Max(value = 9999, message = "The doc number cannot exceed 9999.")
     private Long docNumber;//شماره سند
 
-    @Column(name ="financialDoc_dateTime")
+    @Column(name ="fDoc_dateTime")
     @PastOrPresent(message = "Invalid Date")
     private LocalDate date;//تاریخ
 
-    @Column(name ="financialDoc_description" ,length =999 )
+    @Column(name ="fDoc_description" ,length =999 )
     @Pattern(regexp = "^[a-zA-Zآ-ی\\s]{3,999}$", message = "Invalid Description")
     @Size(min = 3, max = 999, message = " description must be between 3 and 999 characters")
     @NotBlank(message = "Should Not Be Null")

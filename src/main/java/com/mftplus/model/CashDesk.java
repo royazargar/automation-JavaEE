@@ -42,6 +42,6 @@ public class CashDesk extends Base {
     @Max(value = 1999999999, message = "The cash balance cannot exceed 1999999999.")
     private Long cashBalance;//  موجودی صندوق
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User cashier;//صندوقدار
 }

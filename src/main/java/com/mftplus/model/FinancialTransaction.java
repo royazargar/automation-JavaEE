@@ -24,37 +24,37 @@ import java.time.LocalDate;
 @ToString
 
 @Entity(name = "financialTransactionEntity")
-@Table(name = "financial_transaction_tbl")
+@Table(name = "f_transaction_tbl")
 @RequestScoped
 public class FinancialTransaction extends Base {
 
     @Id
     @SequenceGenerator(name = "financialTransactionSeq", sequenceName = "financial_transaction_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "financialTransactionSeq")
-    @Column(name = "financialTransaction_id", length = 20)
+    @Column(name = "fT_id", length = 20)
     private Long id;
 
-    @Column(name = "financialTransaction_dateTime")
+    @Column(name = "fT_dateTime")
     @PastOrPresent(message = "Invalid Date")
     private LocalDate date; //تاریخ
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user; // پرداخت کننده یا دریافت کننده
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Department referringDepartment; // واحد ارجاع کننده
 
     @Enumerated(EnumType.ORDINAL)
     private PaymentType paymentType;
 
-    @Column(name = "financialTransaction_amount", length = 10)
+    @Column(name = "fT_amount", length = 10)
     @Positive(message = "The amount must be a positive number.")
     @Min(value = 1, message = "The amount must be at least 1.")
     @Max(value = 1999999999, message = "The amount cannot exceed 1999999999.")
     private Long amount; // مقدار پول معامله شده
 
-    @Column(name = "financialTransaction_trackingCode", length = 20, unique = true)
-    private int trackingCode; // کد تراکنش
+    @Column(name = "fT_trackingCode", length = 20, unique = true)
+    private long trackingCode; // کد تراکنش
 
     @Enumerated(EnumType.ORDINAL)
     private FinancialTransactionType transactionType;

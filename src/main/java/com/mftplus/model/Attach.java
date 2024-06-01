@@ -29,5 +29,3 @@ public class Attach extends Base implements Serializable {
     @Column (name = "a_title" , length = 25)
     private String title;
 }
-
-

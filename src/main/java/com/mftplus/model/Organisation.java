@@ -35,12 +35,11 @@ public class Organisation extends Base implements Serializable {
     @Column(name = "o_name" , length = 30)
     private String name;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Attach logo;
 
     @Column(name = "o_address" , length = 100)
     private String address;
-
 
     @Column(name = "o_phoneNumber" , length = 11)
     private String phoneNumber;
@@ -49,7 +48,7 @@ public class Organisation extends Base implements Serializable {
     private String description;
 
     @JsonbTransient
-    @OneToMany(mappedBy = "organisation")
+    @OneToMany(mappedBy = "organisation", fetch = FetchType.EAGER)
     private List<Department> departmentList;
 
     public void addDepartment(Department department){
@@ -57,5 +56,10 @@ public class Organisation extends Base implements Serializable {
             departmentList=new ArrayList<>();
         }
         departmentList.add(department);
+    }
+
+    @Override
+    public String toString() {
+        return "Organisation{id=" + id + ", title='" + title + "', name='" + name + "', address='" + address + "', phoneNumber='" + phoneNumber + "', description='" + description + "', departmentListSize=" + (departmentList != null ? departmentList.size() : "null") + "}";
     }
 }

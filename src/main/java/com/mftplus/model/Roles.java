@@ -11,7 +11,6 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Getter
 @Setter
@@ -29,7 +28,7 @@ public class Roles extends Base implements Serializable {
     private Long id;
 
     @ToString.Exclude
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "u_username")
     private User user;
 
@@ -38,4 +37,9 @@ public class Roles extends Base implements Serializable {
     @Size(min = 4, max = 10, message = "RoleName must be between 4 and 10 characters")
     @NotBlank(message = "Should Not Be Null")
     private String role;
+
+    @Override
+    public String toString() {
+        return "Roles{id=" + id + ", user='" + user + ", role='" + role + "'}";
+    }
 }

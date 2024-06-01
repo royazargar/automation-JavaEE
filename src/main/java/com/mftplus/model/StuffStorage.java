@@ -24,13 +24,9 @@ public class StuffStorage extends Base {
     @Column(name = "ss_id", nullable = false)
     private int id;
 
-
     @Column(name = "ss_name", length = 20 )
     private String name;
 
     @Column(name = "ss_count", length = 20)
     private int count;
-    
-
 }
-

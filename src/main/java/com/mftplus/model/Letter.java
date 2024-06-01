@@ -49,8 +49,8 @@ public class Letter extends Base implements Serializable {
     @NotBlank(message = "Should Not Be Null")
     private String letterNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private User user;
 
     //ref receivers
@@ -127,5 +127,4 @@ public class Letter extends Base implements Serializable {
     //todo : does this need @futureOrPresent? I set it as localDateTime.now in servlet
     @Column(name = "register_date_and_time")
     private LocalDateTime registerDateAndTime;
-
 }

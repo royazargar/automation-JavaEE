@@ -25,13 +25,13 @@ public class StuffTransaction {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stuffTransactionSeq")
     private Long id;
 
-    @OneToOne(cascade =  CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     private Department department;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     private Stuff stuff;
 
     @Column(name = "ss_dateTime")
@@ -40,5 +40,3 @@ public class StuffTransaction {
     @Enumerated(EnumType.ORDINAL)
     private StuffTransactionType transactionType;
 }
-
-

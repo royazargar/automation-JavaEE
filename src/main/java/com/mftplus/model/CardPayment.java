@@ -26,7 +26,7 @@ public class CardPayment extends Payment{
     @Column(name = "cardPayment_depositCode",length = 20)
     private String depositCode; // کد واریز
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Bank bankInvolved; //  حساب بانک درگیر
 
     @Override
