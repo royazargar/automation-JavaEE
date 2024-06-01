@@ -54,7 +54,7 @@ public class FinancialTransaction extends Base {
     private Long amount; // مقدار پول معامله شده
 
     @Column(name = "fT_trackingCode", length = 20, unique = true)
-    private long trackingCode; // کد تراکنش
+    private long trackingCode; // کد تراکنش fd
 
     @Enumerated(EnumType.ORDINAL)
     private FinancialTransactionType transactionType;
