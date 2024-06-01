@@ -39,9 +39,11 @@ public class FinancialTransaction extends Base {
     private LocalDate date; //تاریخ
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private User user; // پرداخت کننده یا دریافت کننده
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "dept_id")
     private Department referringDepartment; // واحد ارجاع کننده
 
     @Enumerated(EnumType.ORDINAL)
