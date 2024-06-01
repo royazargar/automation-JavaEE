@@ -49,12 +49,6 @@ public class FinancialTransaction extends Base {
     @Enumerated(EnumType.ORDINAL)
     private PaymentType paymentType;
 
-    @Column(name = "fT_amount", length = 10)
-    @Positive(message = "The amount must be a positive number.")
-    @Min(value = 1, message = "The amount must be at least 1.")
-    @Max(value = 1999999999, message = "The amount cannot exceed 1999999999.")
-    private Long amount; // مقدار پول معامله شده
-
     @Column(name = "fT_trackingCode", length = 20, unique = true)
     private long trackingCode; // کد تراکنش fd
 
@@ -63,6 +57,24 @@ public class FinancialTransaction extends Base {
 
     @Transient
     private String faDate;
+
+    @Column(name = "bank_amount", length = 10)
+    @Positive(message = "The amount must be a positive number.")
+    @Min(value = 1, message = "The amount must be at least 1.")
+    @Max(value = 1999999999, message = "The amount cannot exceed 1999999999.")
+    private Long bankAmount; // مقدار پول معامله شده
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Bank bank;
+
+    @Column(name = "cashDesk_amount", length = 10)
+    @Positive(message = "The amount must be a positive number.")
+    @Min(value = 1, message = "The amount must be at least 1.")
+    @Max(value = 1999999999, message = "The amount cannot exceed 1999999999.")
+    private Long cashAmount; // مقدار پول معامله شده
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private CashDesk cashDesk;
 
     public String getFaDate() {
         return String.valueOf(PersianDate.fromGregorian(date));

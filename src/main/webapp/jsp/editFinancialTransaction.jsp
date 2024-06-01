@@ -24,14 +24,29 @@
             </c:forEach>
         </select>
 
+        <select name="bankId" id="bank">
+            <c:forEach items="${bankList}" var="bank">
+                <option value="${bank.id}">${bank.accountNumber}</option>
+            </c:forEach>
+        </select>
+
+        <input id="bankAmount" class="col form-control" type="text" name="bankAmount"
+               value="${sessionScope.financialTransactionEdit.bankAmount}">
+
+        <select name="cashId" id="cashDesk">
+            <c:forEach items="${cashDeskList}" var="cashDesk">
+                <option value="${cashDesk.id}">${cashDesk.cashDeskNumber}</option>
+            </c:forEach>
+        </select>
+
+        <input id="cashAmount" class="col form-control" type="text" name="cashAmount"
+               value="${sessionScope.financialTransactionEdit.cashAmount}">
+
         <select name="paymentType" id="paymentType">
             <c:forEach var="paymentType" items="${sessionScope.paymentTypes}">
                 <option value="${paymentType}">${paymentType}</option>
             </c:forEach>
         </select>
-
-        <input id="amount" class="col form-control" type="text" name="amount"
-               value="${sessionScope.financialTransactionEdit.amount}">
 
         <input id="trackingCode" class="col form-control" type="text" name="trackingCode"
                value="${sessionScope.financialTransactionEdit.trackingCode}">

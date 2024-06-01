@@ -39,17 +39,41 @@
             </div>
 
             <div class="row mb-4">
+                <label for="bank">Select bank: </label>
+                <select name="bankId" id="bank">
+                    <c:forEach items="${bankList}" var="bank">
+                        <option value="${bank.id}">${bank.accountNumber}</option>
+                    </c:forEach>
+                </select>
+            </div>
+
+            <div class="row mb-4">
+                <label class="col form-label" for="bankAmount">Bank Amount</label>
+                <input id="bankAmount" class="col form-control" type="text" name="bankAmount">
+            </div>
+
+            <div class="row mb-4">
+                <label for="cashDesk">Select cashDesk: </label>
+                <select name="cashId" id="cashDesk">
+                    <option value="">None</option>
+                    <c:forEach items="${cashDeskList}" var="cashDesk">
+                        <option value="${cashDesk.id}">${cashDesk.cashDeskNumber}</option>
+                    </c:forEach>
+                </select>
+            </div>
+
+            <div class="row mb-4">
+                <label class="col form-label" for="cashAmount">Cash Amount</label>
+                <input id="cashAmount" class="col form-control" type="text" name="cashAmount">
+            </div>
+
+            <div class="row mb-4">
                 <label class="col form-label" for="paymentType">Payment Type</label>
                 <select name="paymentType" id="paymentType">
                     <c:forEach var="paymentType" items="${sessionScope.paymentTypes}">
                         <option value="${paymentType}">${paymentType}</option>
                     </c:forEach>
                 </select>
-            </div>
-
-            <div class="row mb-4">
-                <label class="col form-label" for="amount">Amount</label>
-                <input id="amount" class="col form-control" type="text" name="amount">
             </div>
 
             <div class="row mb-4">
@@ -68,7 +92,8 @@
 
             <div class="row mb-4">
                 <label for="date" class="formbold-form-label"> تاریخ </label>
-                <input type="text" name="date" id="date" placeholder="تاریخ  را وارد کنید" class="formbold-form-input" required/>
+                <input type="text" name="date" id="date" placeholder="تاریخ  را وارد کنید" class="formbold-form-input"
+                       required/>
             </div>
 
             <div class="row mb-4">
@@ -104,8 +129,13 @@
                     <td>${financialTransaction.transactionType}</td>
                     <td>${financialTransaction.date}</td>
                     <td>
-                        <button class="btn btn-warning" onclick="editFinancialTransaction(${financialTransaction.id})"><i class="fa fa-edit"></i>Edit</button>
-                        <button class="btn btn-danger" onclick="removeFinancialTransaction('${financialTransaction.id}')"><i class="fa fa-remove"></i>Remove</button>
+                        <button class="btn btn-warning" onclick="editFinancialTransaction(${financialTransaction.id})">
+                            <i class="fa fa-edit"></i>Edit
+                        </button>
+                        <button class="btn btn-danger"
+                                onclick="removeFinancialTransaction('${financialTransaction.id}')"><i
+                                class="fa fa-remove"></i>Remove
+                        </button>
                     </td>
                 </tr>
             </c:forEach>
@@ -123,7 +153,7 @@
     let myElement = document.querySelector('#date');
     kamaDatepicker(myElement);
 
-    kamaDatepicker('date', { buttonsColor: "red", forceFarsiDigits: true });
+    kamaDatepicker('date', {buttonsColor: "red", forceFarsiDigits: true});
 </script>
 </body>
 </html>
