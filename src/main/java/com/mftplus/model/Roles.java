@@ -38,8 +38,4 @@ public class Roles extends Base implements Serializable {
     @NotBlank(message = "Should Not Be Null")
     private String role;
 
-    @Override
-    public String toString() {
-        return "Roles{id=" + id + ", user='" + user + ", role='" + role + "'}";
-    }
 }

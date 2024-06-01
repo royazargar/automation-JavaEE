@@ -67,8 +67,4 @@ public class Person extends Base implements Serializable {
     @Column(name = "p_image")
     private String image;
 
-    @Override
-    public String toString() {
-        return "Person{id=" + id + ", name='" + name + "', family='" + family + "', nationalCode='" + nationalCode + "', gender='" + gender + "', userId=" + (user != null ? user.getUsername() : "null") + ", birthdate='" + birthdate + "', image='" + image + "'}";
-    }
 }
