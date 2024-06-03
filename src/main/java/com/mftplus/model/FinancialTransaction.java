@@ -76,6 +76,9 @@ public class FinancialTransaction extends Base {
     @ManyToOne(fetch = FetchType.EAGER)
     private CashDesk cashDesk;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private CheckPayment checkPayment;
+
     public String getFaDate() {
         return String.valueOf(PersianDate.fromGregorian(date));
     }

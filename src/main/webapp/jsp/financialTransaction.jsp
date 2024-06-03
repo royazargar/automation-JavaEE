@@ -69,6 +69,16 @@
             </div>
 
             <div class="row mb-4">
+                <label for="check">Select check: </label>
+                <select name="checkId" id="check">
+                    <option value="${0}">None</option>
+                    <c:forEach items="${checkPaymentList}" var="check">
+                        <option value="${check.id}">${check.checkNumber}</option>
+                    </c:forEach>
+                </select>
+            </div>
+
+            <div class="row mb-4">
                 <label class="col form-label" for="paymentType">Payment Type</label>
                 <select name="paymentType" id="paymentType">
                     <c:forEach var="paymentType" items="${sessionScope.paymentTypes}">
@@ -113,7 +123,8 @@
                 <th>bankAmount</th>
                 <th>bank</th>
                 <th>cashAmount</th>
-                <th>cashDeskNumber</th>
+                <th>cash</th>
+                <th>check</th>
                 <th>paymentType</th>
                 <th>trackingCode</th>
                 <th>transactionType</th>
@@ -131,6 +142,7 @@
                     <td>${financialTransaction.bank.accountNumber}</td>
                     <th>${financialTransaction.cashAmount}</th>
                     <th>${financialTransaction.cashDesk.cashDeskNumber}</th>
+                    <th>${financialTransaction.checkPayment.checkNumber}</th>
                     <td>${financialTransaction.paymentType}</td>
                     <td>${financialTransaction.trackingCode}</td>
                     <td>${financialTransaction.transactionType}</td>

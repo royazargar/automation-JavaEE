@@ -1,58 +1,58 @@
 package com.mftplus.model;
 
-import com.github.mfathi91.time.PersianDateTime;
-import com.google.gson.Gson;
+import com.github.mfathi91.time.PersianDate;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
+@ToString
 
 @Entity(name = "checkPaymentEntity")
 @Table(name = "check-payment_tbl")
 @RequestScoped
-public class CheckPayment extends Payment{
+public class CheckPayment extends Base{
+
     @Id
     @SequenceGenerator(name = "checkPaymentSeq", sequenceName = "check_payment_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "checkPaymentSeq")
     @Column(name = "checkPayment_id",length = 20)
     private Long id;
 
-    @Pattern(regexp = "^{6}$",message = "Invalid Check Number")
-    @Column(name = "checkPayment_checkNumber",length = 6,unique = true)
+    @Column(name = "checkPayment_checkNumber",length = 16,unique = true)
+    @Pattern(regexp = "^[0-9]{5,16}$", message = "Invalid Check Number")
+    @Size(min = 5, max = 16, message = " Check Number must be between 5 and 16 characters")
+    @NotBlank(message = "Should Not Be Null")
     private String checkNumber;// شماره چک
+
+    @Column(name = "checkPayment_amount", length = 10)
+    @Positive(message = "The amount must be a positive number.")
+    @Min(value = 1, message = "The amount must be at least 1.")
+    @Max(value = 1999999999, message = "The amount cannot exceed 1999999999.")
+    private Long amount; // مقدار پول معامله شده
 
     @Column(name ="checkPayment_checkDueDate")
     @FutureOrPresent(message = "Invalid Date")
-    private LocalDateTime checkDueDate;//تاریخ سررسید چک
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private CashDesk cashDesk;// صندوق
+    private LocalDate checkDueDate;//تاریخ سررسید چک
 
     @Transient
-    private LocalDateTime faCheckDueDate;
+    private String faCheckDueDate;
 
     public String getFaCheckDueDate() {
-        return PersianDateTime.fromGregorian(checkDueDate).toString();
+        return String.valueOf(PersianDate.fromGregorian(checkDueDate));
     }
 
     public void setFaCheckDueDate(String faCheckDueDate) {
-        this.checkDueDate = PersianDateTime.parse(faCheckDueDate).toGregorian();
-    }
-
-    @Override
-    public String toString() {
-        Gson gson=new Gson();
-        return gson.toJson(this);
+        this.checkDueDate = PersianDate.parse(faCheckDueDate).toGregorian();
     }
 }
