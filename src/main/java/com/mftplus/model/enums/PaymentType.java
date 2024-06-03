@@ -3,8 +3,11 @@ package com.mftplus.model.enums;
 public enum PaymentType {
     cashPayment("نقد"),
     cardPayment("واریز به بانک"),
+    checkPayment("چک"),
     cardAndCash("کارت و نقد"),
-    checkPayment("چک");
+    cardAndCheck("کارت و چک"),
+    cashAndCheck("نقد و چک"),
+    cardAndCashAndCheck("کارت و نقد و چک");
 
     private String title;
 

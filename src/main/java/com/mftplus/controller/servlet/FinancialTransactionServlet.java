@@ -52,9 +52,10 @@ public class FinancialTransactionServlet extends HttpServlet {
             Optional<Bank> bankOptional = bankService.findById(bankId);
             Long cashId = Long.valueOf(req.getParameter("cashId"));
             Optional<CashDesk> cashDeskOptional = cashDeskService.findById(cashId);
-            Long checkId= Long.valueOf(req.getParameter("checkId"));
-            Optional<CheckPayment> checkOptional=checkPaymentService.findById(checkId);
+            Long checkId = Long.valueOf(req.getParameter("checkId"));
+            Optional<CheckPayment> checkOptional = checkPaymentService.findById(checkId);
 
+            //Card Payment Save
             if (userOptional.isPresent() && departmentOptional.isPresent() && bankOptional.isPresent() && cashDeskOptional.isEmpty() && checkOptional.isEmpty()) {
 
                 String faDate = req.getParameter("date").replace("/", "-");
@@ -83,8 +84,10 @@ public class FinancialTransactionServlet extends HttpServlet {
 
                 financialTransactionService.save(financialTransaction);
                 log.info("FinancialTransactionServlet - FinancialTransaction Saved");
-//                resp.sendRedirect("/financialTransaction.do");
-            }if (userOptional.isPresent() && departmentOptional.isPresent() && bankOptional.isEmpty() && cashDeskOptional.isPresent() && checkOptional.isEmpty()) {
+            }
+
+            //Cash Payment Save
+            if (userOptional.isPresent() && departmentOptional.isPresent() && bankOptional.isEmpty() && cashDeskOptional.isPresent() && checkOptional.isEmpty()) {
 
                 String faDate = req.getParameter("date").replace("/", "-");
                 int trackingCode = Integer.parseInt(req.getParameter("trackingCode"));
@@ -112,36 +115,10 @@ public class FinancialTransactionServlet extends HttpServlet {
 
                 financialTransactionService.save(financialTransaction);
                 log.info("FinancialTransactionServlet - FinancialTransaction Saved");
-//                resp.sendRedirect("/financialTransaction.do");
-            }if (userOptional.isPresent() && departmentOptional.isPresent() && bankOptional.isPresent() && cashDeskOptional.isPresent() && checkOptional.isEmpty()){
+            }
 
-                String faDate = req.getParameter("date").replace("/", "-");
-                int trackingCode = Integer.parseInt(req.getParameter("trackingCode"));
-                String paymentType = req.getParameter("paymentType");
-                String transactionType = req.getParameter("transactionType");
-                Long bankAmount = Long.valueOf(req.getParameter("bankAmount"));
-                Long cashAmount = Long.valueOf(req.getParameter("cashAmount"));
-
-                financialTransaction = FinancialTransaction
-                        .builder()
-                        .user(userOptional.get())
-                        .referringDepartment(departmentOptional.get())
-                        .paymentType(PaymentType.valueOf(paymentType).cardAndCash)
-                        .trackingCode(trackingCode)
-                        .transactionType(FinancialTransactionType.valueOf(transactionType))
-                        .faDate(faDate)
-                        .bankAmount(bankAmount)
-                        .bank(bankOptional.get())
-                        .cashAmount(cashAmount)
-                        .cashDesk(cashDeskOptional.get())
-                        .checkPayment(null)
-                        .deleted(false)
-                        .build();
-                financialTransaction.setFaDate(faDate);
-
-                financialTransactionService.save(financialTransaction);
-                log.info("FinancialTransactionServlet - FinancialTransaction Saved");
-            }if (userOptional.isPresent() && departmentOptional.isPresent() && bankOptional.isEmpty() && cashDeskOptional.isEmpty() && checkOptional.isPresent()){
+            //Check Payment Save
+            if (userOptional.isPresent() && departmentOptional.isPresent() && bankOptional.isEmpty() && cashDeskOptional.isEmpty() && checkOptional.isPresent()) {
 
                 String faDate = req.getParameter("date").replace("/", "-");
                 int trackingCode = Integer.parseInt(req.getParameter("trackingCode"));
@@ -170,9 +147,131 @@ public class FinancialTransactionServlet extends HttpServlet {
                 financialTransactionService.save(financialTransaction);
                 log.info("FinancialTransactionServlet - FinancialTransaction Saved");
             }
-            else {
+
+            //Card And Cash Save
+            if (userOptional.isPresent() && departmentOptional.isPresent() && bankOptional.isPresent() && cashDeskOptional.isPresent() && checkOptional.isEmpty()) {
+
+                String faDate = req.getParameter("date").replace("/", "-");
+                int trackingCode = Integer.parseInt(req.getParameter("trackingCode"));
+                String paymentType = req.getParameter("paymentType");
+                String transactionType = req.getParameter("transactionType");
+                Long bankAmount = Long.valueOf(req.getParameter("bankAmount"));
+                Long cashAmount = Long.valueOf(req.getParameter("cashAmount"));
+
+                financialTransaction = FinancialTransaction
+                        .builder()
+                        .user(userOptional.get())
+                        .referringDepartment(departmentOptional.get())
+                        .paymentType(PaymentType.valueOf(paymentType).cardAndCash)
+                        .trackingCode(trackingCode)
+                        .transactionType(FinancialTransactionType.valueOf(transactionType))
+                        .faDate(faDate)
+                        .bankAmount(bankAmount)
+                        .bank(bankOptional.get())
+                        .cashAmount(cashAmount)
+                        .cashDesk(cashDeskOptional.get())
+                        .checkPayment(null)
+                        .deleted(false)
+                        .build();
+                financialTransaction.setFaDate(faDate);
+
+                financialTransactionService.save(financialTransaction);
+                log.info("FinancialTransactionServlet - FinancialTransaction Saved");
+            }
+
+            //Card And Check Save
+            if (userOptional.isPresent() && departmentOptional.isPresent() && bankOptional.isPresent() && cashDeskOptional.isEmpty() && checkOptional.isPresent()) {
+
+                String faDate = req.getParameter("date").replace("/", "-");
+                int trackingCode = Integer.parseInt(req.getParameter("trackingCode"));
+                String paymentType = req.getParameter("paymentType");
+                String transactionType = req.getParameter("transactionType");
+                Long bankAmount = Long.valueOf(req.getParameter("bankAmount"));
+//                Long cashAmount = Long.valueOf(req.getParameter("cashAmount"));
+
+                financialTransaction = FinancialTransaction
+                        .builder()
+                        .user(userOptional.get())
+                        .referringDepartment(departmentOptional.get())
+                        .paymentType(PaymentType.valueOf(paymentType).cardAndCheck)
+                        .trackingCode(trackingCode)
+                        .transactionType(FinancialTransactionType.valueOf(transactionType))
+                        .faDate(faDate)
+                        .bankAmount(bankAmount)
+                        .bank(bankOptional.get())
+                        .cashAmount(null)
+                        .cashDesk(null)
+                        .checkPayment(checkOptional.get())
+                        .deleted(false)
+                        .build();
+                financialTransaction.setFaDate(faDate);
+
+                financialTransactionService.save(financialTransaction);
+                log.info("FinancialTransactionServlet - FinancialTransaction Saved");
+            }
+
+            //Cash And Check
+            if (userOptional.isPresent() && departmentOptional.isPresent() && bankOptional.isEmpty() && cashDeskOptional.isPresent() && checkOptional.isPresent()) {
+
+                String faDate = req.getParameter("date").replace("/", "-");
+                int trackingCode = Integer.parseInt(req.getParameter("trackingCode"));
+                String paymentType = req.getParameter("paymentType");
+                String transactionType = req.getParameter("transactionType");
+//                Long bankAmount = Long.valueOf(req.getParameter("bankAmount"));
+                Long cashAmount = Long.valueOf(req.getParameter("cashAmount"));
+
+                financialTransaction = FinancialTransaction
+                        .builder()
+                        .user(userOptional.get())
+                        .referringDepartment(departmentOptional.get())
+                        .paymentType(PaymentType.valueOf(paymentType).cashAndCheck)
+                        .trackingCode(trackingCode)
+                        .transactionType(FinancialTransactionType.valueOf(transactionType))
+                        .faDate(faDate)
+                        .bankAmount(null)
+                        .bank(null)
+                        .cashAmount(cashAmount)
+                        .cashDesk(cashDeskOptional.get())
+                        .checkPayment(checkOptional.get())
+                        .deleted(false)
+                        .build();
+                financialTransaction.setFaDate(faDate);
+
+                financialTransactionService.save(financialTransaction);
+                log.info("FinancialTransactionServlet - FinancialTransaction Saved");
+            }
+
+            //Card And Cash And Check
+            if (userOptional.isPresent() && departmentOptional.isPresent() && bankOptional.isPresent() && cashDeskOptional.isPresent() && checkOptional.isPresent()) {
+
+                String faDate = req.getParameter("date").replace("/", "-");
+                int trackingCode = Integer.parseInt(req.getParameter("trackingCode"));
+                String paymentType = req.getParameter("paymentType");
+                String transactionType = req.getParameter("transactionType");
+                Long bankAmount = Long.valueOf(req.getParameter("bankAmount"));
+                Long cashAmount = Long.valueOf(req.getParameter("cashAmount"));
+
+                financialTransaction = FinancialTransaction
+                        .builder()
+                        .user(userOptional.get())
+                        .referringDepartment(departmentOptional.get())
+                        .paymentType(PaymentType.valueOf(paymentType).cardAndCashAndCheck)
+                        .trackingCode(trackingCode)
+                        .transactionType(FinancialTransactionType.valueOf(transactionType))
+                        .faDate(faDate)
+                        .bankAmount(bankAmount)
+                        .bank(bankOptional.get())
+                        .cashAmount(cashAmount)
+                        .cashDesk(cashDeskOptional.get())
+                        .checkPayment(checkOptional.get())
+                        .deleted(false)
+                        .build();
+                financialTransaction.setFaDate(faDate);
+
+                financialTransactionService.save(financialTransaction);
+                log.info("FinancialTransactionServlet - FinancialTransaction Saved");
+            } else {
                 log.info("Invalid Information");
-//                resp.sendRedirect("/financialTransaction.do");
             }
             resp.sendRedirect("/financialTransaction.do");
         } catch (Exception e) {
@@ -190,7 +289,7 @@ public class FinancialTransactionServlet extends HttpServlet {
             req.getSession().setAttribute("departmentList", departmentService.findAll());
             req.getSession().setAttribute("bankList", bankService.findAll());
             req.getSession().setAttribute("cashDeskList", cashDeskService.findAll());
-            req.getSession().setAttribute("checkPaymentList",checkPaymentService.findAll());
+            req.getSession().setAttribute("checkPaymentList", checkPaymentService.findAll());
             req.getSession().setAttribute("financialTransactionList", financialTransactionService.findAll());
             req.getRequestDispatcher("/jsp/financialTransaction.jsp").forward(req, resp);
         } catch (Exception e) {
