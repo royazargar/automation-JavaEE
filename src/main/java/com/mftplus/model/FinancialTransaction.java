@@ -64,7 +64,7 @@ public class FinancialTransaction extends Base {
     @Max(value = 1999999999, message = "The amount cannot exceed 1999999999.")
     private Long bankAmount; // مقدار پول معامله شده
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Bank bank;
 
     @Column(name = "cashDesk_amount", length = 10)
@@ -73,7 +73,7 @@ public class FinancialTransaction extends Base {
     @Max(value = 1999999999, message = "The amount cannot exceed 1999999999.")
     private Long cashAmount; // مقدار پول معامله شده
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private CashDesk cashDesk;
 
     public String getFaDate() {

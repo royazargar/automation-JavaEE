@@ -41,6 +41,7 @@
             <div class="row mb-4">
                 <label for="bank">Select bank: </label>
                 <select name="bankId" id="bank">
+                    <option value="${0}">None</option>
                     <c:forEach items="${bankList}" var="bank">
                         <option value="${bank.id}">${bank.accountNumber}</option>
                     </c:forEach>
@@ -55,7 +56,7 @@
             <div class="row mb-4">
                 <label for="cashDesk">Select cashDesk: </label>
                 <select name="cashId" id="cashDesk">
-                    <option value="">None</option>
+                    <option value="${0}">None</option>
                     <c:forEach items="${cashDeskList}" var="cashDesk">
                         <option value="${cashDesk.id}">${cashDesk.cashDeskNumber}</option>
                     </c:forEach>
@@ -109,8 +110,11 @@
                 <th>id</th>
                 <th>user</th>
                 <th>referringDepartment</th>
+                <th>bankAmount</th>
+                <th>bank</th>
+                <th>cashAmount</th>
+                <th>cashDeskNumber</th>
                 <th>paymentType</th>
-                <th>amount</th>
                 <th>trackingCode</th>
                 <th>transactionType</th>
                 <th>faDateTime</th>
@@ -123,8 +127,11 @@
                     <td>${financialTransaction.id}</td>
                     <td>${financialTransaction.user.username}</td>
                     <td>${financialTransaction.referringDepartment.title}</td>
+                    <td>${financialTransaction.bankAmount}</td>
+                    <td>${financialTransaction.bank.accountNumber}</td>
+                    <th>${financialTransaction.cashAmount}</th>
+                    <th>${financialTransaction.cashDesk.cashDeskNumber}</th>
                     <td>${financialTransaction.paymentType}</td>
-                    <td>${financialTransaction.amount}</td>
                     <td>${financialTransaction.trackingCode}</td>
                     <td>${financialTransaction.transactionType}</td>
                     <td>${financialTransaction.date}</td>

@@ -45,29 +45,58 @@ public class FinancialTransactionServlet extends HttpServlet {
             Optional<User> userOptional = userService.findByUsername(username);
             Long id = Long.valueOf(req.getParameter("dId"));
             Optional<Department> departmentOptional = departmentService.findById(id);
-            Long bankId= Long.valueOf(req.getParameter("bankId"));
-            Optional<Bank> bankOptional=bankService.findById(bankId);
-            Long cashId= Long.valueOf(req.getParameter("cashId"));
-            Optional<CashDesk> cashDeskOptional=cashDeskService.findById(cashId);
+            Long bankId = Long.valueOf(req.getParameter("bankId"));
+            Optional<Bank> bankOptional = bankService.findById(bankId);
+            Long cashId = Long.valueOf(req.getParameter("cashId"));
+            Optional<CashDesk> cashDeskOptional = cashDeskService.findById(cashId);
 
-            if (userOptional.isPresent() && departmentOptional.isPresent()) {
+            if (userOptional.isPresent() && departmentOptional.isPresent() && bankOptional.isPresent() && cashDeskOptional.isEmpty()) {
+
                 String faDate = req.getParameter("date").replace("/", "-");
                 int trackingCode = Integer.parseInt(req.getParameter("trackingCode"));
                 String paymentType = req.getParameter("paymentType");
                 String transactionType = req.getParameter("transactionType");
                 Long bankAmount = Long.valueOf(req.getParameter("bankAmount"));
+//                Long cashAmount = Long.valueOf(req.getParameter("cashAmount"));
+
+                financialTransaction = FinancialTransaction
+                        .builder()
+                        .user(userOptional.get())
+                        .referringDepartment(departmentOptional.get())
+                        .paymentType(PaymentType.valueOf(paymentType).cardPayment)
+                        .trackingCode(trackingCode)
+                        .transactionType(FinancialTransactionType.valueOf(transactionType))
+                        .faDate(faDate)
+                        .bankAmount(bankAmount)
+                        .bank(bankOptional.get())
+                        .cashAmount(null)
+                        .cashDesk(null)
+                        .deleted(false)
+                        .build();
+                financialTransaction.setFaDate(faDate);
+
+                financialTransactionService.save(financialTransaction);
+                log.info("FinancialTransactionServlet - FinancialTransaction Saved");
+//                resp.sendRedirect("/financialTransaction.do");
+            }if (userOptional.isPresent() && departmentOptional.isPresent() && bankOptional.isEmpty() && cashDeskOptional.isPresent()) {
+
+                String faDate = req.getParameter("date").replace("/", "-");
+                int trackingCode = Integer.parseInt(req.getParameter("trackingCode"));
+                String paymentType = req.getParameter("paymentType");
+                String transactionType = req.getParameter("transactionType");
+//                Long bankAmount = Long.valueOf(req.getParameter("bankAmount"));
                 Long cashAmount = Long.valueOf(req.getParameter("cashAmount"));
 
                 financialTransaction = FinancialTransaction
                         .builder()
                         .user(userOptional.get())
                         .referringDepartment(departmentOptional.get())
-                        .paymentType(PaymentType.valueOf(paymentType))
+                        .paymentType(PaymentType.valueOf(paymentType).cashPayment)
                         .trackingCode(trackingCode)
                         .transactionType(FinancialTransactionType.valueOf(transactionType))
                         .faDate(faDate)
-                        .bankAmount(bankAmount)
-                        .bank(bankOptional.get())
+                        .bankAmount(null)
+                        .bank(null)
                         .cashAmount(cashAmount)
                         .cashDesk(cashDeskOptional.get())
                         .deleted(false)
@@ -76,11 +105,12 @@ public class FinancialTransactionServlet extends HttpServlet {
 
                 financialTransactionService.save(financialTransaction);
                 log.info("FinancialTransactionServlet - FinancialTransaction Saved");
-                resp.sendRedirect("/financialTransaction.do");
+//                resp.sendRedirect("/financialTransaction.do");
             } else {
                 log.info("Invalid Information");
-                resp.sendRedirect("/financialTransaction.do");
+//                resp.sendRedirect("/financialTransaction.do");
             }
+            resp.sendRedirect("/financialTransaction.do");
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);
@@ -94,8 +124,8 @@ public class FinancialTransactionServlet extends HttpServlet {
             req.getSession().setAttribute("transactionTypes", Arrays.asList(FinancialTransactionType.values()));
             req.getSession().setAttribute("userList", userService.findAll());
             req.getSession().setAttribute("departmentList", departmentService.findAll());
-            req.getSession().setAttribute("bankList",bankService.findAll());
-            req.getSession().setAttribute("cashDeskList",cashDeskService.findAll());
+            req.getSession().setAttribute("bankList", bankService.findAll());
+            req.getSession().setAttribute("cashDeskList", cashDeskService.findAll());
             req.getSession().setAttribute("financialTransactionList", financialTransactionService.findAll());
             req.getRequestDispatcher("/jsp/financialTransaction.jsp").forward(req, resp);
         } catch (Exception e) {

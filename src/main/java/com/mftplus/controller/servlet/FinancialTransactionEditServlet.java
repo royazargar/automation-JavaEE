@@ -74,8 +74,8 @@ public class FinancialTransactionEditServlet extends HttpServlet {
             Optional<Department> departmentOptional = departmentService.findById(dId);
             Long bankId= Long.valueOf(req.getParameter("bankId"));
             Optional<Bank> bankOptional=bankService.findById(bankId);
-            Long cashId= Long.valueOf(req.getParameter("cashId"));
-            Optional<CashDesk> cashDeskOptional=cashDeskService.findById(cashId);
+//            Long cashId= Long.valueOf(req.getParameter("cashId"));
+//            Optional<CashDesk> cashDeskOptional=cashDeskService.findById(cashId);
 
             if (userOptional.isPresent() && departmentOptional.isPresent()) {
                 String faDate = req.getParameter("date").replace("/", "-");
@@ -83,7 +83,7 @@ public class FinancialTransactionEditServlet extends HttpServlet {
                 String paymentType = req.getParameter("paymentType");
                 String transactionType = req.getParameter("transactionType");
                 Long bankAmount = Long.valueOf(req.getParameter("bankAmount"));
-                Long cashAmount = Long.valueOf(req.getParameter("cashAmount"));
+//                Long cashAmount = Long.valueOf(req.getParameter("cashAmount"));
 
                 financialTransaction = FinancialTransaction
                         .builder()
@@ -96,8 +96,8 @@ public class FinancialTransactionEditServlet extends HttpServlet {
                         .faDate(faDate)
                         .bankAmount(bankAmount)
                         .bank(bankOptional.get())
-                        .cashAmount(cashAmount)
-                        .cashDesk(cashDeskOptional.get())
+//                        .cashAmount(cashAmount)
+//                        .cashDesk(cashDeskOptional.get())
                         .deleted(false)
                         .build();
                 financialTransaction.setFaDate(faDate);
