@@ -7,21 +7,18 @@
     <link rel="stylesheet" href="../assets/css/all.css">
 </head>
 <body>
+
 <!-- navbar -->
 <nav class="navbar">
     <div class="logo_item">
         <i class="bx bx-menu" id="sidebarOpen"></i>
-        <img src="../assets/image/logo.png" alt=""></i>لوگو سازمان
+        <img src="../assets/image/logo.png" alt="">لوگو سازمان
     </div>
-
-<%--    <div class="search_bar">--%>
-<%--        <input type="text" placeholder="جستجو" />--%>
-<%--    </div>--%>
 
     <div class="navbar_content">
         <i class="bi bi-grid"></i>
         <i class='bx bx-sun' id="darkLight"></i>
-        <i class='bx bx-bell' ></i>
+        <i class='bx bx-bell'></i>
         <a href="person.do"><span class="fas fa-user-circle profile"></span></a>
 
     </div>
@@ -39,7 +36,7 @@
                     <span class="navlink">داشبورد</span>
                 </a>
             </li>
-            <!-- duplicate or remove this li tag if you want to add or remove navlink with submenu -->
+
             <!-- start -->
             <li class="item">
                 <a href="home.do" class="nav_link">
@@ -51,7 +48,6 @@
             </li>
             <!-- end -->
 
-            <!-- duplicate this li tag if you want to add or remove  navlink with submenu -->
             <!-- start -->
             <li class="item">
                 <div href="#" class="nav_link submenu_item">
@@ -63,10 +59,10 @@
                 </div>
 
                 <ul class="menu_items submenu">
-                    <a href="#section1" class="nav_link sublink">اداری</a>
-                    <a href="#section2" class="nav_link sublink">نامه نگاری</a>
-                    <a href="#" class="nav_link sublink">مدیریت کارمندان</a>
-                    <a href="#" class="nav_link sublink">بانک</a>
+                    <li><a href="#section1" class="nav_link sublink">اداری</a></li>
+                    <li><a href="#section2" class="nav_link sublink">نامه نگاری</a></li>
+                    <li><a href="#section3" class="nav_link sublink">مدیریت کارمندان</a></li>
+                    <li><a href="#section4" class="nav_link sublink">مالی</a></li>
                 </ul>
             </li>
             <!-- end -->
@@ -80,7 +76,7 @@
                 <span class="navlink">اداری</span>
                 <i class="bx bx-chevron-right arrow-left"></i>
             </div>
-            <!-- duplicate these li tag if you want to add or remove navlink only -->
+
             <!-- Start -->
             <li class="item">
                 <a href="#" class="nav_link">
@@ -118,9 +114,8 @@
                 <span class="navlink">نامه نگاری</span>
                 <i class="bx bx-chevron-right arrow-left"></i>
             </div>
-            <!-- duplicate these li tag if you want to add or remove navlink only -->
-            <!-- Start -->
 
+            <!-- Start -->
             <li class="item">
                 <a href="letterBox.do" class="nav_link">
               <span class="navlink_icon">
@@ -132,7 +127,7 @@
             <li class="item">
                 <a href="letter.do" class="nav_link">
               <span class="navlink_icon">
-                <i class="fa-solid fa-pen-to-square"></i></i>
+                <i class="fa-solid fa-pen-to-square"></i>
               </span>
                     <span class="navlink">نامه جدید</span>
                 </a>
@@ -163,7 +158,7 @@
             </li>
         </ul>
 
-        <ul class="menu_items">
+        <ul id="section3" class="menu_items">
             <div class="menu_title">
             <span>
             <i class="fas fa-users"></i>
@@ -171,7 +166,7 @@
                 <span class="navlink">مدیریت کارمندان</span>
                 <i class="bx bx-chevron-right arrow-left"></i>
             </div>
-            <!-- duplicate these li tag if you want to add or remove navlink only -->
+
             <!-- Start -->
             <li class="item">
                 <a href="personTable.do" class="nav_link">
@@ -191,6 +186,7 @@
                     <span class="navlink">کاربران</span>
                 </a>
             </li>
+
             <li class="item">
                 <a href="person.do" class="nav_link">
               <span class="navlink_icon">
@@ -199,6 +195,7 @@
                     <span class="navlink">ایجاد پروفایل</span>
                 </a>
             </li>
+
             <li class="item">
                 <a href="user.do" class="nav_link">
               <span class="navlink_icon">
@@ -209,14 +206,22 @@
             </li>
         </ul>
 
-        <ul class="menu_items">
+        <ul id="section4" class="menu_items">
             <div class="menu_title">
             <span>
-            <i class="fa fa-bank"></i>
+            <i class="fa-solid fa-envelopes"></i>
             </span>
-                <span href="bank.do" class="navlink">بانک</span>
+                <span class="navlink">مالی</span>
                 <i class="bx bx-chevron-right arrow-left"></i>
             </div>
+            <li class="item">
+                <a href="bank.do" class="nav_link">
+              <span class="navlink_icon">
+                <i class="bx bx-flag"></i>
+              </span>
+                    <span class="navlink">بانک</span>
+                </a>
+            </li>
             <li class="item">
                 <a href="cashDesk.do" class="nav_link">
               <span class="navlink_icon">
@@ -281,7 +286,7 @@
         <div class="bottom_content">
             <div class="bottom expand_sidebar">
                 <span> باز کردن</span>
-                <i class='bx bx-log-in' ></i>
+                <i class='bx bx-log-in'></i>
             </div>
             <div class="bottom collapse_sidebar">
                 <span> بستن</span>

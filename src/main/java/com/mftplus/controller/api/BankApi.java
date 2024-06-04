@@ -16,6 +16,7 @@ public class BankApi {
     private BankServiceImpl bankService;
 
     @GET
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
         try {
@@ -26,7 +27,7 @@ public class BankApi {
                     .build();
         } catch (Exception e) {
             return Response
-                    .serverError()
+                    .status(500)
                     .entity("{\"message\": \"" + e.getMessage() + "\"}")
                     .build();
         }
@@ -34,6 +35,7 @@ public class BankApi {
 
     @GET
     @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") Long id) {
         try {
@@ -71,6 +73,7 @@ public class BankApi {
 
     @DELETE
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response removeById(@PathParam("id") Long id) {
         try {
             log.info("Remove By Id Bank");
@@ -78,24 +81,6 @@ public class BankApi {
             return Response
                     .ok()
                     .entity(id)
-                    .build();
-        } catch (Exception e) {
-            return Response
-                    .serverError()
-                    .entity("{\"message\": \"" + e.getMessage() + "\"}")
-                    .build();
-        }
-    }
-
-    @DELETE
-    @Path("/{accountNumber}")
-    public Response removeByAccountNumber(@PathParam("accountNumber") String accountNumber) {
-        try {
-            log.info("Remove By Account Number Bank");
-            bankService.removeByAccountNumber(accountNumber);
-            return Response.
-                    ok()
-                    .entity(accountNumber)
                     .build();
         } catch (Exception e) {
             return Response

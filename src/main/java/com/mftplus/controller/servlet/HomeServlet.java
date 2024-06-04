@@ -17,11 +17,10 @@ public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             log.info("InitialServlet - Get");
-            req.getRequestDispatcher("/jsp/index.jsp").forward(req,resp);
+            req.getRequestDispatcher("/jsp/index.jsp").forward(req, resp);
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);
         }
     }
-
 }

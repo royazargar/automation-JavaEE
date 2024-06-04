@@ -63,7 +63,7 @@
     <button id="submit" class="btn btn-warning" onclick="edit()"><i class="fa fa-edit"></i> Edit</button>
 </div>
 
-<script src="../assets/js/financialTransaction.js"></script>
+<script src="../../../assets/js/financialTransaction.js"></script>
 
 </body>
 </html>
