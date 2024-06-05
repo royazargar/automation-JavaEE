@@ -7,7 +7,6 @@ import com.mftplus.model.enums.AccountType;
 import com.mftplus.service.impl.BankServiceImpl;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,11 +19,6 @@ import java.util.Optional;
 
 @Slf4j
 @WebServlet(urlPatterns = "/bankEdit.do")
-@MultipartConfig(
-        fileSizeThreshold = 1024 * 1024, // 1 MB
-        maxFileSize = 1024 * 1024 * 10,      // 10 MB
-        maxRequestSize = 1024 * 1024 * 100   // 10 MB
-)
 public class BankEditServlet extends HttpServlet {
     @Inject
     private BankServiceImpl bankService;
@@ -36,10 +30,12 @@ public class BankEditServlet extends HttpServlet {
             if (req.getParameter("id") == null) {
                 throw new IdIsRequiredException("Please set bank id !");
             } else {
-                req.getSession().setAttribute("accessTypes", Arrays.asList(AccountType.values()));
+                req.getSession().setAttribute("accountType", Arrays.asList(AccountType.values()));
                 Long id = Long.valueOf(req.getParameter("id"));
                 Optional<Bank> bank = bankService.findById(id);
-                bank.ifPresent(value -> req.getSession().setAttribute("bankEdit", value));
+                bank.ifPresent(value -> req.getSession().setAttribute("bank", value));
+
+                req.getSession().setAttribute("accountType", Arrays.asList(AccountType.values()));
                 req.getRequestDispatcher("/jsp/form/edit/editBank.jsp").forward(req, resp);
             }
         } catch (Exception e) {

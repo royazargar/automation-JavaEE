@@ -219,7 +219,15 @@
               <span class="navlink_icon">
                 <i class="bx bx-flag"></i>
               </span>
-                    <span class="navlink">بانک</span>
+                    <span class="navlink">بانک جدید</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="bankTable.do" class="nav_link">
+              <span class="navlink_icon">
+                <i class="bx bx-flag"></i>
+              </span>
+                    <span class="navlink">بانک ها</span>
                 </a>
             </li>
             <li class="item">
@@ -227,7 +235,15 @@
               <span class="navlink_icon">
                 <i class="bx bx-flag"></i>
               </span>
-                    <span class="navlink">صندوق</span>
+                    <span class="navlink">صندوق جدید</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="cashDeskTable.do" class="nav_link">
+              <span class="navlink_icon">
+                <i class="bx bx-flag"></i>
+              </span>
+                    <span class="navlink">صندوق ها</span>
                 </a>
             </li>
             <li class="item">
@@ -235,7 +251,15 @@
               <span class="navlink_icon">
                 <i class="bx bx-medal"></i>
               </span>
-                    <span class="navlink">تراکنش مالی</span>
+                    <span class="navlink">تراکنش مالی جدید</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="financialTransactionTable.do" class="nav_link">
+              <span class="navlink_icon">
+                <i class="bx bx-medal"></i>
+              </span>
+                    <span class="navlink">تراکنش های مالی</span>
                 </a>
             </li>
             <li class="item">
@@ -243,15 +267,15 @@
               <span class="navlink_icon">
                 <i class="bx bx-cog"></i>
               </span>
-                    <span class="navlink">سند مالی</span>
+                    <span class="navlink">سند مالی جدید</span>
                 </a>
             </li>
             <li class="item">
-                <a href="bank.do" class="nav_link">
+                <a href="financialDocTable.do" class="nav_link">
               <span class="navlink_icon">
-                <i class="bx bx-layer"></i>
+                <i class="bx bx-cog"></i>
               </span>
-                    <span class="navlink">بانک</span>
+                    <span class="navlink">سند مالی ها</span>
                 </a>
             </li>
         </ul>

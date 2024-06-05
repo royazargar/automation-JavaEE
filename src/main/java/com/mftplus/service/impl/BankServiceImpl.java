@@ -1,5 +1,6 @@
 package com.mftplus.service.impl;
 
+import com.mftplus.controller.exception.NoContentException;
 import com.mftplus.model.Bank;
 import com.mftplus.service.BankService;
 import jakarta.enterprise.context.SessionScoped;
@@ -22,18 +23,26 @@ public class BankServiceImpl implements BankService, Serializable {
     @Transactional
     @Override
     public void save(Bank bank) throws Exception {
+        log.info("BankService - save");
         entityManager.persist(bank);
     }
 
     @Transactional
     @Override
-    public void edit(Bank bank) throws Exception {
-        entityManager.merge(bank);
+    public void edit(Bank bank) throws NoContentException {
+        Optional<Bank> optionalBank = Optional.ofNullable(entityManager.find(Bank.class, bank.getId()));
+
+        if (optionalBank.isPresent()) {
+            entityManager.merge(bank);
+        } else {
+            throw new NoContentException("Bank with id : " + bank.getId() + " not found !");
+        }
     }
 
     @Transactional
     @Override
     public void remove(Bank bank) throws Exception {
+        bank = entityManager.find(Bank.class, bank.getId());
         bank.setDeleted(true);
         entityManager.merge(bank);
     }
@@ -46,12 +55,9 @@ public class BankServiceImpl implements BankService, Serializable {
         entityManager.merge(bank);
     }
 
-    @Transactional
     @Override
     public void removeByAccountNumber(String accountNumber) throws Exception {
-        Bank bank = entityManager.find(Bank.class, accountNumber);
-        bank.setDeleted(true);
-        entityManager.merge(bank);
+
     }
 
     @Transactional
@@ -65,6 +71,14 @@ public class BankServiceImpl implements BankService, Serializable {
     @Override
     public List<Bank> findByName(String name) throws Exception {
         TypedQuery<Bank> query = entityManager.createQuery("SELECT oo FROM bankEntity oo WHERE oo.name = :name AND oo.deleted=false", Bank.class);
+        return query.getResultList();
+    }
+
+    @Transactional
+    @Override
+    public List<Bank> findByNameAndDeletedFalse(String name) throws Exception {
+        TypedQuery<Bank> query = entityManager.createQuery("SELECT oo FROM bankEntity oo WHERE oo.name = :name AND oo.deleted=false", Bank.class);
+        query.setParameter("name",name);
         return query.getResultList();
     }
 
@@ -89,11 +103,15 @@ public class BankServiceImpl implements BankService, Serializable {
         return query.getResultList();
     }
 
-
     @Transactional
     @Override
-    public Optional<Bank> findById(Long id) throws Exception {
-        return Optional.ofNullable(entityManager.find(Bank.class, id));
+    public Optional<Bank> findById(Long id) throws NoContentException {
+        Optional<Bank> optional = Optional.ofNullable(entityManager.find(Bank.class, id));
+        if (optional.isPresent()) {
+            return optional;
+        } else {
+            throw new NoContentException("Bank with id : " + id + "not found !");
+        }
     }
 
     @Transactional

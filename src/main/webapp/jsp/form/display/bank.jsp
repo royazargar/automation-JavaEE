@@ -15,7 +15,6 @@
         <p class="success">${sessionScope.ok}</p>
 
         <div class="formbold-form-title">
-            <a class="formbold-btn primary" href="#" onclick="reference(${sessionScope.bank.id})">بانک</a>
             <a class="formbold-btn warning" href="#" onclick="showEditBank(${sessionScope.bank.id})">ویرایش</a>
             <a class="formbold-btn danger" href="#" onclick="removeBank(${sessionScope.bank.id})">حذف</a>
         </div>
@@ -56,7 +55,7 @@
                 <div>
                     <label for="accountType" class="formbold-form-label"> نوع حساب : </label>
                     <input type="text" name="accountType" id="accountType" class="formbold-form-input"
-                           value="${sessionScope.bank.accountType}"/>
+                           value="${sessionScope.bank.accountType.title}"/>
                 </div>
 
                 <div>

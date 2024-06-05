@@ -45,10 +45,12 @@
             </div>
 
             <div class="formbold-input-group">
-                <label class="col form-label" for="accountType">نوع حساب</label>
-                <select name="accountType" id="accountType">
-                    <c:forEach var="accountType" items="${sessionScope.accessTypes}">
-                        <option value="${accountType}">${accountType}</option>
+                <label for="accountType" class="formbold-form-label">
+                    نوع حساب را انتخاب کنید
+                </label>
+                <select class="formbold-form-select" name="accountType" id="accountType">
+                    <c:forEach var="accountType" items="${sessionScope.accountType}">
+                        <option value="${accountType}">${accountType.title}</option>
                     </c:forEach>
                 </select>
             </div>
@@ -60,17 +62,16 @@
 
             <button class="a-btn">ثبت</button>
             <c:if test="${not empty param.selectedBank}">
-                <a class="a-btn" href="reference.do?bankIdRef=${param.selectedBank}">بانک ثبت شده</a>
+                <a class="a-btn" href="bank.do?bankIdRef=${param.selectedBank}">بانک ثبت شده</a>
             </c:if>
 
         </form>
         <!--end form-->
-        <h1>${sessionScope.bankList}}</h1>
+        <h1>${sessionScope.bankList}</h1>
     </div>
 </div>
 <script src="../../../assets/js/jquery-3.7.1.min.js"></script>
 <script src="../../../assets/js/kamadatepicker.holidays.js"></script>
 <script src="../../../assets/js/kamadatepicker.min.js"></script>
-<script src="../../../assets/js/referenceInput.js"></script>
 </body>
 </html>

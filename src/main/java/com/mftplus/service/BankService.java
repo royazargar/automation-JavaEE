@@ -1,12 +1,13 @@
 package com.mftplus.service;
 
+import com.mftplus.controller.exception.NoContentException;
 import com.mftplus.model.Bank;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface BankService {
-    void  save(Bank bank) throws Exception;
+    void save(Bank bank) throws Exception;
 
     void edit(Bank bank) throws Exception;
 
@@ -16,9 +17,13 @@ public interface BankService {
 
     void removeByAccountNumber(String accountNumber) throws Exception;
 
+    Optional<Bank> findById(Long id) throws NoContentException;
+
     List<Bank> findAll() throws Exception;
 
     List<Bank> findByName(String name) throws Exception;
+
+    List<Bank> findByNameAndDeletedFalse(String name) throws Exception;
 
     List<Bank> findByBranchCode(int branchCode) throws Exception;
 
@@ -26,8 +31,5 @@ public interface BankService {
 
     List<Bank> findByAccountType(String accountType) throws Exception;
 
-    Optional<Bank> findById(Long id) throws Exception;
-
     Optional<Bank>  findByAccountNumber(String accountNumber) throws Exception;
-
 }

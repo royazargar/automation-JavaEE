@@ -33,7 +33,7 @@
                 <td>${bank.accountNumber}</td>
                 <td>${bank.branchCode}</td>
                 <td>${bank.branchName}</td>
-                <td>${bank.accountType}</td>
+                <td>${bank.accountType.title}</td>
                 <td>${bank.accountBalance}</td>
                 <td>
                     <a href="#" onclick="selectBank(${bank.id})"><i class="fas fa-eye show"></i></a>

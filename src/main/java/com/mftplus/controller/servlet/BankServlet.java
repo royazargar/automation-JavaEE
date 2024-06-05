@@ -6,7 +6,6 @@ import com.mftplus.model.enums.AccountType;
 import com.mftplus.service.impl.BankServiceImpl;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,11 +18,6 @@ import java.util.Arrays;
 
 @WebServlet(urlPatterns = "/bank.do")
 @Slf4j
-@MultipartConfig(
-        fileSizeThreshold = 1024 * 1024, // 1 MB
-        maxFileSize = 1024 * 1024 * 10,      // 10 MB
-        maxRequestSize = 1024 * 1024 * 100   // 10 MB
-)
 public class BankServlet extends HttpServlet {
 
     @Inject
@@ -41,7 +35,6 @@ public class BankServlet extends HttpServlet {
             String branchName = req.getParameter("branchName");
             String accountType = req.getParameter("accountType");
             long accountBalance = Long.parseLong(req.getParameter("accountBalance"));
-            System.out.println(name+" " + branchName+ " "+accountNumber);
             Bank bank =
                     Bank
                             .builder()
@@ -64,8 +57,8 @@ public class BankServlet extends HttpServlet {
 
             bankService.save(bank);
             log.info("BankServlet - Bank Saved");
-            req.getSession().setAttribute("bankList", bankService.findAll());
-            resp.sendRedirect("/bank.do?id=" + bank.getId());
+            req.getSession().setAttribute("bankId", bank.getId());
+            resp.sendRedirect("/bankDisplay.do?id=" + bank.getId());
             String msg = "بانک با موفقیت ثبت شد !";
             req.getSession().setAttribute("ok", msg);
 
@@ -79,11 +72,11 @@ public class BankServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("BankServlet - Get");
         try {
-            req.getSession().setAttribute("accessTypes", Arrays.asList(AccountType.values()));
-            req.getSession().setAttribute("bankList", bankService.findAll());
+            req.getSession().setAttribute("accountType", Arrays.asList(AccountType.values()));
             req.getRequestDispatcher("/jsp/form/save/bank-form.jsp").forward(req, resp);
         } catch (Exception e) {
             log.info(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 }

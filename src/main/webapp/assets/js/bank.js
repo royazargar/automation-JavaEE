@@ -11,10 +11,6 @@ function showEditBank(id) {
     document.location.replace("/bankEdit.do?id=" + id);
 }
 
-function reference(id) {
-    document.location.replace("/reference.do?bankIdRef=" + id);
-}
-
 function editBank(event) {
     event.preventDefault()
     const bankEditForm = document.getElementById("bankEditForm");
